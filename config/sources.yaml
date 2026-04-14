@@ -1,0 +1,128 @@
+# COO Twin - Data Source Configuration
+# Generated 2026-04-14 from Notion workspace audit
+
+# ============================================================
+# Obsidian Vault
+# ============================================================
+obsidian_vault_path: "C:/Users/aaron/daily-automation/vault"
+obsidian_inbox_folder: "inbox"
+obsidian_daily_folder: "daily"
+obsidian_meetings_folder: "meetings"
+obsidian_notes_folder: "notes"
+
+# Tag conventions (frontmatter or inline)
+obsidian_tags:
+  review: "#review"       # Notes that need processing/review
+  lab: "#lab"             # Lincoln Lab related
+  ipa: "#ipa"             # United IPA related
+  nestmate: "#nestmate"   # Nestmate related
+
+# ============================================================
+# Notion Databases
+# ============================================================
+notion_databases:
+
+  # --- PRIMARY: Master Tasks ---
+  - name: "Master Tasks"
+    database_id: "ece9b123-5e67-4172-b9a0-8f558c53ccfa"
+    data_source: "collection://528d24b8-e1e6-4ca0-a7ee-87f70a4f7980"
+    business: all  # Contains tasks for ALL workspaces, filtered by Workspace field
+    # Field mappings
+    status_field: "Status"
+    status_done_values: ["Done"]
+    status_in_progress_values: ["In progress"]
+    status_waiting_values: ["Waiting"]
+    status_not_started_values: ["Not started"]
+    priority_field: null  # No priority field exists; use Due date + staleness for scoring
+    assignee_field: "Assignee"
+    date_field: "Due"
+    workspace_field: "Workspace"
+    last_activity_field: "Last Activity"
+    updated_field: "Updated"
+    # Workspace values in this database
+    workspace_values:
+      lab: "Link & Reference Laboratory"
+      ipa: "United IPA"
+      nestmate: "Nestmate"
+      dock_pro: "Dock Pro"
+      other: "Other"
+    # Key views
+    views:
+      morning_report: "view://335a3158-59b4-8128-92df-000ce86f907b"
+      by_status: "view://4cf74324-51c6-45fb-b701-8c20595dbc7e"
+      due_soon: "view://23849e7a-114e-4dd6-b67d-24b19fe53ad6"
+      lincoln_lab: "view://335a3158-59b4-8116-af5a-000cc458de8c"
+      united_ipa: "view://335a3158-59b4-81f2-837a-000c811dc52d"
+
+  # --- SECONDARY: Provider CRM ---
+  - name: "Provider CRM"
+    database_id: "df3a3158-59b4-8363-937f-017bbe2ca1c0"
+    data_source: "collection://ae0a3158-59b4-8235-b7ca-0758daa2322a"
+    business: all  # Has its own Workspace field
+    stage_field: "Stage"
+    stage_active_values: ["Active"]
+    stage_inactive_values: ["Inactive"]
+    stage_pipeline_values: ["New Lead", "Outreach", "Discovery", "Proposal", "Onboarding"]
+    last_contact_field: "Last Contact"
+    next_step_field: "Next Step"
+    workspace_field: "Workspace"
+    # Key views
+    views:
+      needs_followup: "view://b62a3158-59b4-82b1-b9f3-88745188d87f"
+      pipeline_board: "view://3c4a3158-59b4-8344-b51a-0889a3b0270c"
+      ipa_providers: "view://852a3158-59b4-82be-bbbb-88c60b7c884f"
+
+  # --- SECONDARY: Activity Log ---
+  - name: "Activity Log"
+    database_id: "ec64cb70-bf24-43cd-b9e5-eef117e53062"
+    data_source: "collection://3db174bf-c997-4a41-93ee-36f280e511db"
+    business: all
+    type_field: "Type"
+    type_values: ["Call", "Meeting", "Email", "Site Visit", "Internal", "Follow-Up", "Decision"]
+    workspace_field: "Workspace"
+    date_field: "Date"
+    outcome_field: "Outcome"
+    next_action_field: "Next Action"
+
+# ============================================================
+# Google Calendar
+# ============================================================
+# Accessed via MCP (already connected)
+# No additional config needed
+
+# ============================================================
+# Google Tasks
+# ============================================================
+google_tasks:
+  enabled: true  # gws CLI installed via npx skills add
+  # Commands: gws tasks tasklists list, gws tasks tasks list
+  # Auth: gws auth login --scopes tasks
+
+# ============================================================
+# Calendar Business Tagging
+# ============================================================
+# Keywords to auto-tag calendar events by business
+calendar_business_keywords:
+  lab: ["lab", "lincoln", "testing", "sample", "specimen", "pathology", "phlebotomy", "draw", "panel"]
+  ipa: ["ipa", "united", "provider", "network", "credentialing", "claims", "saipa", "sovereign", "phoenix"]
+  nestmate: ["nestmate", "account", "nest"]
+  dock_pro: ["dock", "cardio"]
+  # Events matching no keyword are tagged "untagged"
+
+# ============================================================
+# Team Members (for delegation detection)
+# ============================================================
+team_members: []
+  # Add team members here as you identify delegation candidates
+  # Example:
+  # - name: "Jane Doe"
+  #   business: ipa
+  #   role: "ops"
+
+delegation_tags: ["delegate", "handoff", "assign"]
+
+# ============================================================
+# Thresholds
+# ============================================================
+staleness_days: 7
+provider_followup_days: 14  # Flag providers not contacted in 14+ days
