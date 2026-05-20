@@ -61,8 +61,8 @@ automations:
     description: "Surface 5 stalest active providers into today's daily note"
     cadence: weekdays
     cadence_anchor: "08:30"
-    enabled: false
-    last_run: null
+    enabled: true
+    last_run: 2026-05-20T14:53:58
     delivery: daily_note_append
     delivery_target: "## Provider Nudges"
     prompt: |
@@ -108,4 +108,5 @@ automations:
 # ============================================================
 # Each run appends one entry. /automation reads `last_run` per automation
 # to compute due-ness; this section is the long-form audit.
-history: []
+history:
+  - { ts: 2026-05-20T14:53:58, id: provider-followup-nudge, status: ok }
