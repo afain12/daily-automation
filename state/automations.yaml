@@ -1,0 +1,111 @@
+# state/automations.yaml — Saved prompts that run on a cadence.
+#
+# Wave 2 of the enhancement plan. Khoj-pattern automation primitive WITHOUT
+# Khoj's daemon — scheduling lives in external cron (Cowork scheduler, Windows
+# Task Scheduler) which simply invokes `/automation` periodically; this file
+# decides which automations are actually due to run.
+#
+# Schema per entry:
+#   id              — kebab-case unique identifier. Stamped into telemetry.
+#   description     — one-line human summary (shown in trust gate).
+#   prompt          — multiline. The LLM executes this in the current session
+#                     context. Reference repo files, scripts, Notion DBs, etc.
+#   cadence         — daily | weekdays | weekly | monthly | manual
+#   cadence_anchor  — optional. "HH:MM" for daily, "monday" for weekly,
+#                     "1" (day of month) for monthly. Used by due-check.
+#   delivery        — obsidian | daily_note_append | telegram | notion | stdout
+#   delivery_target — path or section header (e.g. "vault/notes/Weekly-Review-{date}.md"
+#                     or "## Provider Nudges"). {date} expands to YYYY-MM-DD.
+#   last_run        — auto-managed by /automation skill (ISO timestamp). Edit
+#                     only to force a re-run (set to null).
+#   enabled         — bool. New automations default to false so /automation lists
+#                     them as "available but not enabled" until Aaron flips it on.
+#
+# Adding a new automation: append an entry with enabled: false. Test it with
+# /automation --force-run <id>, then flip enabled: true once it's clean.
+
+automations:
+  # ---------------------------------------------------------------
+  # weekly-review — Friday afternoon retrospective
+  # ---------------------------------------------------------------
+  # Replaces the planned /weekly-review skill that's been stuck waiting for a
+  # scheduling primitive. Reads logs/_telemetry.jsonl from past 7 days and the
+  # week's daily notes. Surfaces patterns, drift, top-3 hit rates.
+  - id: weekly-review
+    description: "Weekly retrospective from telemetry + daily notes"
+    cadence: weekly
+    cadence_anchor: friday
+    enabled: false
+    last_run: null
+    delivery: obsidian
+    delivery_target: "vault/notes/Weekly-Review-{date}.md"
+    prompt: |
+      Read logs/_telemetry.jsonl rows from the past 7 days. Group by skill,
+      count runs, compute average duration_ms, list any status != "ok" rows.
+      Then read vault/daily/*.md for the past 7 days and extract: Top 3 hit
+      rate (how often were the top-3 morning items completed?), most-common
+      carry-forwards, and any "## End of Day Review" notes that flagged
+      systemic friction.
+
+      Append the synthesis as a new Obsidian note at the delivery_target.
+      Structure: ## Skill Activity, ## Plan vs Actual, ## Patterns, ## Action
+      Items for Next Week.
+
+  # ---------------------------------------------------------------
+  # provider-followup-nudge — daily morning stale-provider surface
+  # ---------------------------------------------------------------
+  # Surfaces providers in Provider CRM with Last Contact > 14 days AND
+  # Stage == "Active". Appended to the daily note so it lands in the same
+  # surface as /start-day output. Aaron acts on it inline.
+  - id: provider-followup-nudge
+    description: "Surface 5 stalest active providers into today's daily note"
+    cadence: weekdays
+    cadence_anchor: "08:30"
+    enabled: false
+    last_run: null
+    delivery: daily_note_append
+    delivery_target: "## Provider Nudges"
+    prompt: |
+      Query Provider CRM data_source (collection://ae0a3158-59b4-8235-b7ca-0758daa2322a)
+      for providers where Stage == "Active" AND Last Contact older than
+      provider_followup_days (14, per config/sources.yaml). Sort by oldest
+      Last Contact. Take top 5.
+
+      Append a "## Provider Nudges" section to today's daily note
+      (vault/daily/{date}.md) with: bullet per provider including name,
+      days-since-contact, business (Workspace field), and Next Step text.
+
+      Skip if today is a holiday or if Aaron's daily note already contains
+      a "## Provider Nudges" section (don't double-append within a day).
+
+  # ---------------------------------------------------------------
+  # vault-orphan-scan — Sunday vault health check (read-only)
+  # ---------------------------------------------------------------
+  # Read-only audit. Lists orphan notes (no [[wikilinks]] pointing in),
+  # broken wikilinks, and untagged notes in vault/notes/. Output to stdout
+  # so /automation prints it; Aaron triages manually.
+  - id: vault-orphan-scan
+    description: "Audit vault/ for orphan notes and broken wikilinks"
+    cadence: weekly
+    cadence_anchor: sunday
+    enabled: false
+    last_run: null
+    delivery: stdout
+    delivery_target: null
+    prompt: |
+      Walk vault/notes/*.md. For each file, count incoming wikilinks
+      (other files containing [[that-filename]] or [[that-title]]). Files
+      with zero incoming links are orphans.
+
+      Separately, for each file extract all [[...]] wikilinks and check
+      whether the target file exists. Broken targets are reported.
+
+      Print a summary: N orphans (paths), M broken wikilinks (source →
+      missing target). Do NOT auto-fix; Aaron triages.
+
+# ============================================================
+# History (audit trail — append-only, /automation manages)
+# ============================================================
+# Each run appends one entry. /automation reads `last_run` per automation
+# to compute due-ness; this section is the long-form audit.
+history: []

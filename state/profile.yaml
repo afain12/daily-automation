@@ -1,0 +1,160 @@
+# state/profile.yaml — Aaron-specific profile data.
+#
+# Holds context that is specific to THIS user (Aaron) and would change for a
+# different user installing COO Twin. Generic project mechanics live in CLAUDE.md;
+# stream/department mechanics live in config/streams.yaml; this file is the
+# Aaron-shaped layer on top.
+#
+# Skills that need person disambiguation, business-status checks, or Aaron-tuned
+# preferences should read THIS FILE rather than hard-coding values in their
+# SKILL.md body. /setup will overwrite this file for a new user.
+#
+# Last updated: 2026-05-20
+
+# ============================================================
+# Persona
+# ============================================================
+profile:
+  name: Aaron Fainshtein
+  email: aaronfainshtein1@gmail.com
+  role: >-
+    Operator-founder managing multiple healthcare businesses. Needs daily
+    structure imposed across Notion, Obsidian, Google Calendar, and Google
+    Tasks. Reads briefings on phone (mobile briefing mirror) + laptop.
+  communication_style:
+    - Terse. Lead with the recommendation, not the analysis.
+    - Surface trade-offs in 1-2 sentences, not paragraphs.
+    - When proposing a write, show source line + confidence before the trust gate.
+    - Don't summarize what was just done — Aaron can read the diff.
+
+# ============================================================
+# Businesses
+# ============================================================
+# Status options:
+#   active        — full attention; skills surface items aggressively
+#   normal        — usual priority; default
+#   back_burner   — deprioritized; skills should DEMOTE these items in briefings
+#   wound_down    — historical only; do not surface unless explicitly asked
+#
+# Status drives /start-day prioritization and /end-day carry-forward decay.
+# See state/priorities.yaml memory tier rules.
+businesses:
+  - key: lab
+    display: "Lincoln Lab"
+    status: active
+    notes: "Testing panels, pathology, specimens. Primary revenue line."
+
+  - key: ipa
+    display: "United IPA"
+    status: active
+    notes: >-
+      Beacon→United pause LIFTED 2026-04-23. Johantahn closed, Beacon
+      providers onboarding to United directly. See
+      memory/project_ipa_healthfirst_pause.md.
+
+  - key: nestmate
+    display: "Nestmate"
+    status: active
+    notes: "Urgent care accounts, provider outreach, supply chain."
+
+  - key: dock_pro
+    display: "Dock Pro / Cardio Pro"
+    status: back_burner
+    until: 2026-06-01
+    notes: >-
+      All CardioPro/DockPro postponed to June 2026. Only active item is
+      Roman ↔ CardioPro team meeting. Skills must DEMOTE dock_pro items
+      below the fold. See memory/project_cardiopro_backburner.md.
+
+  - key: other
+    display: "Other / Personal"
+    status: normal
+    notes: "Catch-all; lab tests, personal admin, learning."
+
+# ============================================================
+# Multi-department persons (disambiguation required)
+# ============================================================
+# Persons whose name appears across multiple business contexts. /capture-meeting
+# and /sync-sweep MUST NOT auto-route on these names alone — require a context
+# keyword from `disambiguators` to confirm the business.
+#
+# Single-department persons (auto-route at conf 0.85) live in
+# config/sources.yaml :: single_dept_persons. Do NOT duplicate here.
+ambiguous_persons:
+  Cyrus:
+    spans: [nestmate, ipa, lab]
+    disambiguators:
+      nestmate: ["urgent care", "afc", "diangelo", "clinic", "account"]
+      ipa: ["united", "provider", "credentialing", "claims"]
+      lab: ["sample", "panel", "specimen", "pathology"]
+    default: null   # no auto-route; force user pick
+
+  Ilene:
+    spans: [nestmate, ipa]
+    disambiguators:
+      nestmate: ["urgent care", "afc", "clinic", "account"]
+      ipa: ["united", "provider", "credentialing"]
+    default: null
+
+  Ahmed:
+    spans: [nestmate, ipa, lab]
+    disambiguators:
+      nestmate: ["urgent care", "clinic"]
+      ipa: ["united", "provider", "credentialing"]
+      lab: ["sample", "panel", "lincoln"]
+    default: null
+
+  Ryan:
+    spans: [nestmate, dock_pro]
+    disambiguators:
+      nestmate: ["urgent care", "clinic", "afc"]
+      dock_pro: ["cardio", "roman", "monitoring"]
+    default: null
+
+  Kader:
+    spans: [lab, ipa]
+    disambiguators:
+      lab: ["sample", "panel", "specimen", "lincoln", "essen", "medicaid"]
+      ipa: ["united", "provider", "credentialing", "saipa"]
+    default: lab   # first-match-wins per streams.yaml ordering
+
+# ============================================================
+# Operating gates (active project constraints)
+# ============================================================
+# Time-bounded project decisions that bind skill behavior. /start-day and
+# /end-day should surface upcoming expirations in briefing headers.
+gates:
+  - key: cardiopro_backburner
+    until: 2026-06-01
+    rule: "Demote dock_pro items below the fold in /start-day briefings."
+    source: "memory/project_cardiopro_backburner.md"
+
+  - key: routing_redesign_freeze
+    until: 2026-05-06   # past — graduated
+    rule: "Do NOT touch routing logic until 14 days of logs collected."
+    source: "memory/project_routing_redesign_pending.md"
+    expired: true
+
+  - key: mve_migration_gate
+    until: null  # rolling; gates all Render/alphaclaw infra work
+    rule: "1-week laptop+Telegram MVE gates all alphaclaw/Render work. PRD §9.-1."
+    source: "memory/project_mve_decision.md"
+
+# ============================================================
+# Preferences
+# ============================================================
+preferences:
+  briefing:
+    show_top3_source_markers: true        # [notion:abcd…] etc per AAC GROUNDED
+    show_mode_in_header: true             # `Mode: draft`
+    demote_back_burner_businesses: true   # see businesses[].status
+
+  trust_gate:
+    show_confidence: true
+    show_source_line: true
+    auto_uncategorize_below: 0.70         # conf threshold per capture-meeting §5
+
+  daily_note:
+    department_order: [lab, ipa, nestmate, dock_pro, other]
+    include_backlog_section: true
+    include_eod_review_section: true

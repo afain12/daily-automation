@@ -1,16 +1,15 @@
-# COO Twin — Daily Automation System
+# COO Twin — Daily Automation System (Codex view)
+
+**Mirror of `CLAUDE.md` for OpenAI Codex CLI.** OpenAI Codex reads this file as the
+canonical project-memory file (per the AGENTS.md spec). Claude Code reads `CLAUDE.md`.
+The two files share an identical project body — **when a project fact changes,
+update both.** Tooling deltas (Claude Code vs Codex) live in separate "Operating Notes"
+sections at the bottom of each.
 
 Personal Chief of Staff system that unifies Notion, Obsidian, Google Calendar,
 and Google Tasks into a single terminal workflow. Aaron manages multiple businesses
 (lab, IPA, Nestmate, Dock Pro / Cardio Pro) and this system imposes structure on
 the daily chaos across all of them.
-
-**Mirror of `AGENTS.md` for Claude Code.** OpenAI Codex reads `AGENTS.md` as its
-canonical project-memory file; Claude Code reads this one. The two files share an
-identical project body — **when a project fact changes, update both.** Tooling deltas
-(Claude Code vs Codex) live in separate sections at the bottom of each:
-Claude Code → `docs/claude-code-setup.md` + `docs/anthropic-best-practices.md`;
-Codex → "Codex Operating Notes" section in `AGENTS.md`.
 
 ## Skills
 
@@ -20,31 +19,25 @@ Codex → "Codex Operating Notes" section in `AGENTS.md`.
 | `/capture-meeting` | 2 | Active | Meeting note splitter (Notion + Obsidian + Calendar) |
 | `/end-day` | 3 | Active | Day close retro, planned vs actual, carry-forwards |
 | `/start-day-team` | 1 | Experimental | Parallel fan-out variant of /start-day (4 worker subagents) |
-| `/end-day-team` | 3 | Experimental | Parallel variant of /end-day + braindump-extractor for Activity Log mining |
+| `/end-day-team` | 3 | Experimental | Parallel variant of /end-day + braindump-extractor |
 | `/capture-meeting-team` | 2 | Experimental | Parse-then-fan-out variant; 5 parallel write workers after trust gate |
 | `/notion-probe` | 0 | Active | Read-only Notion workspace scanner; scores DBs against canonical roles (genericization foundation) |
 | `/notion-map` | 0 | Active | Property-role mapper; consumes /notion-probe output, writes draft sources.yaml stub |
 | `/notion-template-install` | 0 | Active | Installs 4 canonical Notion DBs from version-controlled JSON templates (empty-workspace path) |
 | `/setup` | 0 | Active | User-facing onboarding questionnaire — Step A (source presence) + Step B (stream definitions); writes streams.yaml |
-| `/automation` | 4 | Active | Cron-style saved prompts; reads state/automations.yaml; weekly-review + provider-followup-nudge now run through this |
-| `/weekly-review` | 4 | Superseded | Now an automation entry in state/automations.yaml — invoke via `/automation` when due |
+| `/weekly-review` | 4 | Planned | Weekly patterns + insights (needs 2+ weeks of logs) |
 
-The `*-team` skills are experimental siblings that re-implement their baseline using
-parallel sub-agent fan-out. Same input/output contract, same trust gate. See
-`state/experiments/start-day-team.md` for the A/B methodology. Promote a team variant
-to default only after 5+ runs at `quality_delta == 0` and demonstrated wall-time win.
+Skills are defined for Claude Code under `.claude/skills/<name>/SKILL.md`. Codex
+does not yet have an equivalent skills directory in this repo — Codex sessions
+follow the same workflow conventions but invoke them through prompts rather than
+slash-commands. If/when a Codex skills folder is created, document the path here.
 
 ## Project Structure
 
 ```
-.claude/skills/
-  start-day/SKILL.md             — Morning briefing skill (authoritative)
-  capture-meeting/SKILL.md       — Meeting note routing skill
-  end-day/SKILL.md               — Day close retro skill
-  start-day-team/SKILL.md        — Experimental fan-out variant
-  end-day-team/SKILL.md          — Experimental fan-out variant
-  capture-meeting-team/SKILL.md  — Experimental fan-out variant
-.claude/agents/                   — Custom subagent definitions (read-only workers reused across team skills)
+.claude/skills/                   — Claude Code project skills (authoritative)
+.claude/agents/                   — Custom subagent definitions (Claude Code)
+.codex/config.toml                — Codex CLI config (this tool's settings live here)
 .agents/skills/                   — External dependency skills (fetched via skills-lock.json, don't edit)
 config/
   sources.yaml               — Notion DB IDs, data source IDs, field mappings, business keywords
@@ -56,36 +49,23 @@ scripts/
   telemetry.sh               — Appends a row to logs/_telemetry.jsonl
   action_id.sh               — Idempotency: generate / check / stamp action_ids
   phi_scan.sh                — PHI input gate for /capture-meeting
-  vault_search.py            — BM25-lite search over vault/ + logs/ (no embeddings; called from /start-day Top-3 context)
-  automation_due.py          — Companion to /automation: due-check, last_run stamping, history bookkeeping
 state/
   coo_mode.yaml              — System-wide write-mode (observe | draft | approved | auto | locked)
   profile.yaml               — Aaron-specific profile: businesses, ambiguous persons, operating gates, preferences
-  automations.yaml           — Saved prompts + cadence + delivery channel; consumed by /automation
-  priorities.yaml            — Carry-forward items between days (/end-day writes, /start-day reads)
+  priorities.yaml            — Carry-forward items between days
   roadmap.md                 — Future enhancements (speculative, not current state)
-  tmp/                        — Scratch JSON for curl payloads / response parsing (don't commit)
+  tmp/                        — Scratch JSON (don't commit)
 .context/                    — Staged Notion block-children payloads (PATCH bodies)
   *.json                      — Top-level: still pending. /start-day flags these.
-  applied/                    — After PATCH succeeds, MOVE the file here (named `<base>-<YYYY-MM-DD>.json`)
-                                so /start-day stops flagging it. Never delete — keeps an audit trail.
+  applied/                    — After PATCH succeeds, MOVE the file here.
 logs/
   YYYY-MM-DD.md              — Daily briefing + EOD retro logs (retained 90 days)
   _telemetry.jsonl           — Append-only one-row-per-run skill telemetry
 docs/
-  claude-code-setup.md       — Permission modes, settings.json layout, auto-mode tuning
-  anthropic-best-practices.md — Canonical Anthropic Claude Code guidance applied to this repo
+  claude-code-setup.md       — Claude Code permission modes / settings (not Codex)
+  anthropic-best-practices.md — Canonical Anthropic guidance (not Codex)
 vault/                        — Obsidian vault root
-  inbox/                     — Fleeting notes, quick captures (surfaced by /start-day)
-  daily/                     — Daily notes (YYYY-MM-DD.md format)
-  meetings/                  — Meeting notes (created by /capture-meeting)
-  notes/                     — Permanent/evergreen notes
-  CardioPro/                 — Synced from OneDrive: Dock Pro / Cardio Pro notes
-  Labaide/                   — Synced from OneDrive: Lincoln Lab notes
-  Nestmate/                  — Synced from OneDrive: Nestmate notes
-  United IPA/                — Synced from OneDrive: IPA notes
-  Notes to self/             — Synced from OneDrive: personal reflections
-  AI Engineering/            — Synced from OneDrive: research/reference notes
+  inbox/, daily/, meetings/, notes/, CardioPro/, Labaide/, Nestmate/, United IPA/, Notes to self/, AI Engineering/
 ```
 
 **Vault sync:** Business folders are copied from `C:/Users/aaron/OneDrive/Documents/Obsidian Vault/`
@@ -96,12 +76,12 @@ daily notes and meeting notes are written directly to vault/.
 
 ### Notion (REST API via curl)
 
-Authentication: `$NOTION_API_TOKEN` env var in `.claude/settings.local.json`
+Authentication: `$NOTION_API_TOKEN` env var (in `.secrets/notion.env`; see Codex Operating Notes below for how Codex picks it up)
 API Version: `2025-09-03`
 
 **IMPORTANT:** Use the `/v1/data_sources/{id}/query` endpoint, NOT `/v1/databases/{id}/query`.
-The data_source IDs are different from database IDs. **All IDs live in `config/sources.yaml`** — that's
-the single source of truth. Read from there rather than hard-coding.
+The data_source IDs are different from database IDs. **All IDs live in `config/sources.yaml`** —
+that's the single source of truth. Read from there rather than hard-coding.
 
 Primary databases queried: **Master Tasks**, **Provider CRM**, **Activity Log**, **Meeting Notes**.
 
@@ -154,7 +134,11 @@ Every item must be assigned to a department:
 Check the actual Workspace field on each item. If null, infer from context:
 - Provider names, clinics, urgent cares, medical practices = typically **Nestmate**
 - Cardiac monitoring, reps for cardiac panels, cardiologists = **Dock Pro / Cardio Pro**
-- "DOCPRO clients" parent does NOT mean subtasks are Dock Pro — check each individually (learned 2026-04-15 when AFC Urgent Care + Dr Remzy Meny were misrouted as Dock Pro instead of Nestmate)
+- "DOCPRO clients" parent does NOT mean subtasks are Dock Pro — check each individually
+
+This was learned on 2026-04-15 when outreach tasks (Dr Remzy Meny, Dr Rookwood, AFC Urgent Care, etc.)
+were incorrectly placed under Dock Pro because they lived under a "DOCPRO clients" parent in Notion.
+They were actually Nestmate provider outreach.
 
 ## Daily Note Format
 
@@ -187,29 +171,36 @@ Daily notes in `vault/daily/YYYY-MM-DD.md` use department-grouped checkboxes:
 - Include an "End of Day Review" section: completed, carries forward, notes/decisions
 - Include a "Backlog - Needs Triage" section for low-priority items not for today
 
-## Information Routing
+## Information Routing Philosophy
 
-Three brains, three roles:
-- **Notion** → business system of record (tasks, CRM, activity logs, accounts)
-- **Google Tasks** → quick-capture to-dos with due dates
-- **Obsidian** → reflections, learnings, process improvements
+Aaron's three brains:
+- **Notion** = Business brain. Tasks, CRM, activity logs, accounts. Operational system of record.
+- **Google Tasks** = Quick capture brain. Day-to-day actions, quick to-dos with due dates.
+- **Obsidian** = Reflection brain. Daily tracking, learnings, process improvements.
 
-Routing: action items with business context → Notion. Quick reminders → Tasks.
-Reflections/learnings → Obsidian. Meeting outcomes SPLIT (actions → Notion,
-learnings → Obsidian, follow-ups → Tasks). Decisions → Notion Activity Log
-(single source of truth); Obsidian gets a link, not a copy.
+When routing information:
+- Action items with business context → Notion
+- Quick to-dos, follow-ups, reminders → Google Tasks (with due dates)
+- Reflections, learnings, process improvements → Obsidian notes
+- Meeting outcomes get SPLIT: actions → Notion, learnings → Obsidian, follow-ups → Tasks
+- Decisions → Notion Activity Log (single source of truth), Obsidian gets a link not a copy
 
-### Granola → Notion routing
+### Granola → Notion routing (two patterns, both legitimate)
 
-Two legitimate landing patterns: (1) a new Meeting Notes DB row, or (2) a dated
-`## YYYY-MM-DD — <title>` section appended to an existing topic page (e.g.
-`Cardio Pro Rollout`, `Essen Healthcare 4/21`, `Nestmate weekly`). Topic-page
-appends do NOT appear in the Meeting Notes DB.
+Granola meeting notes land in Notion via one of two patterns. Tooling must
+recognize both before declaring a "sync gap":
 
-**Before flagging a sync gap:** run `/v1/search` workspace-wide for an 8-char
-URL fragment. Only declare "⚠️ Sync gap — push from Granola app" when BOTH the
-DB query AND search return zero matches. Topic-page hits get surfaced as
-`📎 Topic-page append: ... → landed in {parent page}`, not as a gap.
+1. **New Meeting Notes DB entry** — one meeting → one row. Detected by querying the Meeting Notes data source.
+2. **Appended section inside an existing topic page** — for recurring threads
+   (e.g. `Cardio Pro Rollout`, `Essen Healthcare 4/21`, `Nestmate weekly`),
+   the Granola URL + bullets get pasted as a dated `## YYYY-MM-DD — <title>`
+   section inside the topic page. Does NOT appear in the Meeting Notes DB.
+
+**Coverage check rule:** before flagging a Granola URL as missing, run a
+workspace-wide `/v1/search` for an 8-char fragment of the URL. Only declare
+"⚠️ Sync gap — push from Granola app" when BOTH the Meeting Notes DB query
+AND the workspace search return zero matches. Topic-page hits should be
+surfaced as `📎 Topic-page append: ... → landed in {parent page}`, not as a sync gap.
 
 ### Staged Notion writes (`.context/` lifecycle)
 
@@ -218,8 +209,8 @@ needs a trust gate or human review, it lands as a JSON file in `.context/`.
 The lifecycle is mandatory:
 
 1. **Stage** — write the `{"children":[...]}` payload to `.context/<name>.json`.
-   Optionally include a top-level `status: "pending"` field if explicit pending
-   semantics are needed; absence of a status field does NOT mean unwritten.
+   Optionally include a top-level `status: "pending"` field; absence of a
+   status field does NOT mean unwritten.
 2. **Apply** — PATCH the payload to Notion.
 3. **Cleanup** — immediately `mv .context/<name>.json
    .context/applied/<name>-<YYYY-MM-DD>.json`. The date is when the write
@@ -244,7 +235,7 @@ framework reference at `state/aac-framework-extraction.md`.
 
 The five disciplines (BOUNDED, GROUNDED, GATED, OBSERVED, GOVERNED) are wired
 through every skill via four shared helpers and one state file. Every new skill
-MUST honor these patterns or be downgraded from C (LLM judgment) to A (human-gated).
+MUST honor these patterns.
 
 ### Operating mode — `state/coo_mode.yaml`
 
@@ -254,29 +245,24 @@ System-wide mode controls write behavior across all skills:
 |------|----------|
 | `observe` | Read-only. No writes to any external system. Briefings still render. |
 | `draft` | **Default.** Every write goes through a trust gate. |
-| `approved` | Trust gate auto-approves action_ids whose prefix matches `approved_action_prefixes`. Others still gated. |
+| `approved` | Trust gate auto-approves action_ids whose prefix matches `approved_action_prefixes`. |
 | `auto` | Full auto for skills listed in `auto_skills` (empty by default). |
 | `locked` | Emergency stop. Every skill refuses at Step 0. |
 
 Every skill begins with `MODE=$(scripts/check_mode.sh) || exit` at Step 0. New skills
-should use the unified `eval "$(scripts/preflight.sh)"` form, which sets `MODE`,
-`NOTION_OK`, `GWS_OK`, `VAULT_OK`, `SKIP_WRITES`, and `PREFLIGHT_WARNINGS` in one call.
-Edit `state/coo_mode.yaml` directly to change mode (post-MVE: Telegram `LOCK AGENT` / `UNLOCK AGENT` commands).
+should use `eval "$(scripts/preflight.sh)"`, which sets `MODE`, `NOTION_OK`,
+`GWS_OK`, `VAULT_OK`, `SKIP_WRITES`, and `PREFLIGHT_WARNINGS` in one call.
 
 ### Telemetry — `logs/_telemetry.jsonl`
 
-Append-only JSONL. One row per skill run. Written via `scripts/telemetry.sh`.
-Required fields per row: `ts`, `skill`, `run_id`, `duration_ms`, `status`. Each
-skill adds its own context (sources_ok, confidence buckets, write counts, mode, …).
-
-The file is the OBSERVED discipline's load-bearing artifact. Never edit rows
-in place. `/weekly-review` will read this file to detect drift.
+Append-only JSONL. One row per skill run via `scripts/telemetry.sh`. Required
+fields per row: `ts`, `skill`, `run_id`, `duration_ms`, `status`. Never edit
+rows in place.
 
 ### Idempotency — `scripts/action_id.sh` + `.context/applied/`
 
-Every external write (Notion PATCH, gtask insert, Gmail send, calendar event)
-carries an `action_id` of the form `{skill}:{target}:{date}:{8-char-hash}`.
-Before executing, skills call:
+Every external write carries an `action_id` of the form
+`{skill}:{target}:{date}:{8-char-hash}`. Before executing, skills call:
 
 ```bash
 AID=$(scripts/action_id.sh generate <skill> <target> <date> <payload>)
@@ -286,78 +272,59 @@ scripts/action_id.sh stamp "$AID" '{"notion_page_id":"..."}'
 ```
 
 Stamped action_ids live as JSON files in `.context/applied/{aid}.json`. Re-runs
-no-op. Failed writes are NOT stamped — they retry on next run. Per-write
-idempotency stamps share the directory with per-payload archives (see
-`.context/` lifecycle above); the structure is unchanged.
+no-op. Failed writes are NOT stamped — they retry on next run.
 
 ### PHI input gate — `scripts/phi_scan.sh`
 
 `/capture-meeting` Step 2.5 scans raw notes for SSN / DOB / MRN patterns BEFORE
 LLM parsing. PHI detection refuses the run and logs to `logs/_phi_refusals.jsonl`.
-This is the AAC GATED input gate. It does NOT make the system HIPAA-compliant —
-it prevents the dumbest leakage (accidentally pasted patient identifier).
+This is the AAC GATED input gate. It does NOT make the system HIPAA-compliant.
 
 ### Confidence + source citation on routed items
 
-`/capture-meeting` Step 5 trust gate shows per item: `[CATEGORY conf:0.92]`,
-`Source line N: "<original text>"`, and `action_id: capture-meeting:meeting-key:date:hash`.
-Items with `conf < 0.70` auto-route to Uncategorized regardless of indicator
-strength — keeps Aaron classifying a few hard ones, not yes/no'ing many easy ones.
+`/capture-meeting` Step 5 trust gate displays:
+- `[CATEGORY conf:0.92]` per item — confidence 0.0–1.0
+- `Source line N: "<original text>"` — every claim cites its origin
+- `action_id: capture-meeting:meeting-key:date:hash` — for audit + idempotency
+
+Items with `conf < 0.70` auto-route to Uncategorized.
 
 ### Daily briefing source markers
 
 `/start-day` Step 7 renders `[notion:abcd…]`, `[gtask:xyzw…]`, `[cal]`, or
-`[derived]` next to every Top 3 item — 4-char ID stub for visibility, full
-HTML comment for /end-day's exact-ID sync. (AAC GROUNDED.)
+`[derived]` next to every Top 3 item.
 
 ### When building a new skill
 
-Fill in all 16 AAC spec sections before building. Blank sections = spec not
-ready. Full list at `state/aac-framework-extraction.md` §4; worked example
-(proposed `/provider-followup-nudge`) at `state/aac-audit-of-current-skills.md` §6.
+Fill in all 16 AAC spec sections (see `state/aac-framework-extraction.md` §4)
+before building. A worked example for `/provider-followup-nudge` is in
+`state/aac-audit-of-current-skills.md` §6.
 
-Every COO Twin SKILL.md MUST include a `coo_twin:` block in its YAML frontmatter.
-Run `scripts/skill_lint.sh` to validate. The block identifies the file as a
-first-party skill (vendored external skills lack it and are auto-skipped):
+Every COO Twin SKILL.md MUST include a `coo_twin:` block in its YAML frontmatter
+(see CLAUDE.md for the full schema and `scripts/skill_lint.sh` for enforcement).
+The block has six required fields: `category`, `mode_required`, `writes_external`,
+`preflight`, `experimental`, and optionally `phi_gate` + `parallel_workers`.
+Vendored external skills lack this block and are auto-skipped by the linter.
 
-```yaml
----
-name: my-skill
-description: >-
-  One-paragraph what + when.
-coo_twin:
-  category: briefing | capture | admin | setup
-  mode_required: any | draft+ | approved+
-  writes_external: true | false       # touches Notion/Calendar/Tasks/anything off-disk
-  preflight: required | optional | none
-  experimental: false                  # true for *-team variants
-  phi_gate: true                       # only if skill ingests free-text user notes
-  parallel_workers: 5                  # team skills only
----
-```
+## Calendar Business Tagging Keywords
 
-The lint also enforces:
-- A Step 0 mode check (`scripts/preflight.sh` or `scripts/check_mode.sh` or `Step 0` heading)
-- Telemetry emission (`scripts/telemetry.sh` or direct `logs/_telemetry.jsonl` append)
-- Trust gate language when `writes_external: true`
-- `scripts/phi_scan.sh` when `phi_gate: true`
+(defined in `config/sources.yaml`):
 
-## Calendar Business Tagging
-
-Events are auto-tagged from summary text using keyword lists in `config/sources.yaml`
-(buckets: lab, ipa, nestmate, dock_pro; no match → untagged).
+- **lab:** lab, lincoln, testing, sample, specimen, pathology, phlebotomy, draw, panel
+- **ipa:** ipa, united, provider, network, credentialing, claims, saipa, sovereign, phoenix
+- **nestmate:** nestmate, account, nest
+- **dock_pro:** dock, cardio
+- Events matching no keyword → "untagged"
 
 ## Key Principles
 
 1. **Read-first, write-on-approval.** Never auto-write without trust gate confirmation.
 2. **Graceful degradation.** If any source is unavailable, run with what's available. Never crash.
-3. **Local state is primary.** Config, logs, and state live in this repo, not Claude memory.
+3. **Local state is primary.** Config, logs, and state live in this repo, not agent memory.
 4. **Business tagging.** Every item tagged by department using Workspace field or keyword matching.
 5. **Route, don't dump.** Parse streams of info into the right tool — don't pile everything in one place.
-6. **Close the loop.** /end-day scans all Notion DBs for today's changes, extracts next steps,
-   routes to Tasks/Calendar. Nothing falls through the cracks overnight.
-7. **Time-blocking.** Don't just list tasks — offer to block calendar time for high-priority items.
-   A task is a suggestion; a calendar block is a commitment.
+6. **Close the loop.** /end-day scans all Notion DBs for today's changes, routes next steps.
+7. **Time-blocking.** A task is a suggestion; a calendar block is a commitment.
 8. **System evolves.** Capture workflow improvements. Surface patterns proactively.
 
 ## Error Handling Patterns
@@ -371,43 +338,50 @@ All skills follow these patterns:
 - **Empty response:** Not an error — display "No items found in {database name}"
 - **Never retry automatically.** Report clearly and continue with available sources.
 
-## Team-skill pattern (this repo's fan-out discipline)
+## Team-skill pattern
 
-The `*-team` skills implement Anthropic's parallelization pattern locally via the
-Agent tool. Each `*-team` SKILL.md is a **coordinator** that spawns N sub-agents
-in parallel via a single message with multiple Agent calls, then synthesizes
-their structured JSON returns.
+The `*-team` skills implement parallel fan-out locally via Claude Code's Agent tool.
+Each is a **coordinator** that spawns N sub-agents in parallel via a single message
+with multiple Agent calls, then synthesizes their structured JSON returns.
 
 Discipline locked in across all team skills:
 - **Workers read; coordinator writes.** Trust gate stays in the coordinator. Workers
-  use `subagent_type: "Explore"` (read-only Bash + Read/Glob/Grep, no Edit/Write).
-- **One Agent message, N parallel calls.** Multiple Agent tool uses in a single
-  assistant message run concurrently.
-- **Each worker has a strict JSON return contract** declared in its prompt — the
-  coordinator merges by field, not by free-text parsing.
-- **Telemetry under the team skill name** (e.g. `start-day-team`, not `start-day`)
-  so `/weekly-review` can A/B the variants from `logs/_telemetry.jsonl`.
-- **TEAM name is RUN_ID-keyed** to make concurrent invocations safe. See each
-  team skill's §"Parallel safety" for the file-by-file collision analysis.
+  use read-only `Explore` subagent type (no Edit/Write).
+- **One Agent message, N parallel calls.**
+- **Each worker has a strict JSON return contract** declared in its prompt.
+- **Telemetry under the team skill name** (e.g. `start-day-team`).
+- **TEAM name is RUN_ID-keyed** for concurrent-safety.
 
-**Custom subagents — when to extract.** If two `*-team` skills both inline the
-same worker (calendar pull, notion pull, etc.), promote the worker to
-`.claude/agents/<name>.md` and have both skills reference it. Today the only
-extracted one is `.claude/agents/notion-puller.md`; the rest are still inline
-in `start-day-team` and `end-day-team`. Repeat extraction as inline prompts drift apart.
+Codex does not currently expose the same `Agent` tool primitive, so team-skill variants
+are Claude-Code-only today. Equivalent fan-out from Codex would need to be re-implemented
+against Codex's sub-process model — not done.
+
+## Codex Operating Notes
+
+Codex CLI specifics (delta from Claude Code):
+
+- **Config file:** `.codex/config.toml`. There is no `.codex/skills/` directory in this repo;
+  Codex-launched workflows run from this AGENTS.md file and direct prompts.
+- **Secrets:** `NOTION_API_TOKEN` lives in `.secrets/notion.env` (the canonical store).
+  Source it before running Codex sessions that hit Notion:
+  `source .secrets/notion.env && codex ...`
+- **No permission-modes equivalent.** Codex does not have Claude Code's `auto` / `acceptEdits` /
+  `plan` modes or `autoMode.environment` rules. Trust gates in this project are enforced
+  by the skill logic itself (the AAC GATED discipline + `state/coo_mode.yaml`), not by the agent tooling.
+- **No sub-agent / parallel-fan-out primitive** in Codex today — see "Team-skill pattern" above.
+- **Telemetry still applies.** Codex sessions should still call `scripts/telemetry.sh` at end
+  of run so `/weekly-review` sees them.
+
+For the Claude Code equivalents of these notes see `docs/claude-code-setup.md` and
+`docs/anthropic-best-practices.md`. Both are read-relevant to Codex too as background — Codex
+doesn't enforce them, but the underlying skill discipline (telemetry, idempotency, PHI gate, mode file)
+applies regardless of which agent is driving.
 
 ## Pointers
 
-- **Claude Code setup (permission modes, settings.json, auto-mode):** `docs/claude-code-setup.md`
-- **Anthropic best practices applied to this repo:** `docs/anthropic-best-practices.md`
+- **Project source of truth (data_source IDs etc.):** `config/sources.yaml`
+- **AAC framework reference:** `state/aac-framework-extraction.md`
+- **AAC audit of current skills:** `state/aac-audit-of-current-skills.md`
 - **Roadmap / future enhancements:** `state/roadmap.md`
 - **Full approved design:** `~/.gstack/projects/daily-automation/aaron-master-design-20260414-103924.md`
-
-## GBrain Configuration (configured by /setup-gbrain)
-- Mode: local-stdio
-- Engine: pglite
-- Config file: ~/.gbrain/config.json (mode 0600)
-- Setup date: 2026-05-18
-- MCP registered: yes (user scope, gbrain serve)
-- Artifacts sync: full (federated source: gstack-brain-aaron)
-- Current repo policy: unset (no origin remote)
+- **Claude Code's view of the same project:** `CLAUDE.md` (update together)
