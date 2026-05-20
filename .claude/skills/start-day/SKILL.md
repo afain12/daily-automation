@@ -715,11 +715,30 @@ _Run: {RUN_ID} · Mode: {MODE}_
 
 ## Top 3 Outcomes
 1. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
+   {↳ past: {path} — "{snippet excerpt, 80 chars}"}     ← optional, only if a vault_search hit ≥ 1.5 exists
 2. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
+   {↳ past: {path} — "{snippet excerpt, 80 chars}"}
 3. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
+   {↳ past: {path} — "{snippet excerpt, 80 chars}"}
 
 {If slot #3 was promoted by the starvation guard, append a one-line reason:}
    _Slot #3 promoted from {starved_dept} (stale {N}d) — see config/starvation rule._
+
+{Past-context citations are computed by running `scripts/vault_search.py` against
+each Top 3 item's text BEFORE rendering the briefing. The skill should:
+
+  1. For each Top 3 item, extract 3-5 keyword terms (entity names, business
+     terms, action verbs). Strip stopwords and check items.
+  2. Run `python scripts/vault_search.py "<terms joined by space>" --top-n 1
+     --min-score 1.5 --json`
+  3. If a result comes back, render the `↳ past: ...` line beneath the item
+     with the relative path and the first 80 chars of the snippet.
+  4. If no result meets the threshold, omit the line entirely (don't render
+     "no context found" — it's noise).
+
+Skip vault_search for items whose source_marker is [cal] (calendar prep items
+rarely have past context worth surfacing). Always run for [notion:…] and
+[gtask:…] items. The whole pass should add < 2 seconds to total wall time.}
 
 {source_marker format (AAC GROUNDED — every fact must trace to a source):
   - Notion item: render as `[notion:ABCD…]` where ABCD is the first 4 chars of the page_id

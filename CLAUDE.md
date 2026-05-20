@@ -27,6 +27,8 @@ Codex → "Codex Operating Notes" section in `AGENTS.md`.
 | `/notion-template-install` | 0 | Active | Installs 4 canonical Notion DBs from version-controlled JSON templates (empty-workspace path) |
 | `/setup` | 0 | Active | User-facing onboarding questionnaire — Step A (source presence) + Step B (stream definitions); writes streams.yaml |
 | `/automation` | 4 | Active | Cron-style saved prompts; reads state/automations.yaml; weekly-review + provider-followup-nudge now run through this |
+| `/vault-health` | 4 | Active | Read-only vault audit: orphan notes, broken wikilinks, untagged notes, stale inbox. Trust-gated batch fixes. |
+| `/meeting-prep` | 2 | Active | Pre-meeting context dossier: attendees → CRM/Activity Log/Meeting Notes/vault. Read-only. |
 | `/weekly-review` | 4 | Superseded | Now an automation entry in state/automations.yaml — invoke via `/automation` when due |
 
 The `*-team` skills are experimental siblings that re-implement their baseline using
@@ -57,6 +59,7 @@ scripts/
   action_id.sh               — Idempotency: generate / check / stamp action_ids
   phi_scan.sh                — PHI input gate for /capture-meeting
   vault_search.py            — BM25-lite search over vault/ + logs/ (no embeddings; called from /start-day Top-3 context)
+  vault_health.py            — Vault audit: orphans, broken wikilinks, untagged notes, stale inbox (companion to /vault-health)
   automation_due.py          — Companion to /automation: due-check, last_run stamping, history bookkeeping
 state/
   coo_mode.yaml              — System-wide write-mode (observe | draft | approved | auto | locked)
