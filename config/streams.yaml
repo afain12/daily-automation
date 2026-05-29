@@ -1,0 +1,146 @@
+# Streams — the generic equivalent of "departments" or "business units".
+#
+# Every skill that currently hardcodes department names (Lincoln Lab, Nestmate,
+# etc.) should iterate this file instead. The migration is incremental — a skill
+# can keep its hardcoded list while it's being refactored, as long as the list
+# stays consistent with this file (run scripts/streams_check.py to verify).
+#
+# For a new user, /setup will overwrite this file with their own streams.
+# For Aaron, this file is derived from config/sources.yaml as of 2026-05-20.
+
+streams:
+  - key: lab
+    display_name: "Lincoln Lab"
+    is_default: false
+    # Notion Workspace-select option values that route to this stream.
+    # Canonical value is "Lincoln Reference Laboratory" across all 4 DBs as of the
+    # 2026-05-29 reorg (see CLAUDE.md). "LabAide" is preserved because Activity Log
+    # keeps it as a distinct option. The old "Lincoln Lab" / "Link & Reference
+    # Laboratory" values were the drift the reorg fixed — do NOT re-introduce them
+    # (fixed 2026-05-29; was causing a blocking streams_check drift).
+    workspace_values:
+      - "Lincoln Reference Laboratory"
+      - "LabAide"
+    # Calendar tagging keywords (case-insensitive substring match on event summary).
+    keywords:
+      - lab
+      - lincoln
+      - testing
+      - sample
+      - specimen
+      - pathology
+      - phlebotomy
+      - draw
+      - panel
+      - ldx
+      - ahbd
+      - telcor
+      - gary biller
+      - morshed
+      - abid
+      - essen
+      - medicaid
+      - biller proposal
+      - lincoln reference
+      - lrl
+      - hui tzu
+      - kader      # multi-dept (also in ipa); calendar matcher does first-match-wins
+      - tim eng
+      - dr ng
+      - dr eng office
+      - afc short hills      # specific account is lab (generic "afc" stays in nestmate)
+      - yili                  # moved from nestmate 2026-05-21 per Aaron correction
+      - goyal                 # moved from nestmate 2026-05-21 per Aaron correction
+      - nazmul
+      - suleman
+      - suleiman
+      - hussain
+      - hussein
+
+  - key: ipa
+    display_name: "United IPA"
+    is_default: false
+    workspace_values:
+      - "United IPA"
+    keywords:
+      - ipa
+      - united
+      - provider network
+      - credentialing
+      - claims
+      - saipa
+      - sovereign
+      - phoenix
+      - healthfirst
+      - starling
+      - luis
+      - adrianova
+      - wayne
+      - spipa
+      - kader      # multi-dept (also in lab)
+
+  - key: nestmate
+    display_name: "Nestmate"
+    is_default: false
+    workspace_values:
+      - "Nestmate"
+    keywords:
+      - nestmate
+      - account
+      - nest
+      - afc
+      - urgent care
+      - diangelo
+      - d'angelo
+      - richard
+      - remzy
+      - rookwood
+      - tin
+      - gordin
+      - rybstein
+      - shapsis
+      - sorkin
+      - kiranpreet
+      - khrom
+      - ling cui
+      - alam
+      - main street radiology
+      - ahmed
+      - guerchon
+      - guerchin
+      - ilene
+      - cyrus
+      - big apple nephrology
+
+  - key: dock_pro
+    display_name: "Dock Pro / Cardio Pro"
+    is_default: false
+    workspace_values:
+      - "Dock Pro"
+    keywords:
+      - dock
+      - cardio
+      - roman
+      - aileen
+      - abos
+
+  - key: other
+    display_name: "Other / Personal"
+    is_default: true
+    # Catch-all stream; receives anything that doesn't match another stream's
+    # workspace_values or keywords. Notion option "Other" routes here directly.
+    workspace_values:
+      - "Other"
+    keywords: []
+
+# ============================================================
+# Inheritance contract
+# ============================================================
+# - Daily-note department headers are rendered from `display_name` in stream order.
+# - Calendar tagging walks streams in order and picks the first whose keywords
+#   match the event summary. Order matters when a keyword could match multiple
+#   streams (e.g. "kader" sits in both lab and ipa — lab comes first).
+# - Routing inference (e.g. /capture-meeting attendee → stream) uses keywords
+#   the same way: first-match-wins, in declaration order.
+# - The `is_default: true` stream is the fallback when no match. Exactly one
+#   stream must have it (validated by scripts/streams_check.py).
