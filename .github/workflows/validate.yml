@@ -1,0 +1,37 @@
+name: validate
+
+# Minimal validation gate for the COO Twin daily-automation repo.
+# Runs the repo's own checks on every PR to master (and on master pushes):
+#   1. capture_meeting_parse.py --self-test  (annotation extractor + meeting-parse parity)
+#   2. skill_lint.sh                         (AAC discipline across all COO Twin SKILL.md)
+#   3. streams_check.py                      (streams.yaml <-> sources.yaml drift; exits 1 on blocking)
+# There is no app/deploy here — this is the second pair of eyes before a merge.
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Parser self-test (annotation extractor + parity)
+        run: python scripts/capture_meeting_parse.py --self-test
+
+      - name: Skill lint (AAC discipline)
+        run: bash scripts/skill_lint.sh
+
+      - name: Streams config drift check
+        run: python scripts/streams_check.py
