@@ -131,6 +131,12 @@ def diff(streams_state, sources_state):
 
 
 def main():
+    # Force UTF-8 stdout so the human-readable output (which uses the ↔ glyph)
+    # doesn't crash on Windows cp1252. The --json path is unaffected either way.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
+    except (AttributeError, ValueError):
+        pass
     as_json = "--json" in sys.argv
     streams_data = load_yaml(STREAMS_PATH)
     sources_data = load_yaml(SOURCES_PATH)
