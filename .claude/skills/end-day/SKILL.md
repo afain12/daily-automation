@@ -280,6 +280,73 @@ Compare morning calendar vs actual:
 
 (Now handled in Step 4d. This anchor preserved for older log references.)
 
+### 4f: Inline Annotation Extraction (NEW 2026-05-29)
+
+Aaron types imperative scheduling directives into the daily note as checkbox
+tails or braindump prose — `"Bill for trish ... handle 9am tomm set on calender"`,
+`"create cal event 10am"`, `"set for 4pm tomm"`, `"create 11am task on calender"`.
+These are instructions to **create a calendar event / Google Task**, not passive
+notes, and were being silently dropped (a week's worth lost; caught 2026-05-29).
+See memory `feedback_daily_note_annotations_are_actions`.
+
+This step reuses the daily-note lines already read in 4b — no extra file read.
+
+**Procedure:**
+
+1. Run the deterministic extractor (pure regex; **no LLM, no PHI gate needed**):
+   ```bash
+   python scripts/capture_meeting_parse.py --mode annotations \
+     --date {TODAY} --notes-file "${VAULT}/daily/{TODAY}.md"
+   ```
+   It emits a JSON array of intents:
+   ```json
+   {"verb":"create_event|create_task|reschedule",
+    "suggested_summary":"...","source_line":172,"original_text":"...",
+    "date_iso":"2026-05-29","date_resolved_from":"relative_phrase",
+    "start_iso":"2026-05-29T09:00:00","end_iso":"2026-05-29T10:00:00",
+    "meridiem_guessed":false,"time_resolved_from":"single_meridiem",
+    "confidence":0.95,"flags":[]}
+   ```
+   The extractor already skips struck-through lines, `<!-- synced -->` /
+   `<!-- sched-done -->` lines, markdown headers/tables/blockquotes, and
+   `(already in tasks/on calendar)` markers.
+
+2. **MVP scope:** act only on `create_event` and `create_task`. `reschedule` and
+   any `recurring`/low-confidence items are **surfaced only** (Step 6), never
+   auto-staged. (Reschedule execution + recurrence land in the fuller version.)
+
+3. **Idempotency check (BEFORE proposing):** for each create intent, build
+   ```bash
+   AID=$(scripts/action_id.sh generate end-day \
+        "cal" "{TODAY}" "<verb>|<start_iso>|<suggested_summary>")
+   scripts/action_id.sh check "$AID" && mark intent already_created
+   ```
+   Use target `cal` for create_event, `gtask` for create_task. The hash includes
+   the resolved start + summary, so a re-run of `/end-day` (or tomorrow's
+   `/start-day` reading this same note) produces the identical AID and no-ops.
+   Carry `$AID` on the intent for stamping in 8h.
+
+4. **Dedupe against live state (read-only):**
+   - `create_event`: pull `gws calendar +agenda --date {target-day} --format json`
+     (or `--today`/`--week` and filter). Skip (mark `dup_skipped`) if an event
+     with start within ±15 min AND a fuzzy-matching summary already exists.
+     This is the programmatic version of the manual "verified, not duplicated"
+     check from the 2026-05-29 note.
+   - `create_task`: compare against the incomplete-tasks list already pulled in
+     2c. Skip if an open task with a matching title exists.
+
+5. **Conflict + ambiguity flags** (carry to Step 6, do NOT auto-resolve):
+   - `meridiem_guessed` → "assumed {9 AM} — confirm".
+   - Proposed event start within ±30 min of a *different* existing event →
+     `⚠ overlaps "{other}"`. Two new intents colliding → flag together.
+   - `verb_ambiguous` (matched both event + task signals) → surface as
+     "event or task?" — never create both.
+   - `confidence < 0.70` OR any flag → surfaced but NOT pre-selected at the gate.
+
+Build `annotation_intents` (create_event/create_task, with per-item status:
+`proposed | already_created | dup_skipped | needs_confirm`) and
+`annotation_reschedules` (surface-only) for Step 6.
+
 ## Step 5: Build Carry-Forward List
 
 Items that carry forward to tomorrow:
@@ -340,6 +407,28 @@ Output the retro to the terminal:
 - Set {N} Notion Master Tasks to "Done" (PATCH /v1/pages/{id})
 - Manual completions logged only: {N}
 
+## Inline Annotations Detected (Step 4f — NEW)
+
+{Render only if annotation_intents or annotation_reschedules is non-empty.
+Omit entirely otherwise. Per-item, modeled on /capture-meeting Step 5 display.}
+
+### Will create on approval (pre-selected)
+{create_event / create_task intents with status=proposed AND confidence ≥ 0.70
+AND no blocking flag.}
+- 📅 **{suggested_summary}** → Calendar {date} {start}–{end}  _(line {N}, conf {0.95})_
+- ✅ **{suggested_summary}** → Google Task{, due {date}}  _(line {N}, conf {0.80})_
+
+### Needs your confirmation (NOT pre-selected)
+{Items with a flag: meridiem_guessed, overlap, verb_ambiguous, or conf < 0.70.}
+- 📅 **{summary}** → {date} {start} — ⚠ {assumed 9 AM / overlaps "Huang" 12:00 / event-or-task?}  _(line {N}, conf {0.60})_
+
+### Already handled (no-op)
+- {summary} — already created (action_id stamped) / already on calendar (dup) — skipped
+
+### Reschedule mentions (surface-only in MVP — not auto-applied)
+{annotation_reschedules — e.g. "push to next week", "move to 3pm".}
+- {original_text} — reschedule intent; {has <!-- gtask/notion:ID --> anchor → "can retarget" | "no source anchor — handle manually"}
+
 ## Dead Tasks (In Progress > 5 days, no edits)
 
 For each dead task, require explicit action at the trust gate:
@@ -392,15 +481,25 @@ Use AskUserQuestion:
 **"What would you like to do with this retro?"**
 
 Options:
-- **A) Save everything + sync loop** — Update daily note, log, carry-forwards, AND
+- **A) Save everything + sync loop** — Update daily note, log, carry-forwards,
   push all queued sync writes (close Google Tasks, flip Notion to Done) for items
-  Aaron checked off in the daily note. Includes resolving dead tasks per Step 7b.
-- **B) Edit carry-forwards/syncs first** — Let me add/remove/modify carry-forward
-  items, opt out of any queued sync writes, or override dead-task resolutions
-  before saving.
+  Aaron checked off in the daily note, resolve dead tasks per Step 7b, AND create
+  the pre-selected inline-annotation events/tasks from Step 4f (Step 8h).
+- **B) Edit carry-forwards/syncs/annotations first** — Let me add/remove/modify
+  carry-forward items, opt out of any queued sync writes, toggle which Step-4f
+  annotation events/tasks to create (and confirm any flagged ones), or override
+  dead-task resolutions before saving.
 - **C) Just the summary** — Don't write anything, review only.
 
-If B: ask which items to add, remove, or modify. Then save.
+If B: ask which items to add, remove, or modify. For the "needs confirmation"
+annotation items (meridiem guesses, overlaps, ambiguous verb), this is where Aaron
+picks the time / resolves the overlap / chooses event-vs-task. Then save.
+
+**Auto-mode note:** in `approved` mode, the auto-mode classifier cannot see
+AskUserQuestion selections (memory `feedback_automode_trust_gate`). Annotation
+creates are calendar/Tasks commitments — they always require plain-text approval
+in chat, never silent auto-create, even at high confidence. `approved_action_prefixes`
+does NOT include `end-day:cal:` / `end-day:gtask:` for the MVP.
 
 ### Step 7b: Dead-task resolution (only if Step 4c found any)
 
@@ -567,12 +666,27 @@ For every item in `checkbox_completions` from Step 4b that traces back to a sour
 push the completion. Approved as a batch via Option A in Step 7.
 
 **Google Tasks completions:**
+
+CRITICAL: gws splits URL/query params from the request body across two flags. Nesting
+`body` inside `--params` is a silent failure mode — the API returns 200 OK with an
+empty/unchanged task. Hit 2026-05-20 during /end-day when 6 newly-created tasks all
+landed blank. Use `--params` for `tasklist` + `task` only, and `--json` for the body:
+
 ```bash
-gws tasks tasks update --params '{"tasklist":"MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow","task":"<TASK_ID>","body":{"status":"completed"}}'
+gws tasks tasks patch \
+  --params '{"tasklist":"MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow","task":"<TASK_ID>"}' \
+  --json '{"status":"completed"}'
 ```
 
-If `gws tasks tasks update` is unavailable in the installed gws version, fall back to
-`gws tasks tasks patch` or to a direct curl against the Google Tasks REST API:
+The same rule applies to `gws tasks tasks insert` (creating new tasks during /end-day
+braindump capture or /capture-meeting Step 6a-3): `--json '{"title":"...","notes":"..."}'`,
+NEVER `--params '{...,"body":{"title":"..."}}'`. See `reference_gws_tasks_insert.md`.
+
+Always verify the response `title` or `status` field is populated — there is no error
+on the broken form.
+
+If `gws tasks tasks patch` is unavailable in the installed gws version, fall back to
+a direct curl against the Google Tasks REST API:
 ```bash
 curl -s -X PATCH "https://tasks.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/<TASK_ID>" \
   -H "Authorization: Bearer $(gws auth token)" \
@@ -636,6 +750,63 @@ the Notion mobile page so Aaron can read tonight's closeout on his phone.
 If the Notion MCP is not loaded in the current session: skip silently and
 note "MCP unavailable" in the day's log. Mirror runs from both `/start-day`
 and `/end-day`, so a miss on one doesn't lose the phone view for long.
+
+### 8h: Execute Inline Annotations (NEW 2026-05-29)
+
+Runs only under Option A, or the subset Aaron confirmed under Option B. Skips in
+`observe`/`SKIP_WRITES`. Execute BEFORE Step 9.5 (sync-sweep) so a `reschedule`
+phrase isn't re-routed as braindump prose. Process only `create_event` /
+`create_task` intents whose status is `proposed` (or `needs_confirm` and the user
+approved it); never the `already_created` / `dup_skipped` ones.
+
+For each approved intent:
+
+1. **Re-check idempotency** (the `$AID` from Step 4f):
+   ```bash
+   scripts/action_id.sh check "$AID" && continue   # already applied → no-op
+   ```
+
+2. **create_event** — use the canonical insert (memory `reference_gws_calendar_insert`):
+   ```bash
+   gws calendar +insert --summary "<suggested_summary>" \
+     --start "<start_iso e.g. 2026-05-29T16:00:00-04:00>" \
+     --end   "<end_iso>" --format json
+   ```
+   Append a `-04:00` (EDT) / `-05:00` (EST) offset to the ISO datetimes the
+   extractor emits (they are naive local). Default 60-min end is already in
+   `end_iso`. Optionally tag the summary's stream from
+   `calendar_business_keywords`.
+
+3. **create_task** — gws Tasks insert. CRITICAL: body goes in `--json`, NEVER
+   nested in `--params` (silent blank-task failure — memory
+   `reference_gws_tasks_insert`):
+   ```bash
+   gws tasks tasks insert \
+     --params '{"tasklist":"MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow"}' \
+     --json '{"title":"<suggested_summary>","due":"<date_iso>T00:00:00.000Z"}'
+   ```
+   Verify the response `title` is populated (blank = the broken-form failure).
+
+4. **On success:**
+   ```bash
+   scripts/action_id.sh stamp "$AID" '{"cal_event_id":"<id>"}'   # or {"gtask_id":"..."}
+   ```
+   Then append a single-line handled sentinel to **that one source line** in the
+   daily note so it isn't re-created next run. Grep the exact line text first to
+   confirm a UNIQUE match; never `replace_all`. Append, do not rewrite:
+   `... set on calender <!-- sched-done:cal:<8hex> {TODAY} -->`
+   **If the source line is inside the actively-typed `## Braindump` block**
+   (clobber risk — memory `feedback_endday_braindump_append`), skip the in-note
+   sentinel and rely on the `$AID` stamp alone; log the creation under
+   `### Annotation Execution` in `${LOGS_DIR}/{TODAY}.md` instead.
+
+5. **On failure** (4xx/5xx/timeout): report which intent failed, continue with
+   the rest, do NOT retry, do NOT stamp (so a later run can re-attempt). Same
+   non-blocking discipline as 8e.
+
+Record counts (`annotations_created_event`, `annotations_created_task`,
+`annotations_skipped_idempotent`, `annotations_dup_skipped`, `annotations_failed`)
+for Step 10 telemetry.
 
 ## Step 9: Summary
 
@@ -740,7 +911,15 @@ print(json.dumps({
     'gtask_retry_queue_oldest_days': ${DLQ_OLDEST_DAYS},
     'sync_pull_completions': ${PULL_COUNT},
     'sync_push_completions': ${PUSH_COUNT},
-    'sync_push_failures': ${PUSH_FAIL_COUNT}
+    'sync_push_failures': ${PUSH_FAIL_COUNT},
+    'annotations_detected': ${ANNO_DETECTED},            # Step 4f total (create_event+create_task)
+    'annotations_created_event': ${ANNO_CREATED_EVENT},
+    'annotations_created_task': ${ANNO_CREATED_TASK},
+    'annotations_needs_confirm': ${ANNO_NEEDS_CONFIRM},  # surfaced, flagged
+    'annotations_skipped_idempotent': ${ANNO_SKIP_IDEM},
+    'annotations_dup_skipped': ${ANNO_DUP_SKIP},
+    'annotations_failed': ${ANNO_FAILED},
+    'annotation_reschedules_surfaced': ${ANNO_RESCHED}   # surface-only in MVP
 })
 ")"
 ```
