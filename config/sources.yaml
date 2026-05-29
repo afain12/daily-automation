@@ -40,8 +40,11 @@ notion_databases:
     last_activity_field: "Last Activity"
     updated_field: "Updated"
     # Workspace values in this database
+    # CANONICAL — do not drift. Same option set across all 4 canonical DBs as of 2026-05-29 reorg.
+    # Master Tasks, Provider CRM, Activity Log, Meeting Notes all share these exact 5 values.
+    # Activity Log additionally preserves the 'LabAide' option (Aaron 2026-05-29 — separate product).
     workspace_values:
-      lab: "Link & Reference Laboratory"
+      lab: "Lincoln Reference Laboratory"
       ipa: "United IPA"
       nestmate: "Nestmate"
       dock_pro: "Dock Pro"
@@ -84,6 +87,37 @@ notion_databases:
     outcome_field: "Outcome"
     next_action_field: "Next Action"
 
+  # --- SECONDARY: Meeting Notes (Granola sync target) ---
+  - name: "Meeting Notes"
+    database_id: "1dea3158-59b4-8036-ad33-f5ef7515666e"
+    data_source: "collection://22ba3158-59b4-804d-9c1c-000b9fad40ae"
+    business: all
+    # Granola syncs meetings here. Sync is per-meeting click in the Granola
+    # desktop app, not automatic — recent meetings may not be present yet.
+    title_field: "Meeting name"
+    date_field: "Date"
+    summary_field: "Summary"  # rich_text — Granola's auto-generated recap
+    attendees_field: "Attendees"
+    workspace_field: "Workspace"  # Added 2026-04-27 — auto-tag via /start-day or /capture-meeting
+    related_tasks_field: "Related Tasks"  # relation → Master Tasks (added 2026-04-27)
+    legacy_category_field: "Category"  # multi_select — never populated; ignore
+    # Routing inference for untagged meetings, by attendee or title keyword:
+    #   Lincoln/lab/sample/Kader/HPV → Lincoln Lab
+    #   Ryan/EMU/Sheila/Diangelo/Zakaria/urgent care → Nestmate
+    #   Wayne/Kader/Adrianova/IPA/Beacon/Health First → United IPA
+    #   Roman/Cardio/Dock Pro/Aileen/Abos → Dock Pro
+    #   no match → Other
+
+# ============================================================
+# Mobile Briefing Mirror (Notion page, read on Notion mobile app)
+# ============================================================
+# Auto-overwritten by /start-day (morning) and /end-day (evening) — both
+# local Claude Code and Cowork's scheduled runs replace this page's content
+# with the current day's vault/daily/YYYY-MM-DD.md markdown. Phone-delivery
+# surface while Telegram bot is being set up. Created 2026-05-18.
+mobile_briefing_page_id: "365a3158-59b4-8100-a1ae-c6a8ad53eec5"
+mobile_briefing_page_url: "https://www.notion.so/365a315859b48100a1aec6a8ad53eec5"
+
 # ============================================================
 # Google Calendar
 # ============================================================
@@ -101,13 +135,49 @@ google_tasks:
 # ============================================================
 # Calendar Business Tagging
 # ============================================================
-# Keywords to auto-tag calendar events by business
+# Keywords to auto-tag calendar events by business. Match case-insensitively
+# against event summary (and location if present). Order matters when a
+# summary could match multiple lists — first match wins, so put the most
+# specific lists first.
+#
+# Expanded 2026-05-19 after start-day-team validation run #1 showed too
+# many real lab/nestmate events landing in "untagged" because they used
+# proper nouns (AHBD, LDX, Telcor, Gary biller, AFC, Diangelo, Goyal, etc.)
+# rather than the generic words below. Add new terms as Aaron's clinic
+# vocabulary grows; do NOT delete existing ones.
 calendar_business_keywords:
-  lab: ["lab", "lincoln", "testing", "sample", "specimen", "pathology", "phlebotomy", "draw", "panel"]
-  ipa: ["ipa", "united", "provider", "network", "credentialing", "claims", "saipa", "sovereign", "phoenix"]
-  nestmate: ["nestmate", "account", "nest"]
-  dock_pro: ["dock", "cardio"]
-  # Events matching no keyword are tagged "untagged"
+  lab: ["lab", "lincoln", "testing", "sample", "specimen", "pathology",
+        "phlebotomy", "draw", "panel", "ldx", "ahbd", "telcor", "gary biller",
+        "morshed", "abid", "essen", "medicaid", "biller proposal",
+        "lincoln reference", "lrl", "hui tzu", "kader", "tim eng",
+        "dr ng", "dr eng office", "afc short hills", "yili", "goyal",
+        "nazmul", "suleman", "suleiman", "hussain", "hussein"]
+  # 2026-05-19: `tim eng` moved from dock_pro → lab (Aaron confirmed 5/13 that
+  #   Tim ENG closed for the lab — the dock_pro mapping was stale).
+  # `kader` is intentionally kept in BOTH lab AND ipa (see ipa list below) —
+  #   he is multi-dept and should trigger disambig when his name appears,
+  #   per the corrected E1 multi-keyword rule.
+  ipa: ["ipa", "united", "provider network", "credentialing", "claims",
+        "saipa", "sovereign", "phoenix", "healthfirst", "starling",
+        "luis", "adrianova", "wayne", "spipa", "kader"]
+  # 2026-05-19: `kader` added to ipa (also remains in lab). 5/14 braindump
+  #   exercises the IPA context (SAIPA / Sovereign Phoenix cleanup), but
+  #   the Meeting Notes routing comment retains Kader on both sides — multi-dept.
+  nestmate: ["nestmate", "account", "nest", "afc", "urgent care", "diangelo",
+             "d'angelo", "richard", "remzy", "rookwood", "tin",
+             "gordin", "rybstein", "shapsis", "sorkin", "kiranpreet",
+             "khrom", "ling cui", "alam", "main street radiology", "ahmed",
+             "guerchon", "guerchin", "ilene", "cyrus", "big apple nephrology"]
+  dock_pro: ["dock", "cardio", "roman", "aileen", "abos"]
+  # Events matching no keyword are tagged "untagged".
+  #
+  # Fallback inference (applied by /start-day-team calendar-worker AFTER
+  # keyword match yields untagged):
+  # - Summary starts with "Visit Dr" or "Visit <Clinic>" → nestmate
+  #   (default for unmatched provider visits — Aaron's nestmate route)
+  # - Summary contains "Meditate", "Tea", "GYM", "Lunch", "Workout" → personal
+  # - Summary contains "Workshop", "Maven", "Webinar" → personal/learning
+  # See start-day-team SKILL.md Worker 1 prompt for the exact inference logic.
 
 # ============================================================
 # Team Members (for delegation detection)
@@ -126,3 +196,40 @@ delegation_tags: ["delegate", "handoff", "assign"]
 # ============================================================
 staleness_days: 7
 provider_followup_days: 14  # Flag providers not contacted in 14+ days
+
+# ============================================================
+# Entity Aliases (sync-sweep §E2 graduation target)
+# ============================================================
+# Canonical name → Notion page_id mappings. Populated by /sync-sweep at runtime
+# once an E2 disambiguation has been confirmed 3 times in state/sync-sweep-resolutions.yaml.
+# A graduated entry is removed from sync-sweep-resolutions.yaml and lives here as
+# the authoritative routing target. Start empty; do not hand-edit unless you
+# need to seed a known-good mapping.
+entity_aliases: {}
+
+# ============================================================
+# Single-Department Persons (sync-sweep §locked decision #3)
+# ============================================================
+# Unambiguous first-name → workspace mappings per feedback_person_routing.md.
+# When /sync-sweep extracts a bare first name in this list, it scores conf 0.85
+# and auto-stages (skips the disambiguation gate).
+#
+# IMPORTANT: only add names that map to a single department in 100% of Aaron's
+# usage. Multi-department names (Cyrus, Ilene, Ahmed, Ryan) are intentionally
+# absent — they require line-level context disambiguation and must NOT be added
+# here without explicit evidence they have collapsed to a single department.
+single_dept_persons:
+  MDland: "Lincoln Reference Laboratory"
+  Alam: "Lincoln Reference Laboratory"
+  Sheila: "Nestmate"
+  EMU: "Nestmate"
+  # Added 2026-05-21 per Aaron correction (previously mis-routed nestmate):
+  Yili: "Lincoln Reference Laboratory"
+  Goyal: "Lincoln Reference Laboratory"
+  Hussain: "Lincoln Reference Laboratory"
+  Hussein: "Lincoln Reference Laboratory"
+  Nazmul: "Lincoln Reference Laboratory"
+  Suleman: "Lincoln Reference Laboratory"
+  Suleiman: "Lincoln Reference Laboratory"
+  "Dr Ng": "Lincoln Reference Laboratory"
+  "Dr Eng": "Lincoln Reference Laboratory"
