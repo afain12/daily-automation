@@ -1,0 +1,71 @@
+{
+  "_comment": "Template for .claude/settings.local.json. Copy to settings.local.json and fill in. scripts/bootstrap-mac.sh does this for you, substituting __REPO_ROOT__/__HOME__ and prompting for the token. The real settings.local.json is gitignored. Windows-only entries (gws.exe, taskkill, OneDrive cp sync) are intentionally omitted — on the Mac the vault ships inside this repo, so no OneDrive sync is needed.",
+  "env": {
+    "NOTION_API_TOKEN": "__NOTION_API_TOKEN__"
+  },
+  "permissions": {
+    "allow": [
+      "Skill(start-day)",
+      "Skill(capture-meeting)",
+      "Skill(end-day)",
+      "Skill(office-hours)",
+      "Skill(update-config)",
+      "Skill(checkpoint)",
+      "Skill(codex)",
+      "Skill(autoplan)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-get-teams",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__get-library-docs",
+      "WebSearch",
+      "WebFetch(domain:docs.claude.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl:*)",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "Bash(python -c ' *)",
+      "Bash(PYTHONIOENCODING=utf-8 python *)",
+      "Bash(gws auth:*)",
+      "Bash(gws tasks:*)",
+      "Bash(gws calendar:*)",
+      "Bash(gws schema:*)",
+      "Bash(gws --help)",
+      "Bash(gws --version)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(awk *)",
+      "Bash(xargs *)",
+      "Bash(ln:*)",
+      "Bash(mkdir -p *)",
+      "Bash(ls -d __REPO_ROOT__/vault/*/)",
+      "Bash(ls -lt __HOME__/.claude/plans/*.md)",
+      "Bash(du -sh __REPO_ROOT__/vault/*/)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git reset:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(npx skills:*)",
+      "Bash(claude auto-mode *)"
+    ]
+  },
+  "autoMode": {
+    "environment": [
+      "Organization: Aaron Fainshtein personal COO Twin / daily-automation system. Primary use: orchestrating daily workflow across four businesses (Lincoln Reference Laboratory, United IPA, Nestmate, Dock Pro / Cardio Pro) from a single terminal. Runs as the Hermes agent on a Mac mini (localhost).",
+      "Trusted internal domains: api.notion.com, *.googleapis.com (Google Calendar, Tasks, Drive endpoints reached via gws CLI), accounts.google.com (OAuth for gws), github.com (personal remote for this repo).",
+      "Trusted APIs: Notion REST API at api.notion.com (authenticated via NOTION_API_TOKEN env var). Curl POSTs to /v1/data_sources/{id}/query and /v1/pages are routine and expected.",
+      "Trusted CLIs: gws (Google Workspace CLI) for Calendar and Tasks, invoked as bare `gws` via PATH. Commands like `gws calendar +agenda`, `gws tasks tasks list`, `gws tasks tasks insert` are routine.",
+      "Trusted local paths: Project root is the cloned daily-automation repo. Obsidian vault at <repo>/vault (writes to daily/, meetings/, notes/ are expected). Config in config/, state in state/, logs in logs/. The full vault — including business folders (CardioPro, Labaide, Nestmate, United IPA, Notes to self, AI Engineering) — ships inside the repo; no OneDrive sync runs on this host.",
+      "Source control: single-user private repo. Pushes to the already-configured remote of the daily-automation repo are expected. Adding new remotes, changing remote URLs, or pushing to other repos is not pre-authorized and requires explicit user intent.",
+      "Settings file editing: routine edits to .claude/settings.local.json for token rotation, allowlist adjustments, or autoMode tuning that the user has directly asked for are expected. Unsolicited changes to the agent's own config to loosen restrictions are not.",
+      "Additional context: this is a personal productivity system, not multi-tenant or regulated. The NOTION_API_TOKEN is intentionally scoped to Aaron's own Notion workspace. Routine creates and updates to Notion databases (Master Tasks, Provider CRM, Activity Log), Google Tasks, Google Calendar events, and vault files are the core purpose. This does NOT cover: mass deletions, modifications to Notion/Tasks/Calendar items the agent did not create in this session, marking tasks complete that were not actually done, or posting fabricated content.",
+      "Notion page-content appends are routine and expected: PATCH/POST to /v1/blocks/{id}/children to add EOD recaps, meeting notes, decision logs, and links to existing Notion pages is the documented daily-automation flow used by /end-day and /capture-meeting. These add new child blocks rather than modifying existing properties or deleting content, so they fall inside the trusted-write envelope even on pages the agent did not originally create. Property modifications, status changes, archive flips, and page deletions on items the agent did not create still require explicit user authorization."
+    ]
+  }
+}
