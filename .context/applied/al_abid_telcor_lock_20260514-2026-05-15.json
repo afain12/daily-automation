@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — 2026-05-14 Abid 10am meeting: lab + Telcor pathway lock",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Abid 10am meeting — Lab + Telcor pathway lock (Morshed audit gate → Fri lab visit + license payment)" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-14" } },
+      "Type": { "select": { "name": "Meeting" } },
+      "Workspace": { "select": { "name": "Link & Reference Laboratory" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Met Abid 10am. Lab + Telcor pathway locked in pending audit confirmation. Fri 5/15 12:30 Morshed touchbase reviews Abid team audit findings; if clean, Abid team visits lab same Friday afternoon to pay Telcor license, completing access to move on billing." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "(1) Fri 5/15 12:30 — Morshed touchbase, audit-findings review (calendar event 29jefabuvqm8ie1l2314srmvps). (2) Fri 5/15 ~15:00 — if audit clean, Abid team @ lab pays Telcor license (calendar event r8fbldna88add3kotrgn9n9t8k, tentative). (3) Wed 5/20 14:00 — Telcor AI billing call + Gary biller proposal review (decide direction)." } }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — 2026-05-14 GI provider intros to Specialty Pharmacy program",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Dr Parmar (GI Medical Services) + Dr Langan (GI) — Specialty Pharmacy program intros" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-14" } },
+      "Type": { "select": { "name": "Meeting" } },
+      "Workspace": { "select": { "name": "Nestmate" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Both Dr Parmar (GI Medical Services) and Dr Langan introduced to Specialty Pharmacy program in same AM session. Both bought in. Immediate actionable for both offices is identical: Ilene receives the CDTM form, orders start flowing direct to Insight Outpatient Pharmacy. Notion pages for both providers carry full context (see Provider CRM)." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "(1) Ilene to receive CDTM forms from Parmar + Langan offices, week of 5/19. (2) Win over PA/office staff at both offices (real sellers given ~40% PA acceptance rate on expensive biologics). (3) Pitch their PA team as well — better PA quality = lower lab expense for us. (4) Tag both providers in Provider CRM as SP-active pipeline." } }
+        ]
+      }
+    }
+  }
+}

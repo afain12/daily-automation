@@ -6,6 +6,11 @@
       "sourceType": "github",
       "computedHash": "371c84e03e4b456134fba5427096083b163716517f6210fadcffe887c5f1daae"
     },
+    "competitive-analysis": {
+      "source": "refoundai/lenny-skills",
+      "sourceType": "github",
+      "computedHash": "e42f44115e4fd930c03a314afd218d99864d6ea25a083a06e4db123e3d2efd2d"
+    },
     "context-driven-development": {
       "source": "wshobson/agents",
       "sourceType": "github",
@@ -35,6 +40,11 @@
       "source": "googleworkspace/cli",
       "sourceType": "github",
       "computedHash": "bdf6b3b129f22862757426272950ee2aecd615a5c408f065487149c95e0d8327"
+    },
+    "high-output-management": {
+      "source": "guia-matthieu/clawfu-skills",
+      "sourceType": "github",
+      "computedHash": "0fa5bfea73cae4629fa02dd20df9e071f11a7ff805501ea8f8bd1e6ca500f7bc"
     },
     "notion-api": {
       "source": "intellectronica/agent-skills",

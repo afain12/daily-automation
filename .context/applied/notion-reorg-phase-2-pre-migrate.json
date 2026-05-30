@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "phase": "2.2 — pre-PATCH row snapshot",
+    "snapshot_taken_at": "2026-05-29",
+    "migration": "Workspace: Link & Reference Laboratory → Lincoln Reference Laboratory",
+    "total_rows": 19,
+    "rollback_strategy": "PATCH each row back to Workspace=Link & Reference Laboratory using these page IDs."
+  },
+  "activity_log_rows": [
+    {"url": "https://www.notion.so/366a315859b48127a24ee63ae96f0a5a", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Essen clients dashboard postponed until ECW integration complete (seamless data transfer required)"},
+    {"url": "https://www.notion.so/366a315859b48163a677ddd47ffc99ee", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Rehana Alam go-live pushed to next Sunday 5/25 -- waiting on MDland integration + template creation"},
+    {"url": "https://www.notion.so/366a315859b481cfa262c45be2af1230", "Workspace_pre": "Link & Reference Laboratory", "Activity": "AFFA deprioritized -- off main status, backbone tracking only (subtask bundle dropped)"},
+    {"url": "https://www.notion.so/361a315859b4815da9efc947281cbb20", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Abid 10am meeting — Lab + Telcor pathway lock"},
+    {"url": "https://www.notion.so/361a315859b48108bc4ec093dc1a6ec4", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Labaide / Natalie product spec — test-time compute + AI judge", "_note": "Labaide-themed row. Aaron may want to re-tag to LabAide manually post-migration; preserving original tag for now."},
+    {"url": "https://www.notion.so/35ea315859b48195a8e7e8694df76486", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Local + Jumpstart — account check-ins"},
+    {"url": "https://www.notion.so/35ea315859b4812cb0f7cfa0d1414c76", "Workspace_pre": "Link & Reference Laboratory", "Activity": "Latina med — touched base"},
+    {"url": "https://www.notion.so/352a315859b4811f90f8c22ceef117aa", "Workspace_pre": "Link & Reference Laboratory", "Activity": "AFFA partnership discussion concluded positively"}
+  ],
+  "master_tasks_rows": [
+    {"url": "https://www.notion.so/23aa315859b480ad94bac3381d1a9fcd", "Workspace_pre": "Link & Reference Laboratory", "Task": "Panels for Drs"},
+    {"url": "https://www.notion.so/238a315859b480ea8d7ac47b3a7adb34", "Workspace_pre": "Link & Reference Laboratory", "Task": "Cytology to IHC reflex"},
+    {"url": "https://www.notion.so/348a315859b48109b17bcf64cd673559", "Workspace_pre": "Link & Reference Laboratory", "Task": "Accu panels for AFC — awaiting sign-off with new med director name"},
+    {"url": "https://www.notion.so/348a315859b481629177fdbe5e0d5e7b", "Workspace_pre": "Link & Reference Laboratory", "Task": "1-page flyer for self-swab HPV (for Kader follow-ups)"},
+    {"url": "https://www.notion.so/352a315859b48111bb36fb7a9e43ce7c", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Oksana to provide practice NPI + provider screenshots"},
+    {"url": "https://www.notion.so/352a315859b481429bd6dabce7f2d8b7", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Oksana to discuss partnership proposal with Ella"},
+    {"url": "https://www.notion.so/352a315859b481b78027e31d40161787", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Cross-reference MTHFR testing with billing"},
+    {"url": "https://www.notion.so/352a315859b481e098d0d37c3e10df96", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Investigate GDX genetic testing for pediatric offerings"},
+    {"url": "https://www.notion.so/352a315859b481d18b29c64ea3d8e5e2", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Verify availability of Fragile X genetic testing"},
+    {"url": "https://www.notion.so/352a315859b481fe907ada7359b04e5a", "Workspace_pre": "Link & Reference Laboratory", "Task": "AFFA: Provide credentialed insurances list + which to avoid sending"},
+    {"url": "https://www.notion.so/352a315859b481a68890cb65825bca28", "Workspace_pre": "Link & Reference Laboratory", "Task": "[Meeting] AFFA Diagnostic and Treatment Center 2026-04-07"}
+  ]
+}

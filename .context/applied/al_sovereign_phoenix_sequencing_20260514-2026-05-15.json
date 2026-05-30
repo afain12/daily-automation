@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — 2026-05-14 strategic decision: Sovereign Phoenix takeover sequencing + Kader untrust thesis",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Sovereign Phoenix takeover sequencing — Luis HF cleanup gate + 3-month exclusive countdown" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-14" } },
+      "Type": { "select": { "name": "Decision" } },
+      "Workspace": { "select": { "name": "United IPA" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Three months remain on Sovereign Phoenix exclusive contract — hard countdown to acquisition. Takeover must be COMPLETE (no room for existing management to siphon funds or sabotage). Sequencing change: Luis must first clean up his bad-standing history with Healthfirst (HF may re-interview owners under new mgmt and use any unresolved past issues as a reason to drop the contract). ONLY AFTER Luis cleanup is complete do we gather Aaron + Ahmed + DocPro for the purchase/rewire conversation. Kader untrust thesis confirmed: no transparency on numbers + dishonest dealings = the explicit reason we cut business to SAIPA. Cannot be involved in clean takeover." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "(1) Confirm with Luis that HF-standing cleanup is underway and define done-criteria. (2) Set countdown checkpoint: re-evaluate at 60-day mark (~2026-07-14) — if Luis cleanup not done, escalate. (3) DO NOT schedule full Aaron+Ahmed+DocPro+Luis purchase meeting until cleanup gate clears. (4) Surface in every /start-day until takeover complete or contract expires (~2026-08-14)." } }
+        ]
+      }
+    }
+  }
+}

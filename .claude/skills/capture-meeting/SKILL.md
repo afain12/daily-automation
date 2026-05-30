@@ -384,7 +384,12 @@ archive. Routing rule per subtask:
 | External / track-only (e.g. Oksana → Ella) | ❌ skip | ✅ create (Aaron is tracking, not doing) |
 
 For each Aaron-owned subtask, after the Notion subtask is created, immediately
-create a Google Task on the default tasklist (`MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow`):
+create a Google Task on the default tasklist (`MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow`).
+
+**Syntax is load-bearing — do NOT nest the body inside `--params`.** Hit 2026-05-20
+during /end-day: 6 newly-inserted tasks landed silently blank because `body` was
+nested inside `--params` instead of passed via `--json`. The API returns 200 OK.
+Use `--params` for URL/query (tasklist/task) and `--json` for the request body:
 
 ```bash
 gws tasks tasks insert \
@@ -392,7 +397,10 @@ gws tasks tasks insert \
   --json '{"title":"<same as Notion subtask title>","notes":"Notion subtask: <NOTION_SUBTASK_ID>\nParent: https://www.notion.so/<PARENT_TASK_ID_no_dashes>"}'
 ```
 
-Capture the response `id` as `GTASK_ID`. Then PATCH the Notion subtask to
+Capture the response `id` as `GTASK_ID` (full 22-char form — do NOT truncate to 14 chars
+for storage; the truncated form fails silently on subsequent `gws tasks tasks patch`).
+Verify the response `title` is non-empty before moving on. See
+`reference_gws_tasks_insert.md` in memory. Then PATCH the Notion subtask to
 record the back-pointer for bidirectional sync:
 
 ```bash

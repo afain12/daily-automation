@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "snapshot_phase": "0.2",
+    "db_name": "Orphan Provider CRM (phantom duplicate)",
+    "database_id": "35542c16-f36a-4246-83af-6b71dfa6c7de",
+    "data_source": "collection://062feecb-7cea-4522-9283-64ba07f0c109",
+    "view_url_queried": "https://www.notion.so/35542c16f36a424683af6b71dfa6c7de?v=cdcd830bf91c4553978fb786b1c3fa37",
+    "snapshot_taken_at": "2026-05-29",
+    "row_count": 0,
+    "workspace_breakdown": {},
+    "notes": "EMPTY. Zero rows. Phase 3 row migration is unnecessary — only schema repoint + archive needed. Activity Log's Provider relation column observed empty across all rows in snapshot 0.3, consistent with this CRM having no content to link to. Safe to archive after schema flip."
+  },
+  "results": []
+}

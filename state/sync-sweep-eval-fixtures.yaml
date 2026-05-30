@@ -1,0 +1,423 @@
+# sync-sweep-eval-fixtures.yaml
+# Entity-extraction eval fixtures for the /sync-sweep skill
+#
+# Source files used (vault/daily/2026-05-*.md):
+#   2026-05-02.md  2026-05-11.md  2026-05-12.md  2026-05-13.md
+#   2026-05-14.md  2026-05-15.md  2026-05-18.md  2026-05-19.md
+#
+# Total fixture records: 45
+#
+# Distribution by business:
+#   Nestmate     | high:10  medium:6  low:2  | total:18
+#   Lincoln Lab  | high:8   medium:3  low:1  | total:12
+#   United IPA   | high:7   medium:1  low:1  | total:9
+#   Dock Pro     | high:2   medium:2  low:0  | total:4
+#   Other        | high:1   medium:0  low:1  | total:2
+#   Total        | high:28  medium:12 low:5  | total:45
+
+fixtures:
+
+  # ── 2026-05-12 BRAINDUMP ──────────────────────────────────────────────────
+
+  - date: "2026-05-12"
+    source_line: 78
+    source_text: "Morning meeting- touched base with Ilene regarding her GI's"
+    expected_entity: "Ilene"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "First-name only. Multi-dept person (Nestmate, IPA, Lab). Context 'her GIs' in SP program thread strongly points Nestmate, but no surname."
+
+  - date: "2026-05-12"
+    source_line: 78
+    source_text: "Event created thursday morning 9am (GI medical services Dr Kiranpreet)"
+    expected_entity: "Dr Kiranpreet"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full title + practice name. Clearly a Nestmate provider lead introduced via Ilene."
+
+  - date: "2026-05-12"
+    source_line: 80
+    source_text: "10am visited LocalMD sunset park new opportunity unlocked."
+    expected_entity: "LocalMD Sunset Park"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Named clinic account. Braindump makes Nestmate SP context clear."
+
+  - date: "2026-05-12"
+    source_line: 80
+    source_text: "Dr Alex is already on board to send scripts to us needs. CDTM(actionable next step to get from guerchon)."
+    expected_entity: "Dr Alex"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "First name + title only. Context is LocalMD Sunset Park SP program = Nestmate. 'Guerchon' is a disambiguating Nestmate signal."
+
+  - date: "2026-05-12"
+    source_line: 80
+    source_text: "Needs green light from dr Rybstein and maybe we take full onboarding."
+    expected_entity: "Dr Rybstein"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Surname only but strong context: LocalMD Sunset Park onboarding thread = Nestmate."
+
+  - date: "2026-05-12"
+    source_line: 85
+    source_text: "New potential clients to onboard for speciality pharmacy (340b)- Dr Inna Gordin (start off with referals from Dr G and bring onboard to program find out which patients currently sit on expensive medicaitions.)"
+    expected_entity: "Dr Inna Gordin"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full name + role context (340b SP client lead). Unambiguously Nestmate SP program."
+
+  - date: "2026-05-12"
+    source_line: 85
+    source_text: "Dr Yili Huang- friend of dr lau was contacted please setup 1 week followup for a dinner date to talk about lab and specialty pharmacy referrals."
+    expected_entity: "Dr Yili Huang"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full name. 'Specialty pharmacy referrals' = Nestmate. 'Lab referrals' adds a secondary Lab signal, but the action item is SP = Nestmate primary."
+
+  - date: "2026-05-12"
+    source_line: 87
+    source_text: "touched base with latina med(delays in results again lead to slodown in bringing on lincoln accounts)"
+    expected_entity: "Latina Med"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named account. 'Lincoln accounts' directly names the business."
+
+  - date: "2026-05-12"
+    source_line: 91
+    source_text: "Need to collect check from the rest of the clients by EOW. Main docs are NYCDOCS, white plains uc by thursday"
+    expected_entity: "NYCDOCS"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named client account for check collection. Appears in Lab section of actionables across multiple days."
+
+  - date: "2026-05-12"
+    source_line: 91
+    source_text: "Need to collect check from the rest of the clients by EOW. Main docs are NYCDOCS, white plains uc by thursday"
+    expected_entity: "White Plains UC"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named clinic for check collection. Consistently routed to Lincoln Lab across all daily notes."
+
+  # ── 2026-05-13 BRAINDUMP ──────────────────────────────────────────────────
+
+  - date: "2026-05-13"
+    source_line: 139
+    source_text: "OTW to Eng engagded with Ilene regarding her GI docs and the Speciality pharmacy program"
+    expected_entity: "Ilene"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "First-name only, multi-dept. Section is Nestmate SP thread. 'SP program' + 'GI docs' in same sentence = Nestmate. Same ambiguity as 5/12."
+
+  - date: "2026-05-13"
+    source_line: 142
+    source_text: "Dr Tim Eng's practice is still beogh built out. crendetnlailing thru caipa, and should be compelted by july (more notes in google tasks). will help as much as needed when it comes to office setup. sucessfuly closed for lab and exchanged contacts follow up 1 mo before opening july 15."
+    expected_entity: "Dr Tim ENG"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Full name. 'Closed for lab' is unambiguous. Also surfaces in Nestmate section (office setup), but the business deal is Lab."
+
+  - date: "2026-05-13"
+    source_line: 144
+    source_text: "Luis meeting 12:30- key findings healthfirst pays a per member per month admin fee to ipas(so does fidelis)."
+    expected_entity: "Luis"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "First-name only, but 'healthfirst', 'ipas', 'fidelis', 'PMPM admin fee' are all unambiguous IPA context. Single most reliable multi-dept disambiguation in the corpus."
+
+  - date: "2026-05-13"
+    source_line: 145
+    source_text: "Docpro is already putdown 50k to buy into soverign phoneix with a total purchase of 600k."
+    expected_entity: "Sovereign Phoenix"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Named deal/program. DocPro as buyer creates a Dock Pro secondary signal, but Sovereign Phoenix is an IPA acquisition = United IPA primary."
+
+  - date: "2026-05-13"
+    source_line: 145
+    source_text: "Docpro is already putdown 50k to buy into soverign phoneix with a total purchase of 600k."
+    expected_entity: "DocPro"
+    expected_business: "Dock Pro"
+    expected_confidence_bucket: "high"
+    notes: "Named organization. Context here is as buyer in IPA deal. However DocPro itself is clearly Dock Pro business entity."
+
+  - date: "2026-05-13"
+    source_line: 146
+    source_text: "WIthin the next week look to meet with the full team Luis, ahmed ,brian and docpro"
+    expected_entity: "Ahmed"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "medium"
+    notes: "HARD CASE. First-name only, multi-dept (Lab peptide lists, Nestmate derm). Here the surrounding context is IPA deal team — Luis IPA meeting, Sovereign Phoenix purchase. 'Ahmed' alone is ambiguous; section header and named co-attendees resolve to IPA."
+
+  - date: "2026-05-13"
+    source_line: 147
+    source_text: "Soverign phenix has a 1.2m dollar loan out from their failiures in 2020"
+    expected_entity: "Sovereign Phoenix"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Repeated deal reference. $1.2M loan = M&A diligence item for IPA consolidation."
+
+  - date: "2026-05-13"
+    source_line: 148
+    source_text: "New York IPA has talks with healthfirst tommrow for a contract"
+    expected_entity: "NY IPA"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Named organization + 'healthfirst contract' = clear IPA signal."
+
+  - date: "2026-05-13"
+    source_line: 155
+    source_text: "Essen's first house call for lincoln was perfomred today!!!! check in on status of the patient tomm morning"
+    expected_entity: "Essen Healthcare"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named account. 'For lincoln' is explicit. Essen is the lab integration partner."
+
+  - date: "2026-05-13"
+    source_line: 157
+    source_text: "follow up with abid's team. Medicaid is crutial for lincoln labs survivial, need to confirm zoom call with adam and valentyna"
+    expected_entity: "Abid"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "First name only but 'lincoln labs survival' + 'Medicaid' + recurring Lab thread = high confidence Lab."
+
+  - date: "2026-05-13"
+    source_line: 157
+    source_text: "confirm zoom call with adam and valentyna set as a task for tomm"
+    expected_entity: "Adam"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "medium"
+    notes: "First-name only. In context of Abid/Lincoln Medicaid zoom = Lab. But 'Adam Syed' also appears in Dr Eng Medicaid app context (Nestmate). Surrounding text resolves to Lab here."
+
+  - date: "2026-05-13"
+    source_line: 157
+    source_text: "confirm zoom call with adam and valentyna set as a task for tomm"
+    expected_entity: "Valentyna"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "First-name only. Valentyna is single-dept (Lincoln Lab / White Plains UC check deposit + Medicaid portal setup). High confidence."
+
+  # ── 2026-05-14 BRAINDUMP ──────────────────────────────────────────────────
+
+  - date: "2026-05-14"
+    source_line: 200
+    source_text: "Morning was successful, meeting with Dr Parmar (GI Medical Services) and Dr Langan — both introduced to the Specialty Pharmacy program."
+    expected_entity: "Dr Parmar"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full surname + practice name (GI Medical Services). SP program = Nestmate."
+
+  - date: "2026-05-14"
+    source_line: 200
+    source_text: "Morning was successful, meeting with Dr Parmar (GI Medical Services) and Dr Langan — both introduced to the Specialty Pharmacy program."
+    expected_entity: "Dr Langan"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Surname only. Same sentence as Dr Parmar, same meeting, same program = Nestmate. Practice pages confirm GI Medical Services."
+
+  - date: "2026-05-14"
+    source_line: 200
+    source_text: "Immediate actionable for both: Ilene to receive CDTM form and start receiving orders."
+    expected_entity: "Ilene"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "CDTM form + Parmar/Langan SP context makes this the clearest Nestmate routing for Ilene in the corpus. High confidence despite first-name-only."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Abid Meeting @ 10am. Regarding lab and Telcor: will have confirmation in morning if we can meet at the lab to establish Telcor licenses"
+    expected_entity: "Abid"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named person + 'lab and Telcor' + 'Telcor licenses' = unambiguous Lincoln Lab billing thread."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Regarding Sovereign Phoenix: 3 months left on exclusive contract — 3 months for us to get our shit together and buy the damn thing."
+    expected_entity: "Sovereign Phoenix"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Recurring deal. Consistent IPA routing across all May files."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Kader is not to be trusted — lack of transparency on the numbers, dishonest dealings, which is why we can't bring business to SAIPA anymore."
+    expected_entity: "Kader"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Surname-only. SAIPA (SPIPA/Starling IPA context) = United IPA. Single-dept per memory file ('Kader → IPA credentialing follow-ups')."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Kader is not to be trusted — lack of transparency on the numbers, dishonest dealings, which is why we can't bring business to SAIPA anymore."
+    expected_entity: "SAIPA"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Named IPA organization (Sovereign/SPIPA alias). Unambiguous IPA."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Next steps: meeting between myself, Ahmed, and DocPro."
+    expected_entity: "Ahmed"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "medium"
+    notes: "HARD CASE again. First-name only, multi-dept. Meeting is about Sovereign Phoenix IPA purchase. Same Ahmed disambiguated to IPA here by co-attendees + topic, but this is precisely the case flagged in feedback_person_routing.md."
+
+  - date: "2026-05-14"
+    source_line: 202
+    source_text: "Luis had some bad standings with HF from the past — can cause conflicts with Sovereign Phoenix takeover."
+    expected_entity: "Luis"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "First-name. Consistent IPA routing (HF = Healthfirst, SP = Sovereign Phoenix). No ambiguity here."
+
+  # ── 2026-05-15 (no freeform braindump section — structured EOD only) ─────
+  # Only the Notion Activity Log section has entity-rich prose; included below.
+
+  - date: "2026-05-15"
+    source_line: 157
+    source_text: "5/14 Dr Parmar + Dr Langan SP intros"
+    expected_entity: "Dr Parmar"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Recap reference. Same entity as 5/14 fixture above; verifies persistence across dates."
+
+  - date: "2026-05-15"
+    source_line: 161
+    source_text: "5/14 Abid 10am Telcor pathway lock"
+    expected_entity: "Abid"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Recap. Telcor + Abid = Lab. Repeats 5/14 fixture for regression testing."
+
+  # ── 2026-05-18 BRAINDUMP / EVENING REVIEW ────────────────────────────────
+
+  - date: "2026-05-18"
+    source_line: 259
+    source_text: "Upon the drive over we listed to some key actionable insidght from lennys podcast with the roles of PM in companeis like anthropic."
+    expected_entity: "Lenny (podcast)"
+    expected_business: "Other"
+    expected_confidence_bucket: "low"
+    notes: "First name only, no business context. 'Lenny' = Lenny Rachitsky podcast (public figure). Useful low-confidence fixture to confirm extractor doesn't over-extract personal/learning content."
+
+  - date: "2026-05-18"
+    source_line: 293
+    source_text: "Following up after speaking with Doctor Inna Gordins manager alex, we dicussed the 35 dollar referalls to their practice located in broojlyn."
+    expected_entity: "Dr Inna Gordin"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full name. 340b SP referral arrangement = Nestmate."
+
+  - date: "2026-05-18"
+    source_line: 293
+    source_text: "Following up after speaking with Doctor Inna Gordins manager alex, we dicussed the 35 dollar referalls to their practice located in broojlyn."
+    expected_entity: "Alex (Dr Gordin's manager)"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "First name only, role given ('manager'). Could be extracted as a separate contact from Dr Gordin herself. Nestmate routing inherited from Gordin context."
+
+  - date: "2026-05-18"
+    source_line: 204
+    source_text: "[ipa] Sovereign Phoenix decision (2026-05-14) — Confirm with Luis that HF-standing cleanup is underway."
+    expected_entity: "Luis"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "high"
+    notes: "Activity Log recap. Luis + HF + Sovereign Phoenix = IPA. Consistent."
+
+  - date: "2026-05-18"
+    source_line: 213
+    source_text: "[nestmate] Dr Parmar + Dr Langan SP intros (2026-05-14) — Ilene to receive CDTM forms from both offices, week of 5/19."
+    expected_entity: "Dr Parmar"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Third occurrence of same entity — regression test for canonical name normalization."
+
+  - date: "2026-05-18"
+    source_line: 341
+    source_text: "Schedule Dr Rookwood Thu 5/21 15:00 event + open research thread (her book away from Quest/LabCorp split)."
+    expected_entity: "Dr Rookwood"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "Surname only. 'Quest/LabCorp split' context → lab ordering = Nestmate outreach via Accu Migration angle per other notes. Not Lincoln Lab — this is a provider account, not an internal lab item."
+
+  - date: "2026-05-18"
+    source_line: 321
+    source_text: "The goal for them is to create an actionable walkthrough of the benefits of using Link In Lab over the big three competitors, BioQuest."
+    expected_entity: "Dr Hui Tzu Chou"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Extracted from prep note. Full name appears at line 321 context header. 'Lincoln Lab benefits vs BioQuest' = Lab meeting."
+
+  - date: "2026-05-18"
+    source_line: 316
+    source_text: "12:00 AHBD/LDX call (Google Meet; contact@athomeblooddraw.com + julie.olender@lincolnreference.com)"
+    expected_entity: "AHBD/LDX integration"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named deal/program. 'At-Home Blood Draw' + Lincoln Reference domain = Lab integration program."
+
+  - date: "2026-05-18"
+    source_line: 316
+    source_text: "julie.olender@lincolnreference.com"
+    expected_entity: "Julie Olender"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Email domain 'lincolnreference.com' = Lincoln Lab contact. Full name derivable from email. Essen integration coordinator."
+
+  # ── 2026-05-19 BRAINDUMP / ACTIONABLES ────────────────────────────────────
+
+  - date: "2026-05-19"
+    source_line: 95
+    source_text: "take AFFA off main sttaus for now backbone as of yet. -Some new chnages is we clsoed or rehana alam go live should be today , wiating on mdland integration and creatine templates followup by weekden to see if they will start sending samples to us."
+    expected_entity: "AFFA Diagnostic and Treatment Center"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Named account. Appears across all May notes as a Lincoln Lab client with 6 subtasks. 'Credentialed insurances', 'billing', 'NPI' all point Lab."
+
+  - date: "2026-05-19"
+    source_line: 95
+    source_text: "rehana alam go live should be today, wiating on mdland integration and creatine templates"
+    expected_entity: "Dr Alam"
+    expected_business: "Lincoln Lab"
+    expected_confidence_bucket: "high"
+    notes: "Surname only. 'Dr Alam → Lab' is listed as a single-dept safe override in feedback_person_routing.md. MDland integration confirms."
+
+  - date: "2026-05-19"
+    source_line: 99
+    source_text: "Provider Meetings for this week — contains two open sub-checkboxes (Dr Salman Hanan follow-up; David Carmeli recruitment from Bronx United)"
+    expected_entity: "Dr Salman Hanan"
+    expected_business: "Other"
+    expected_confidence_bucket: "low"
+    notes: "Full name. No clear business context from note alone. Appears in Other / Personal section. Requires Notion page context to route. Low confidence = correct output."
+
+  - date: "2026-05-19"
+    source_line: 99
+    source_text: "David Carmeli recruitment from Bronx United"
+    expected_entity: "David Carmeli"
+    expected_business: "United IPA"
+    expected_confidence_bucket: "medium"
+    notes: "Full name + 'Bronx United' = likely IPA network provider. 'Recruitment' frames as provider onboarding. Medium because 'Bronx United' could also mean the soccer club (unlikely in this context)."
+
+  - date: "2026-05-19"
+    source_line: 81
+    source_text: "speak to Ent and allergy group"
+    expected_entity: "ENT and Allergy Group"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "medium"
+    notes: "Generic clinic type, no specific name. Listed under Nestmate stale items. Medium confidence — might not be distinct enough for an entity record but tests extractor's clinic-type detection."
+
+  - date: "2026-05-19"
+    source_line: 81
+    source_text: "left notes under dr remzy meny wholesome regarding next steps- Make sure both accounts are thrown into the provider CRM labeled under specialty pharmacy."
+    expected_entity: "Dr Remzy Meny"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Full name. 'Provider CRM', 'specialty pharmacy' = Nestmate SP program. Wholesome billing context consistent with other notes."
+
+  - date: "2026-05-19"
+    source_line: 192
+    source_text: "TOP 2 — Draft Guerchon email: BAA + GI onboarding + Nestmate workflow (anti-kickback gate)"
+    expected_entity: "Guerchon"
+    expected_business: "Nestmate"
+    expected_confidence_bucket: "high"
+    notes: "Single-name contact. Consistently Nestmate throughout all notes (CDTM, onboarding docs, 340b workflow). High confidence single-dept."

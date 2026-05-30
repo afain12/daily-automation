@@ -1,0 +1,6 @@
+{"children":[
+  {"object":"block","type":"callout","callout":{"icon":{"type":"emoji","emoji":"✅"},"rich_text":[{"type":"text","text":{"content":"Status as of 2026-04-28 (auto-reconciled by /start-day fix)"}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Lab action items → Master Tasks: DONE 2026-04-27. Lab sweep closed 7 tasks (HPV self-swab flyer, Cytology→IHC reflex, Healthfirst Rebuttal, Panels for Drs, AGENT FOR LINCOLN, Ray meeting, Luis meeting)."}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Essen Apu for Julie: DONE 2026-04-27."}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Open thread: Followup with Leo (wholesome biller) + Amju re: patients — ideally in person (carried 1d as of 4/28)."}}]}}
+]}

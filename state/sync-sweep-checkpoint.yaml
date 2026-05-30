@@ -1,0 +1,51 @@
+# /sync-sweep build checkpoint
+# Maintained by sync-sweep-lead-v2 (kiro-plan persistent coordinator)
+# Path: MVE-first per execution plan §4
+
+current_phase: 1A
+last_completed_task: none
+blockers: []
+next_action: "await T1/T2/T21 worker return then dispatch T3a"
+
+# MVE-path task sequence (class A only, defers Phase 1B + classes B/C/D + extras to v0.2)
+mve_path:
+  phase_1A:
+    - T1   # config/sources.yaml — entity_aliases + single_dept_persons
+    - T2   # state file scaffolds (retry-queue + resolutions)
+    - T21  # E1 spec correction (line-override soft prior)
+    - T3a  # scripts/capture_meeting_parse.py (depends on T1+T21)
+  phase_2_class_A_only:
+    - T4   # skill.md Steps 0-1
+    - T5   # Steps 2-3 (PHI + entity extract + corrected E1)
+    - T6   # Step 4 (Notion search)
+    - T7   # Step 5 (scoring + E1 + E2 read)
+    - T8   # Steps 6-7 (idempotency + stage)
+    - T9   # Steps 8-9 (trust gate + PATCH) +G1 +G2
+    - T16  # Steps 10-11 (archive + telemetry)
+  phase_3_MVE:
+    - T17  # /end-day Step 9 wiring
+    - T18  # /start-day DLQ surfacing
+  phase_4_MVE:
+    - T19  # observe-mode dry run +G6
+    - T23  # PHI gate integration test (G5)
+
+deferred_to_v0_2:
+  - T3b  # capture_meeting_write.py (class C dep)
+  - T10  # class B (Obsidian vault scan)
+  - T11  # E2 memory (disambig graduation)
+  - T12  # class C (meeting auto-process) +G3
+  - T13  # E3 priorities.yaml integration
+  - T14  # class D (stub page enrichment) +G4
+  - T15  # E4 (Granola URL) + E5 (dup-append guard)
+  - T20  # full fixture eval (45 fixtures)
+  - T22  # regression gate documentation
+
+# Coordination protocol
+protocol:
+  workers_never_write_to_each_other: true
+  all_handoffs_via_lead_SendMessage: true
+  code_reviewer_required_at_phase_boundaries: true
+  lead_does_not_write_code: true  # validates worker output against acceptance criteria only
+
+# Updated by lead after every task completion
+history: []

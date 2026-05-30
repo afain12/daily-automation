@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — 2026-05-14 Specialty Pharmacy sales-pitch framework decision (reusable IP)",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "SP sales-pitch framework — short/sweet, win office staff, don't info-overload" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-14" } },
+      "Type": { "select": { "name": "Decision" } },
+      "Workspace": { "select": { "name": "Nestmate" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Pitch framework that landed Parmar + Langan today: 'Doc, our goal is to get those expensive biologics your patients sit on for the lowest out-of-pocket cost possible and delivered in a timely manner.' Keep it short. Less information = simpler close. Don't info-overload — give them the answer they're looking for. The real sellers are PA/office staff (40% PA acceptance rate is their pain). Office staff happy → orders flow direct to Insight Outpatient Pharmacy. Better PA from office team = lower lab expense for us. Permanent note: vault/notes/2026-05-14-sp-pitch-framework.md." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "(1) Use this exact framing on every SP doctor intro going forward. (2) Build the simplified one-pager for doctors (Specialty Pharmacy subtask, 13d carry) — apply same 'short/sweet' principle. (3) Add office-staff angle to Document SP onboarding workflow 1-pager. (4) Tag pattern in Provider CRM for outcome tracking." } }
+        ]
+      }
+    }
+  }
+}

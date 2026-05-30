@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "snapshot_phase": "0.5",
+    "db_name": "Provider CRM (real)",
+    "database_id": "df3a3158-59b4-8363-937f-017bbe2ca1c0",
+    "data_source": "collection://ae0a3158-59b4-8235-b7ca-0758daa2322a",
+    "view_url_queried": "https://www.notion.so/df3a315859b48363937f017bbe2ca1c0?v=78ba315859b4832e9498086d66938cdf",
+    "snapshot_taken_at": "2026-05-29",
+    "row_count": 9,
+    "workspace_breakdown": {
+      "Nestmate": 4,
+      "United IPA": 2,
+      "Lincoln Lab": 0,
+      "Dock Pro": 0,
+      "null_no_workspace": 3
+    },
+    "notes": "Real CRM is small (9 rows). 3 rows have null Workspace — including the blank row at 336a3158-59b4-8097-8908-f1429ce33c2b (created 2026-04-02). Phase 2 doesn't need to PATCH Workspace values here (zero 'Lincoln Lab' rows). The 'Other' option missing addition in Phase 2.6 still needed."
+  },
+  "results_summary": "Full row payload preserved in conversation context 2026-05-29. Provider CRM page IDs intact."
+}

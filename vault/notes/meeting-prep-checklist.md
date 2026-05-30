@@ -23,3 +23,5 @@ Walking in with the system's perspective ("we want to roll this out") without tr
 - IPA provider onboarding conversations
 - Cardio Pro partner discussions
 - Any meeting where someone needs to *buy in*, not just be informed
+
+#review

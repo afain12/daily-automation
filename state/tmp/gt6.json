@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"pf8E-jO6Bw8\"",
+  "id": "RXJ1SF9MckdOME1xeGdWcw",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "External owner Oksana. Track-only. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-8111-bb36-fb7a9e43ce7c",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/RXJ1SF9MckdOME1xeGdWcw",
+  "status": "needsAction",
+  "title": "AFFA: Oksana to provide practice NPI + provider screenshots if proceeding (track-only)",
+  "updated": "2026-04-30T17:54:27.240Z",
+  "webViewLink": "https://tasks.google.com/task/EruH_LrGN0MqxgVs?sa=6"
+}

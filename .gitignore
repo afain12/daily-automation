@@ -1,1 +1,26 @@
+# Secrets
 .claude/settings.local.json
+.secrets/
+client_secret_*.json
+*.env
+!.env.example
+# Codex CLI config (contains live NOTION_API_TOKEN)
+.codex/
+# 300MB Chrome profile w/ live Notion/Google session cookies (notion-ui-ops skill)
+scripts/notion-ui-ops/profile/
+
+# Stray temp / scratch files (not source of truth)
+C*Tempq*.json
+download.html
+vault/Untitled*
+
+# Obsidian app config (not vault content)
+.obsidian/
+vault/.obsidian/
+
+# External dependency skills (fetched via skills-lock.json)
+.agents/skills/
+
+# Business vault folders (OneDrive mirrors) are INCLUDED in this repo so the
+# Hermes replica has the full Obsidian vault. Source of truth remains OneDrive.
+.gstack/

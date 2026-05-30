@@ -1,0 +1,6 @@
+{"children":[
+  {"object":"block","type":"callout","callout":{"icon":{"type":"emoji","emoji":"📌"},"rich_text":[{"type":"text","text":{"content":"Status as of 2026-04-28 (auto-reconciled by /start-day fix)"}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Roman ↔ CardioPro meeting — NOT held 4/24. 9 days carried. Tasks item still says 'potentially tomm' (Tasks ID 3epOO2gm3-XUfIIj). Action: pin a real date or close. Per memory, only active Dock Pro item until June 2026."}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Beacon→United IPA onboarding — ACTIVE. Johantahn closed 2026-04-23, IPA Health First pause lifted. Goldstein (owner) — voicemail left 4/27, callback 4/28. Mariwalla still needs Provider CRM entry."}}]}},
+  {"object":"block","type":"bulleted_list_item","bulleted_list_item":{"rich_text":[{"type":"text","text":{"content":"Piris Health insurances — STILL AWAITING Raymond (email sent 4/22). Deadline 2026-04-30."}}]}}
+]}

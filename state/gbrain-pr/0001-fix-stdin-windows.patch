@@ -1,0 +1,53 @@
+From: Aaron Fainshtein <aaronfainshtein1@gmail.com>
+Date: Mon, 18 May 2026
+Subject: [PATCH] fix(cli): use stdin fd 0 instead of /dev/stdin path for Windows compat
+
+The CLI and report command read stdin via `readFileSync('/dev/stdin', ...)`,
+which works on macOS/Linux but fails on Windows (Git Bash, PowerShell, cmd)
+with ENOENT because Windows doesn't expose /dev/stdin as a filesystem path.
+
+Node and Bun both accept fd 0 (process.stdin's fd) as the first argument to
+readFileSync, and the behavior is identical across platforms. This is a
+one-character change in two locations.
+
+Repro on Windows:
+  $ echo "hello" | gbrain put test-page
+  ENOENT: no such file or directory, open '/dev/stdin'
+
+After this patch:
+  $ echo "hello" | gbrain put test-page
+  { "slug": "test-page", "status": "created_or_updated", "chunks": 1 }
+
+---
+ src/cli.ts              | 2 +-
+ src/commands/report.ts  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/cli.ts b/src/cli.ts
+index abcdef0..1234567 100644
+--- a/src/cli.ts
++++ b/src/cli.ts
+@@ -134,7 +134,7 @@
+ 
+   // Read stdin for content params
+   if (op.cliHints?.stdin && !params[op.cliHints.stdin] && !process.stdin.isTTY) {
+-    const stdinContent = readFileSync('/dev/stdin', 'utf-8');
++    const stdinContent = readFileSync(0, 'utf-8');
+     const MAX_STDIN = 5_000_000; // 5MB
+     if (Buffer.byteLength(stdinContent, 'utf-8') > MAX_STDIN) {
+       console.error(`Error: stdin content exceeds ${MAX_STDIN} bytes. Split into smaller inputs.`);
+diff --git a/src/commands/report.ts b/src/commands/report.ts
+index fedcba0..7654321 100644
+--- a/src/commands/report.ts
++++ b/src/commands/report.ts
+@@ -41,7 +41,7 @@
+   // Read content from --content arg or stdin
+   let content = contentIdx >= 0 ? args[contentIdx + 1] : null;
+   if (!content && !process.stdin.isTTY) {
+-    content = readFileSync('/dev/stdin', 'utf-8');
++    content = readFileSync(0, 'utf-8');
+   }
+ 
+   if (!content?.trim()) {
+-- 
+2.49.0

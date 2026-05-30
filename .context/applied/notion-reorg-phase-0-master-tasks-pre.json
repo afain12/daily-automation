@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "snapshot_phase": "0.4",
+    "db_name": "Master Tasks",
+    "database_id": "ece9b123-5e67-4172-b9a0-8f558c53ccfa",
+    "data_source": "collection://528d24b8-e1e6-4ca0-a7ee-87f70a4f7980",
+    "view_url_queried": "https://www.notion.so/ece9b1235e674172b9a08f558c53ccfa?v=9649f9d1bcef44768a89b486762f6be5",
+    "snapshot_taken_at": "2026-05-29",
+    "row_count": 41,
+    "workspace_breakdown": {
+      "Link & Reference Laboratory": 11,
+      "Nestmate": 16,
+      "United IPA": 5,
+      "Dock Pro": 1,
+      "Other": 1,
+      "null_no_workspace": 7
+    },
+    "notes": "7 rows have no Workspace value — these are 'Inbox' candidates. Phase 2 PATCH targets only the 11 Link & Reference Laboratory rows."
+  },
+  "results_summary": "Full row payload preserved in conversation context 2026-05-29. Master Tasks page IDs intact and queryable via Notion API. has_more was false."
+}

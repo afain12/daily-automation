@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "snapshot_phase": "0.7",
+    "db_name": "Speciality Pharmacy Account Tracking",
+    "database_id": "32ca3158-59b4-8055-a8f7-c3fc008baf61",
+    "data_source": "collection://32ca3158-59b4-81d0-9877-000b8bcd5639",
+    "parent_teamspace_page": "335a3158-59b4-8125-bf09-de765977e77f (Nestmate)",
+    "view_url_queried": "https://www.notion.so/32ca315859b48055a8f7c3fc008baf61?v=32ca315859b4811383a1000cc62952d1",
+    "snapshot_taken_at": "2026-05-29",
+    "row_count": 13,
+    "status_breakdown": {
+      "Not started": 8,
+      "In progress": 4,
+      "Done": 0,
+      "null": 1
+    },
+    "notes": "ACTIVE — 13 rows of real Specialty Pharmacy provider/account tracking. Examples: GI Medical Services, NYCDOCS, Dr Kevin Tin, Dr Lawrence Nasharat, ADDA article 28, Dr Remzy Meny/Wholesome. Already parented under Nestmate teamspace page per Aaron's 2026-05-29 decision. Schema is the generic Notion product-tracker template (Effort level/Bug/Polish/etc.) and is mismatched to actual usage — rows use Status + Task name only. Rebuild deferred to separate session per plan §5 out-of-scope."
+  },
+  "results_summary": "Full row payload preserved in conversation context 2026-05-29. Page IDs intact."
+}

@@ -110,7 +110,7 @@ Primary databases queried: **Master Tasks**, **Provider CRM**, **Activity Log**,
 
 Key fields on Master Tasks:
 - **Status** (status): "Not started", "In progress", "Waiting", "Done"
-- **Workspace** (select): "Lincoln Lab", "United IPA", "Nestmate", "Dock Pro", "Other"
+- **Workspace** (select): "Lincoln Reference Laboratory", "United IPA", "Nestmate", "Dock Pro", "Other"
 - **Due** (date): ISO date
 - **Assignee** (people): array of users
 - **Task** (title): task name (NOT "Name" — the title property is called "Task")
@@ -150,8 +150,26 @@ Every item must be assigned to a department:
 | **Nestmate** | "Nestmate" | Urgent care accounts, provider outreach, supply chain |
 | **Dock Pro / Cardio Pro** | "Dock Pro" | Cardiac monitoring device rollout — reps, cardiologists, internists |
 | **United IPA** | "United IPA" | Provider network, credentialing, claims, sign-up docs |
-| **Lincoln Lab** | "Lincoln Lab" | Testing panels, pathology, specimens |
+| **Lincoln Lab** | "Lincoln Reference Laboratory" | Testing panels, pathology, specimens |
 | **Other / Personal** | "Other" | Everything else |
+
+### Workspace value conventions (canonical — do not drift)
+
+As of 2026-05-29 Notion reorg, the `Workspace` select on all 4 canonical DBs (Master Tasks, Provider CRM, Activity Log, Meeting Notes) uses the SAME option set:
+
+- `Lincoln Reference Laboratory`
+- `United IPA`
+- `Nestmate`
+- `Dock Pro`
+- `Other`
+
+Activity Log additionally preserves `LabAide` as a separate value (Aaron 2026-05-29 — distinct product, not the lab business).
+
+**Rules for any new DB added to this workspace:**
+- Use this exact option set verbatim. No abbreviations, no synonyms.
+- Never re-introduce `Lincoln Lab` or `Link & Reference Laboratory` as Workspace values (those were the drift the reorg fixed).
+- For human-friendly display in CLI briefings, the short name "Lincoln Lab" is still fine — see `state/profile.yaml` `display` field. That's a display-layer translation, not a data-layer drift.
+- `sources.yaml` `workspace_values.lab` is the single source of truth for the API value. Any skill code reading from Notion MUST filter against this exact string.
 
 **CRITICAL ROUTING RULE:** Do NOT inherit department from a Notion parent task name.
 Check the actual Workspace field on each item. If null, infer from context:

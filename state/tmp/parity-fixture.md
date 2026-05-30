@@ -1,0 +1,4 @@
+- Decided to onboard AFC Urgent Care to Nestmate this week
+- Tell Abos to follow up with Dr Remzy by Friday
+- Spoke with Dr Rookwood about credentialing for United IPA
+- Random observation: clinic intake forms are terrible

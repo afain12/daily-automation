@@ -1,0 +1,80 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": { "content": "Master Tasks" }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "✅"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Canonical task database for the COO Twin system. One row per actionable item across all workspaces."
+      }
+    }
+  ],
+  "properties": {
+    "Task": {
+      "title": {},
+      "description": "The task description. Title property — keep it short and verb-led."
+    },
+    "Status": {
+      "status": {
+        "options": [
+          { "name": "Not started", "color": "default" },
+          { "name": "In progress", "color": "blue" },
+          { "name": "Waiting", "color": "yellow" },
+          { "name": "Done", "color": "green" }
+        ],
+        "groups": [
+          { "name": "To-do", "color": "gray", "option_ids": [] },
+          { "name": "In progress", "color": "blue", "option_ids": [] },
+          { "name": "Complete", "color": "green", "option_ids": [] }
+        ]
+      },
+      "description": "Workflow state. /start-day filters out Done; /end-day flips items to Done."
+    },
+    "Due": {
+      "date": {},
+      "description": "Due date. Items past Due AND not Done are flagged as overdue."
+    },
+    "Assignee": {
+      "people": {},
+      "description": "Person responsible. Leave blank if self-assigned."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          { "name": "Lincoln Lab", "color": "purple" },
+          { "name": "United IPA", "color": "blue" },
+          { "name": "Nestmate", "color": "green" },
+          { "name": "Dock Pro", "color": "orange" },
+          { "name": "Other", "color": "gray" }
+        ]
+      },
+      "description": "Business unit this task belongs to. Drives department grouping in the daily briefing."
+    },
+    "Priority": {
+      "select": {
+        "options": [
+          { "name": "High", "color": "red" },
+          { "name": "Medium", "color": "yellow" },
+          { "name": "Low", "color": "gray" }
+        ]
+      },
+      "description": "Optional priority hint. /start-day weights High items toward Top 3."
+    },
+    "Last Activity": {
+      "rich_text": {},
+      "description": "Free-text breadcrumb for sync — e.g. 'gtask:<id>' to mirror with Google Tasks."
+    },
+    "Notes": {
+      "rich_text": {},
+      "description": "Context, links, or scratch notes for this task."
+    }
+  }
+}

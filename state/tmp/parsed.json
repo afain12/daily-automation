@@ -1,0 +1,1127 @@
+{
+  "master": [
+    {
+      "id": "332a3158-59b4-80ce-8ac5-e2d5189e3042",
+      "title": "AiBuilersClub",
+      "status": "In progress",
+      "due": "2026-04-23",
+      "workspace": null,
+      "biz": null,
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81ab-bd56-d5ae9909ca0f",
+      "title": "Nephro \u00ef\u00bf\u00bd Check if Big Apple Nephrology prescribes",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-815c-a262-d581d2b73896",
+      "title": "Endo \u00ef\u00bf\u00bd Visit Eleni's endocrine office in LIC",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-815c-91b5-ec966a23fd97",
+      "title": "Endo \u00ef\u00bf\u00bd Ask Ilene if Yonkers endocrine prescribes",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-815b-acdf-dde560199688",
+      "title": "Neuro \u00ef\u00bf\u00bd Meet w/ Laus re: specialty pharmacy",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81cb-bfa9-f5bd4c606461",
+      "title": "Rheum \u00ef\u00bf\u00bd Audit lab's rheumatologist list; run sales data to find prescribers",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-8170-b4a5-f7721624d8d4",
+      "title": "GI \u00ef\u00bf\u00bd Outreach to Dr. Tin",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81c5-8077-d3ce1a316916",
+      "title": "GI \u00ef\u00bf\u00bd Build NotebookLM episode on specialty pharmacy GI workflow",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-815c-be3e-f8e397ad0f4d",
+      "title": "GI \u00ef\u00bf\u00bd Backup: bring Cyrus to Bay Parkway GI visits",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81fe-8e66-c90e29c506d8",
+      "title": "GI \u00ef\u00bf\u00bd Ride-along w/ Claude to Badalov (Bay Parkway) or Yuri Pertsovsky",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-8198-a04a-f08057c82c1b",
+      "title": "Derm \u00ef\u00bf\u00bd Loop Alexander Shapsis in via Sorkin",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-813f-a0d2-edb827211510",
+      "title": "Derm \u00ef\u00bf\u00bd Speak w/ Misha Sorkin re: Khrom Dermatology",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81bb-9245-d3150255b7a4",
+      "title": "Derm \u00ef\u00bf\u00bd Ask Ahmed if Percy writes specialty pharmacy scripts",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "34aa3158-59b4-81a7-8f81-f817a822ed6c",
+      "title": "Specialty Pharmacy",
+      "status": "In progress",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-22",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "348a3158-59b4-816a-b091-c7fe766d163f",
+      "title": "Dr. Ling CUI \u00ef\u00bf\u00bd schedule intro meeting (back-burner for now)",
+      "status": "Waiting",
+      "due": null,
+      "workspace": "United IPA",
+      "biz": "ipa",
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "348a3158-59b4-81f9-ad1b-e492456c5653",
+      "title": "Main Street Radiology \u00ef\u00bf\u00bd followed up, no response yet; define next step",
+      "status": "Waiting",
+      "due": null,
+      "workspace": "Nestmate",
+      "biz": "nestmate",
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "348a3158-59b4-8162-9177-fdbe5e0d5e7b",
+      "title": "1-page flyer for self-swab HPV (for Kader follow-ups)",
+      "status": "Not started",
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "343a3158-59b4-8119-8d9e-f356beabb9ef",
+      "title": "Kader follow-ups: Dr. Bassak, Saboor Waizon, Shaikh Hassan",
+      "status": "Not started",
+      "due": null,
+      "workspace": "United IPA",
+      "biz": "ipa",
+      "assignees": [],
+      "last_edit": "2026-04-15",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "343a3158-59b4-8098-b2a2-cf6a77cd0720",
+      "title": "MDland negociation",
+      "status": null,
+      "due": null,
+      "workspace": null,
+      "biz": null,
+      "assignees": [],
+      "last_edit": "2026-04-15",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "342a3158-59b4-8148-913d-e3357662c2e2",
+      "title": "Cardio Pro Rollout",
+      "status": "Waiting",
+      "due": null,
+      "workspace": "Dock Pro",
+      "biz": "dock_pro",
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "339a3158-59b4-8067-bb2f-de7ee6a78064",
+      "title": "Peptide purity RJ",
+      "status": "Waiting",
+      "due": null,
+      "workspace": null,
+      "biz": null,
+      "assignees": [],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "334a3158-59b4-8034-8618-d8cdbf94157c",
+      "title": "(untitled)",
+      "status": null,
+      "due": null,
+      "workspace": null,
+      "biz": null,
+      "assignees": [],
+      "last_edit": "2026-03-31",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "320a3158-59b4-8051-823b-c32213ce6d03",
+      "title": "Luis meeting",
+      "status": null,
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2026-04-06",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "31fa3158-59b4-802e-a2ff-f342ca40086a",
+      "title": "Ray meetin",
+      "status": null,
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2026-04-06",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "293a3158-59b4-804f-bd5e-f7e66ff04fee",
+      "title": "AGENT FOR LINCOLN",
+      "status": null,
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2026-04-06",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "26ea3158-59b4-8056-abb2-cd4b4f33e996",
+      "title": "Sovereign Phoenix IPA",
+      "status": null,
+      "due": null,
+      "workspace": "United IPA",
+      "biz": "ipa",
+      "assignees": [],
+      "last_edit": "2025-09-14",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "26ba3158-59b4-80f7-b7cf-ea0ebf1e8743",
+      "title": "Healthfirst Rebuttal",
+      "status": null,
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2026-04-06",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "26aa3158-59b4-808d-94d8-c350eeace537",
+      "title": "IPA List",
+      "status": null,
+      "due": null,
+      "workspace": "United IPA",
+      "biz": "ipa",
+      "assignees": [
+        null
+      ],
+      "last_edit": "2026-04-06",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "247a3158-59b4-80e2-88ba-f93754265a77",
+      "title": "Inhouse LLM Reflection Ideas",
+      "status": null,
+      "due": null,
+      "workspace": "Other",
+      "biz": "other",
+      "assignees": [],
+      "last_edit": "2026-03-23",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    },
+    {
+      "id": "23aa3158-59b4-80ad-94ba-c3381d1a9fcd",
+      "title": "Panels for Drs",
+      "status": "Waiting",
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [
+        null
+      ],
+      "last_edit": "2026-04-20",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": false,
+      "source": "notion"
+    },
+    {
+      "id": "238a3158-59b4-80ea-8d7a-c47b3a7adb34",
+      "title": "Cytology to IHC reflex",
+      "status": "In progress",
+      "due": null,
+      "workspace": "Link & Reference Laboratory",
+      "biz": "lab",
+      "assignees": [],
+      "last_edit": "2025-07-28",
+      "overdue": false,
+      "days_overdue": 0,
+      "stale": true,
+      "source": "notion"
+    }
+  ],
+  "master_24h": [
+    {
+      "title": "Accu panels for AFC \u00ef\u00bf\u00bd awaiting sign-off with new med director name",
+      "status": "Done",
+      "ws": "Link & Reference Laboratory",
+      "created": "2026-04-20T18:42:00.000Z",
+      "edited": "2026-04-21T02:07:00.000Z",
+      "id": "348a3158-59b4-8109-b17b-cf64cd673559"
+    },
+    {
+      "title": "Derm \u00ef\u00bf\u00bd Speak w/ Misha Sorkin re: Khrom Dermatology",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-813f-a0d2-edb827211510"
+    },
+    {
+      "title": "Neuro \u00ef\u00bf\u00bd Meet w/ Laus re: specialty pharmacy",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-815b-acdf-dde560199688"
+    },
+    {
+      "title": "Endo \u00ef\u00bf\u00bd Ask Ilene if Yonkers endocrine prescribes",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-815c-91b5-ec966a23fd97"
+    },
+    {
+      "title": "Endo \u00ef\u00bf\u00bd Visit Eleni's endocrine office in LIC",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-815c-a262-d581d2b73896"
+    },
+    {
+      "title": "GI \u00ef\u00bf\u00bd Backup: bring Cyrus to Bay Parkway GI visits",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-815c-be3e-f8e397ad0f4d"
+    },
+    {
+      "title": "GI \u00ef\u00bf\u00bd Outreach to Dr. Tin",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-8170-b4a5-f7721624d8d4"
+    },
+    {
+      "title": "Derm \u00ef\u00bf\u00bd Loop Alexander Shapsis in via Sorkin",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-8198-a04a-f08057c82c1b"
+    },
+    {
+      "title": "Specialty Pharmacy",
+      "status": "In progress",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:12:00.000Z",
+      "edited": "2026-04-22T03:12:00.000Z",
+      "id": "34aa3158-59b4-81a7-8f81-f817a822ed6c"
+    },
+    {
+      "title": "Nephro \u00ef\u00bf\u00bd Check if Big Apple Nephrology prescribes",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-81ab-bd56-d5ae9909ca0f"
+    },
+    {
+      "title": "Derm \u00ef\u00bf\u00bd Ask Ahmed if Percy writes specialty pharmacy scripts",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-81bb-9245-d3150255b7a4"
+    },
+    {
+      "title": "GI \u00ef\u00bf\u00bd Build NotebookLM episode on specialty pharmacy GI workflow",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-81c5-8077-d3ce1a316916"
+    },
+    {
+      "title": "Rheum \u00ef\u00bf\u00bd Audit lab's rheumatologist list; run sales data to find prescribers",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-81cb-bfa9-f5bd4c606461"
+    },
+    {
+      "title": "GI \u00ef\u00bf\u00bd Ride-along w/ Claude to Badalov (Bay Parkway) or Yuri Pertsovsky",
+      "status": "Not started",
+      "ws": "Nestmate",
+      "created": "2026-04-22T03:13:00.000Z",
+      "edited": "2026-04-22T03:13:00.000Z",
+      "id": "34aa3158-59b4-81fe-8e66-c90e29c506d8"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "TmM0VGVBZWZMR0dDaFVlWA",
+      "title": "changing personal address in Chase account",
+      "due": "2026-02-25T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": true,
+      "notes": ""
+    },
+    {
+      "id": "RVJLSWU1SVp2YW92TlJzSQ",
+      "title": "Mention to Shake: braces in urgent care?",
+      "due": "2026-04-15T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": true,
+      "notes": "Quick Solve Urgent Care and RH Medical Care are ideal contenders for braces product. Ask Shake: do they issue braces in urgent care directly? If not, discuss options with him."
+    },
+    {
+      "id": "M05QRzZ5b3o0UFo0NjJrYg",
+      "title": "Sit-down with Ilene",
+      "due": "2026-04-21T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": true,
+      "notes": "Create game plan for Raveco and other physicians, Finalize house calls"
+    },
+    {
+      "id": "dUhnRUNiNzBCN29ad3NkRA",
+      "title": "Follow up with Ryan",
+      "due": "2026-04-21T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": true,
+      "notes": "Awaiting finalized pricing for EMU dental supply and grow it from there."
+    },
+    {
+      "id": "c1lNNTFHazFLeVl4VWRCMQ",
+      "title": "Julie stedi followup",
+      "due": "2026-04-24T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bUhjS3hVN2FFOXprTFNyVA",
+      "title": "Cardio Pro: identify ideal providers (internists, no cardiology, high volume)",
+      "due": "2026-04-30T00:00:00.000Z",
+      "parent_title": "",
+      "overdue": false,
+      "notes": "Internists with no cardiology but hefty volume in their practices. Aileen flagged Dr. Goris and Dr. Flennerman. Abos agreed, 50/50 split.\n\n[2026-04-20] Postponed to end of month \u00e2\u20ac\u201d Cardio Pro push no"
+    },
+    {
+      "id": "Y1JXZFpzdGxSRHV0Um9hcA",
+      "title": "Call back nicoleh",
+      "due": null,
+      "parent_title": "Accureference brainstorm",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "Z1dMVWJQdW1kV2NsS0Ixaw",
+      "title": "Bring on Yitz Accounts into accu",
+      "due": null,
+      "parent_title": "Accureference brainstorm",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "MURrMEtYQS15TEhnYUlZVw",
+      "title": "Accureference brainstorm",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "eVZLWmlqVXJoZFZCdFExVg",
+      "title": "Send Labib Resume",
+      "due": null,
+      "parent_title": "Rippling for valentyna",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "YU96WE5JaTRUZ0FlVERsRw",
+      "title": "Using Julie's file list she sent coordinate personalized email with which docs reps should speak with",
+      "due": null,
+      "parent_title": "Send email to reps",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "M01UN2F1dWIxT09kVHoyMg",
+      "title": "Send email to reps",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "UkI0MFBFYVZiZV90UDRfTQ",
+      "title": "Nephro - Check if Big Apple Nephrology prescribes",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "SGV6ckdqdU12MFFsZ3FvaA",
+      "title": "Endo - Visit Eleni's endocrine office in LIC",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bUtkLWFyV0JHZjhweTIyZw",
+      "title": "Endo - Ask Ilene if Yonkers endocrine prescribes",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "R3dzWmdfSVVIbjRtRDBqMg",
+      "title": "Neuro - Meet w/ Laus re: specialty pharmacy",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "ZmR0QW1MUEx6WngxQ1BxVw",
+      "title": "Rheum - Audit lab's rheumatologist list; run sales data to find prescribers",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "RzVRWnhaV0dqNHF6bFo4VA",
+      "title": "GI - Outreach to Dr. Tin",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "Wjd2ZkdhSUI4Sk9SWGdFcA",
+      "title": "GI - Build NotebookLM episode on specialty pharmacy GI workflow",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "MG9xbXBadkphUjRpZUJ6SA",
+      "title": "GI - Backup: bring Cyrus to Bay Parkway GI visits",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bG44V1lKYmo3UGtDcFNIdA",
+      "title": "GI - Ride-along w/ Claude to Badalov (Bay Parkway) or Yuri Pertsovsky",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "WkU5azExVUc4aS1pYnowYw",
+      "title": "Derm - Loop Alexander Shapsis in via Sorkin",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "UFp2X21lTjFzTGo1QmhPcQ",
+      "title": "Derm - Speak w/ Misha Sorkin re: Khrom Dermatology",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "YmZ4dk05dUlNNVdEeTBieg",
+      "title": "Derm - Ask Ahmed if Percy writes specialty pharmacy scripts",
+      "due": null,
+      "parent_title": "Specialty Pharmacy",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "SVhrd0c3cFN1QWptRFhsZw",
+      "title": "Specialty Pharmacy",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": "Parent - per-provider outreach subtasks"
+    },
+    {
+      "id": "SFBJRy1jN252N01NX1c5bg",
+      "title": "Followup with guerchon ans start sending pts to ADDA article pts for mental health",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "VFBVWUhRcXV2eXdlOHB5Zg",
+      "title": "Throw this on the backbone but sync with Notion pages.",
+      "due": null,
+      "parent_title": "Run all rep statistics for pcp to onboard for cardio.pro",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "YkRKOFBGRkhaNnZ5NFYzMg",
+      "title": "Still take his sizing",
+      "due": null,
+      "parent_title": "Mention to Shake: braces in urgent care?",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bS14eFVoUlJLMVlkMi1JZg",
+      "title": "Having call tonight",
+      "due": null,
+      "parent_title": "Sit-down with Ilene",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "a2lSYTBIZFpmLVVsbkxTcQ",
+      "title": "Followed up ready by Thursday",
+      "due": null,
+      "parent_title": "Follow up with Ryan",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "cGVENHlZaHNhTEJMc1pmVg",
+      "title": "Rippling for valentyna",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "SWk4SEd4MmJNUUlpYTVyaw",
+      "title": "Sheila by Thursday",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "S1BWNUItRGVlRXE2eERiXw",
+      "title": "Ryan call done call with Ray foe tomm 11am",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "T1Myb0pNdU02N3J4OTg2VQ",
+      "title": "Started in manus needs refining",
+      "due": null,
+      "parent_title": "Create a one-page flyer for self-swab HPV.",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "VEFHSE1JT2QyY2h2aWc1Mg",
+      "title": "Finalize Steven deal and sign contract- lincoln reference Essen health",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "Vjg5cUZQTGhXelpSMFQxYg",
+      "title": "Postponed until next week",
+      "due": null,
+      "parent_title": "Touch base with Cyrus regarding accounts",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "Y0dNczhIOHRIOVBEX3c2Ug",
+      "title": "Touch base with Cyrus regarding accounts",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "N2J5dDRmdFpOY2ZEYjNLVw",
+      "title": "Followup day for Luis ahmed meeting",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "UVdONmpTaHVwdmowblFpTw",
+      "title": "Nestmate EMU - price match supply list",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": "EMU sent supply list. Waiting to price match or see what we can do.\n\n[2026-04-20] In progress"
+    },
+    {
+      "id": "ZHBFbEFUX3N4bVkzQmtmYg",
+      "title": "Follow up with Wayne",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": "- Follow up with Dr Ludy Honore- by wed\n- Carmeli thursday"
+    },
+    {
+      "id": "RUNaMGp5ZG5EbXBnWVg2OQ",
+      "title": "Create a one-page flyer for self-swab HPV.",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "cGZlWXB1cXcwb0xmZlNoeg",
+      "title": "https://arxiv.org/abs/2506.12469",
+      "due": null,
+      "parent_title": "Ai papers to read at some point",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "VGxYdlM5SHhKOUc4aE9sQQ",
+      "title": "Ai papers to read at some point",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "Q3dORDFqZVQ4ZWt1QVpLSQ",
+      "title": "https://www.ibm.com/think/topics/ai-agent-types",
+      "due": null,
+      "parent_title": "Ai papers to read at some point",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "UnB3bHppSGNCQWRwc2F1dg",
+      "title": "https://maven.com/boring-bot/advanced-llm?utm_campaign=lennys-newsletter&utm_medium=affiliate&utm_source=maven&promoCode=LENNYSLIST",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bTFfY043ajg2SDFqV1lDLQ",
+      "title": "Mdland for 5343 my care np",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "MUwtWnh3cDNyYzdxT094ag",
+      "title": "Buy 2nd yubikey",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "T2VkWHVROTRrQlVFNkhWUg",
+      "title": "Dr Adrianova Husband",
+      "due": null,
+      "parent_title": "Followup on united Ipa sign up docs",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "bnRHMnFHT0szUUdqcy0tZQ",
+      "title": "Dr vamos",
+      "due": null,
+      "parent_title": "Followup on united Ipa sign up docs",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "dnJYcUV1T29Jc0hoTE9qQg",
+      "title": "Followup on united Ipa sign up docs",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "N3c3VFptVWRpUjVjZ1dBYQ",
+      "title": "Ger invoice from richard for gpo + lunch",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "VjhnX0ZPWWxWay15dWpuYw",
+      "title": "100 monthly cafdio visits 60 new/40 fu= net 3000 1500 rent/m rep cost 1k per office",
+      "due": null,
+      "parent_title": "Run all rep statistics for pcp to onboard for cardio.pro",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "TTFmNE8wZ2s3a2lZakZxbA",
+      "title": "Run all rep statistics for pcp to onboard for cardio.pro",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "ei1yUjhhQ1JvWklKbUJUSQ",
+      "title": "Labreports for 9009 rockaway",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "V2ZzaEFBLXA3ZUk4U093VQ",
+      "title": "From movies or shows that we have seen, potentially artwork from Etsy that's framed",
+      "due": null,
+      "parent_title": "For house",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "eGdyZTdmSzRhYnJrbnp2SA",
+      "title": "Duck art",
+      "due": null,
+      "parent_title": "For house",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "WjJWZEx4TTAyTF9LRW5Meg",
+      "title": "For house",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "NlU2SlZ1ME1yaEx2ZFJBSQ",
+      "title": "Dr. Alam follow-up",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "RThlcVNlSmlXdUVoUFhCMw",
+      "title": "5654",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "VzBFcTFoSkxGOHBCSVZJSw",
+      "title": "5010",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "TWdvcHJQd3U5S3VCZ1BOXw",
+      "title": "4957",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "b1FmZzhHa3RVRDFXc2x5Qg",
+      "title": "3364/3908 (Wednesday)",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "emNBY0Z4TGZVaXJ0Ri13Ng",
+      "title": "3354",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "cnZ5YjQtTVdPSGhXdUtFdw",
+      "title": "5415",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "SGlaTkFfVG15cHk3eXNWOA",
+      "title": "5027",
+      "due": null,
+      "parent_title": "Accounts to train for swab",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "eHU3T25BT1p4V2l2WUR3Tw",
+      "title": "Accounts to train for swab",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "a3BwZTRxZVNJaXowS3ZDOQ",
+      "title": "Cascading ABR if cul negative",
+      "due": null,
+      "parent_title": "For dr rookwood",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "QWpnV0NvM1hudEhDZV9yQQ",
+      "title": "For dr rookwood",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "QUp0X1FkalpiU2hNdG1EYQ",
+      "title": "Descale coffee machine(weekend only)",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "OVNNX3lGRFBHc3FXOUVyTg",
+      "title": "Monsey health",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    },
+    {
+      "id": "aTgxVFduYVdVcjYxZTY0Vg",
+      "title": "La traviata for gf day",
+      "due": null,
+      "parent_title": "",
+      "overdue": false,
+      "notes": ""
+    }
+  ],
+  "crm": []
+}

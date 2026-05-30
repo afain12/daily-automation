@@ -1,0 +1,79 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": { "content": "Activity Log" }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "📓"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Decisions, touchpoints, and material outcomes. The single source of truth for 'what happened' across all businesses."
+      }
+    }
+  ],
+  "properties": {
+    "Entry": {
+      "title": {},
+      "description": "One-line summary of what happened. Title property."
+    },
+    "Date": {
+      "date": {},
+      "description": "When this happened (not when it was logged)."
+    },
+    "Type": {
+      "select": {
+        "options": [
+          { "name": "Decision", "color": "purple" },
+          { "name": "Meeting", "color": "blue" },
+          { "name": "Call", "color": "green" },
+          { "name": "Email", "color": "yellow" },
+          { "name": "Outcome", "color": "orange" },
+          { "name": "Milestone", "color": "red" },
+          { "name": "Note", "color": "gray" }
+        ]
+      },
+      "description": "Category of activity. Drives filters in weekly review."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          { "name": "Lincoln Lab", "color": "purple" },
+          { "name": "United IPA", "color": "blue" },
+          { "name": "Nestmate", "color": "green" },
+          { "name": "Dock Pro", "color": "orange" },
+          { "name": "Other", "color": "gray" }
+        ]
+      },
+      "description": "Business unit this entry relates to."
+    },
+    "Outcome": {
+      "rich_text": {},
+      "description": "What was decided, learned, or shipped. The substantive content of the entry."
+    },
+    "Next Action": {
+      "rich_text": {},
+      "description": "Concrete follow-up — what / when / who. If actionable, also create a Master Tasks row."
+    },
+    "Participants": {
+      "people": {},
+      "description": "People involved in this activity (internal only)."
+    },
+    "Tags": {
+      "multi_select": {
+        "options": [
+          { "name": "review", "color": "blue" },
+          { "name": "blocker", "color": "red" },
+          { "name": "learning", "color": "green" },
+          { "name": "compliance", "color": "orange" }
+        ]
+      },
+      "description": "Free-form tagging for cross-cutting themes."
+    }
+  }
+}

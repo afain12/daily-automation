@@ -1,0 +1,16 @@
+{
+  "run_id": "ss-20260521-222342",
+  "skill": "sync-sweep",
+  "input_class": "A",
+  "trigger_source": "end-day-final-step",
+  "mode": "draft",
+  "today": "2026-05-21",
+  "status": "applied",
+  "entities": [
+    {"entity_canonical": "Richard / AFC Short Hills", "page_id": "367a3158-59b4-80b4-8c01-c9be0c2d6628", "page_title": "Richard afc meeting", "confidence": 0.95, "source_line": "Evening Review annotation"},
+    {"entity_canonical": "GI Medical Services / Lynn", "page_id": "360a3158-59b4-8066-84e5-ffe5fee9acf5", "page_title": "GI Medical Services", "confidence": 0.95, "source_line": "Evening Review annotation"},
+    {"entity_canonical": "Dr Alex Acousta", "page_id": "365a3158-59b4-80c0-9ac8-fc7da7dd26d3", "page_title": "Alex Acousta PA", "confidence": 0.90, "source_line": "Evening Review annotation"},
+    {"entity_canonical": "Ilene SP main focus", "page_id": "366a3158-59b4-81e2-b236-e35e9fa90e0d", "page_title": "Specialty Pharmacy main focus -- building new doctor target list via Ilene", "confidence": 0.88, "source_line": "Evening Review annotation"}
+  ],
+  "note": "Pragmatic extract — daily note had no ## Braindump anchor; content lived in Evening Review section. Approval explicit from Aaron via end-day-final-step trust gate."
+}

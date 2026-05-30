@@ -1,0 +1,55 @@
+IMPORTANT: Do NOT read or execute any files under ~/.claude/, ~/.agents/, .claude/skills/, or agents/. These are Claude Code skill definitions meant for a different AI system. Do NOT modify agents/openai.yaml. Stay focused on the repository code only.
+
+You are a brutally honest technical reviewer. Terse, direct, no compliments, no filler. This is a brainstorm-mode consult — I am NOT implementing yet.
+
+CONTEXT:
+
+I'm building a personal chief-of-staff CLI system called "COO Twin" in the repo at C:/Users/aaron/daily-automation. It aggregates Google Calendar, Notion (Master Tasks, Activity Log, Provider CRM), Google Tasks, and Obsidian into a morning briefing grouped by department: Nestmate (urgent care / provider outreach), Dock Pro / Cardio Pro (cardiac monitoring), United IPA (provider network), Lab (Lincoln Reference lab), Other/Personal. Aaron, the user, runs several businesses and needs each task routed into the correct department.
+
+You can read CLAUDE.md in the repo root and config/sources.yaml and state/priorities.yaml for ground truth on the current system.
+
+THIS MORNING the /start-day briefing misrouted 4 items and included 1 duplicate. After the user annotated the daily note (vault/daily/2026-04-22.md) with corrections inline, I'm redesigning the routing layer.
+
+MISROUTES FROM THIS MORNING:
+- "Touch base with Cyrus re: accounts" — I put in Nestmate; actually United IPA. Cyrus works across IPA + Nestmate + Lab depending on task context.
+- "MDland for 5343 My Care NP" — I put in IPA; actually Lab (MDland is a Lincoln Labs integration).
+- "Dr. Alam follow-up" — I put in IPA; actually Lab.
+- "Sheila by Thursday" — I put in Other/Personal; actually Nestmate (Sheila = EMU Health contact).
+- Specialty Pharmacy direct-targets carry-forward item duplicated the live Notion subtree.
+
+THREE SUB-PROBLEMS:
+
+1. Multi-department people — Cyrus, Ilene, Ahmed operate across 2-3 departments. Today's misroutes happened because I treated task text as a bag of words instead of reading context around the person's name.
+
+2. Dedup — An item can appear both as a carry-forward entry in state/priorities.yaml and as a live Notion task.
+
+3. Back-burner separation — Parked items (Dr Rookwood, Monsey Health, Good Health Psych, Eleni's LIC endocrine office) were shown alongside active work. User flagged them as back-burner after the fact.
+
+MY PROPOSED DESIGN:
+
+- New file config/person_routing.yaml — YAML map of multi-dept people with disambiguator keywords. Example: Cyrus + "Bay Parkway" → Nestmate; Cyrus + "Accureference" → Lab; Cyrus + "IPA account" → IPA. Plus a flat map of single-dept name overrides (MDland→Lab, Alam→Lab, Sheila→Nestmate, EMU→Nestmate, Kader→IPA, Accureference→Lab).
+
+- New file config/routing-learned.yaml — auto-populated from /end-day parsing of inline user corrections in the daily note. Empty at start; grows with use.
+
+- Routing pipeline (priority order, first match wins):
+  1. Google Tasks parent-task inheritance (parent title → dept)
+  2. person_routing.yaml disambiguators (person + keyword → dept)
+  3. Single-dept name overrides (name alone → dept)
+  4. Notion Workspace field (the existing signal; explicit rule already in CLAUDE.md says do NOT inherit from Notion parent task name)
+  5. Calendar business keywords (fallback)
+  6. "Needs Routing" bucket shown at trust gate for truly unresolved items — user one-word-claims each.
+
+- Dedup: compute a fuzzy key for each carry-forward (title tokens + business), and when a carry-forward's key matches a live Notion item at >80% similarity, drop the carry-forward line and instead annotate the live item with "carried Nd".
+
+- Back-burner: add `parked: true` + `parked_reason` + `parked_since` fields to priorities.yaml entries. Render parked items under a "Back-burner" subsection per department, below the active items, smaller/collapsed.
+
+ASK — please push back on all of this:
+
+1. What will break this design in 2-4 weeks of real use? (edge cases, staleness, maintenance)
+2. Is the 6-step routing pipeline the right order, or should something else come first/last?
+3. Am I missing a simpler approach? E.g. is this actually solvable with one trust-gate "claim department" UX instead of a config-driven pipeline? Or by asking Aaron to tag tasks at creation time?
+4. The "learned routing" file feels like it could rot as contexts change. Should /end-day also prune or re-review old learned rules?
+5. The disambiguator keyword approach is textual. What if the task text is ambiguous but Aaron's mental model is clear? (e.g., "Touch base with Cyrus" — no disambiguator keyword matches.) How should that case be handled?
+6. Anything else you'd push back on.
+
+Budget: focused, under 2 minutes of reasoning. Terse output. No implementation code. Just the flaws and your recommendation.

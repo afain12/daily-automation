@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"bQKn0JtHobU\"",
+  "id": "MlM2cDhKaWxHVmhLekVyTQ",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "Lab subtask. Assigned to Ahmed in Notion. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-81b7-8027-e31d40161787",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/MlM2cDhKaWxHVmhLekVyTQ",
+  "status": "needsAction",
+  "title": "AFFA: Cross-reference MTHFR testing with billing - coverage + cash pricing",
+  "updated": "2026-04-30T17:54:25.341Z",
+  "webViewLink": "https://tasks.google.com/task/2S6p8JilGVhKzErM?sa=6"
+}

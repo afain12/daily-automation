@@ -1,0 +1,11 @@
+# /sync-sweep dead-letter queue (DLQ). Append-only at runtime.
+# Entry shape:
+#   - entity_name: str          # canonical name from extraction
+#     notion_page_id: str        # target page id
+#     payload: object            # the staged PATCH body that failed
+#     attempts: int              # current attempt count (1..3)
+#     last_status: str           # 5xx | 429 | network | other
+#     first_failed: str          # ISO timestamp of first failure
+#
+# /start-day reads queue depth + oldest age; entries >=3 days old get a warning marker.
+queue: []

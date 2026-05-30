@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"aTDoCXcaWdI\"",
+  "id": "Q1hpTm5ocXNEbnBfc2s4Uw",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "Lab subtask. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-81d1-8b29-c64ea3d8e5e2",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/Q1hpTm5ocXNEbnBfc2s4Uw",
+  "status": "needsAction",
+  "title": "AFFA: Verify availability of Fragile X genetic testing",
+  "updated": "2026-04-30T17:54:23.540Z",
+  "webViewLink": "https://tasks.google.com/task/CXiNnhqsDnp_sk8S?sa=6"
+}

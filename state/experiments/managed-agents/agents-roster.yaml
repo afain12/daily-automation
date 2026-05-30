@@ -1,0 +1,124 @@
+# state/agents-roster.yaml — Managed Agents roster for the G7-MA spike (PRD §19.7–19.9).
+#
+# Declarative source of truth. scripts/agents-bootstrap.sh reads this file and
+# POSTs /v1/agents for each entry, then creates the coordinator with the four
+# specialists in its multiagent.agents roster.
+#
+# Beta header: managed-agents-2026-04-01
+# Endpoint:    https://api.anthropic.com/v1/agents
+#
+# IDs returned by the API are written to state/agents-bootstrap.lock.json
+# (not committed — single-machine state). Re-running the bootstrap script is
+# idempotent: it stamps an action_id per agent and skips on second run.
+#
+# System prompts are sourced from .claude/skills/<name>/skill.md so the
+# spike uses the exact same instructions the laptop runs. Each specialist
+# gets a short pre-prompt header (defined below) prepended at bootstrap time
+# to scope it to coordinator-delegation semantics rather than slash-command
+# semantics.
+
+specialists:
+  - name: start-day
+    model: claude-opus-4-7
+    system_prompt_file: .claude/skills/start-day/SKILL.md
+    pre_prompt: |
+      You are the start-day specialist. The coordinator delegates to you with
+      a structured task. Return a department-grouped daily briefing matching
+      the format in CLAUDE.md "Daily Note Format". Cite every Top 3 item with
+      [notion:abcd…] / [gtask:xyzw…] / [cal] / [derived] markers (GROUNDED
+      discipline). Never write to Notion/Calendar/Tasks without a
+      requires_action confirmation — the trust gate is owned by the coordinator.
+    tools:
+      - type: bash_20250124
+      - type: file_editor_20250124
+    mcp_servers:
+      # G7-MA step 1: confirm coverage exists for these before sinking spike days.
+      - id: notion          # Anthropic-hosted MCP (Notion). Coverage: TBD G7-MA step 1.
+        required: true
+      - id: google_workspace
+        required: true       # gws CLI does not exist in Managed Agents container.
+
+  - name: capture-meeting
+    model: claude-opus-4-7
+    system_prompt_file: .claude/skills/capture-meeting/SKILL.md
+    pre_prompt: |
+      You are the capture-meeting specialist. The coordinator delegates raw
+      meeting notes to you. RUN scripts/phi_scan.sh equivalent BEFORE any LLM
+      parsing — refuse with PHI_DETECTED if SSN/DOB/MRN patterns appear.
+      Per-item output MUST include [CATEGORY conf:0.NN], source line cite, and
+      action_id (capture-meeting:<meeting-key>:<date>:<hash>). Items with
+      conf < 0.70 auto-route to Uncategorized. Trust gate before any write.
+    tools:
+      - type: bash_20250124
+      - type: file_editor_20250124
+    mcp_servers:
+      - id: notion
+        required: true
+      - id: google_workspace
+        required: true
+
+  - name: end-day
+    model: claude-opus-4-7
+    system_prompt_file: .claude/skills/end-day/SKILL.md
+    pre_prompt: |
+      You are the end-day specialist. Compare today's planned Top 3 (from
+      state/priorities.yaml) against actual movement across Notion, Tasks,
+      Calendar, and the Obsidian Braindump. Always include a "Real movement
+      off Top 3" section — in-person Nestmate work bypasses digital systems
+      and a 0/3 score misrepresents days like 5/12. Append Braindump-only,
+      never Edit mid-file (feedback_endday_braindump_append).
+    tools:
+      - type: bash_20250124
+      - type: file_editor_20250124
+    mcp_servers:
+      - id: notion
+        required: true
+      - id: google_workspace
+        required: true
+
+  - name: sync-sweep
+    model: claude-opus-4-7
+    system_prompt_file: .claude/skills/end-day/SKILL.md   # placeholder — sync-sweep skill not yet written; spec lives in state/aac-spec-sync-sweep.md
+    pre_prompt: |
+      You are the sync-sweep specialist. The coordinator delegates a list of
+      braindump mentions. Resolve each to a Notion page workspace-wide via
+      /v1/search before declaring "missing" (CLAUDE.md rule #10). Append
+      dated `## YYYY-MM-DD — <title>` sections to topic pages; create new
+      Meeting Notes DB rows only when no topic page exists. Stage every
+      PATCH as .context/<name>.json and move to .context/applied/ on success.
+    tools:
+      - type: bash_20250124
+      - type: file_editor_20250124
+    mcp_servers:
+      - id: notion
+        required: true
+
+coordinator:
+  name: coo-coordinator
+  model: claude-opus-4-7
+  system: |
+    You coordinate Aaron's COO Twin daily-automation system. Aaron sends
+    short messages (≤1 line, forwarded URLs, or meeting notes) via Telegram
+    or a direct API call. Classify each incoming task and delegate to the
+    correct specialist:
+
+      • start-day        — morning briefing / "what's on today" / scheduled 7am cron
+      • capture-meeting  — raw meeting notes / Granola URLs / multi-bullet captures
+      • end-day          — end-of-day retro / scheduled 6pm cron / "wrap up"
+      • sync-sweep       — Braindump entries with @mentions of Notion pages
+
+    Honor state/coo_mode.yaml: in `observe`, no writes. In `draft` (default),
+    every specialist's external write surfaces as `requires_action` on the
+    primary thread — relay confirmation requests to Aaron and forward his
+    user.tool_confirmation back to the originating thread.
+
+    Trust gate is load-bearing. Never auto-confirm an action_id whose prefix
+    is not in state/coo_mode.yaml `approved_action_prefixes`.
+
+    On any specialist `session.thread_terminated` with stop_reason != end_turn,
+    summarize the failure and escalate to Aaron rather than retrying silently.
+  tools:
+    - type: agent_toolset_20260401
+  # multiagent.agents is filled in at bootstrap time with the specialist IDs
+  # from state/agents-bootstrap.lock.json. Each entry pins {id, version} for
+  # the deterministic-skills invariant (R24).

@@ -1,0 +1,33 @@
+# state/coo_mode.yaml — system-wide operating mode for COO Twin skills.
+#
+# Modes (per Manus v2 §4.2 + AAC GOVERNED):
+#   observe   — read-only. No writes to any external system. Briefings still display.
+#   draft     — default. All writes go through trust gate. Today's behavior.
+#   approved  — trust gate auto-approves whitelisted action_ids; everything else still gated.
+#   auto      — full auto for skills listed in `auto_skills`. Use with caution.
+#   locked    — emergency stop. Every skill refuses to run. /UNLOCK AGENT to lift.
+#
+# Skills read this file at Step 0 (mode check). If mode is `locked`, exit immediately
+# with a Telegram-friendly message. If mode is `observe`, set a flag that all write
+# steps check before executing.
+#
+# To change mode: edit this file directly, or (post-MVE, once Telegram bot is live)
+# send `LOCK AGENT` / `UNLOCK AGENT` from the allow-listed Telegram user ID.
+
+mode: draft
+last_changed: 2026-05-18
+last_changed_by: manual
+
+# Whitelisted action_ids for `approved` mode. Each entry is a prefix match.
+# Example: "start-day:*" approves any start-day write (Obsidian daily note, log).
+approved_action_prefixes:
+  - "start-day:*"
+
+# Whitelisted skills for `auto` mode. Skills NOT in this list still require gates
+# regardless of mode. Empty list = no full-auto skills, which is the right default
+# until a skill has 30+ days of clean traces.
+auto_skills: []
+
+# Audit notes — append, don't overwrite. /end-day surfaces this in retros.
+history:
+  - { ts: 2026-05-18, from: null, to: draft, reason: "initial commit per aac-audit-of-current-skills.md §5.4" }

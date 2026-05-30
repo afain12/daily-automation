@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"BLObCWfYHZ8\"",
+  "id": "UWdUQm4wN1NtX2JxMzgtaw",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "Lab subtask. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-81e0-98d0-d37c3e10df96",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/UWdUQm4wN1NtX2JxMzgtaw",
+  "status": "needsAction",
+  "title": "AFFA: Investigate GDX genetic testing for pediatric offerings",
+  "updated": "2026-04-30T17:54:24.340Z",
+  "webViewLink": "https://tasks.google.com/task/QgTBn07Sm_bq38-k?sa=6"
+}

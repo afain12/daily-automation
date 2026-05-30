@@ -1,0 +1,119 @@
+{
+  "count": 16,
+  "events": [
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-04-30T19:00:00-04:00",
+      "location": "",
+      "start": "2026-04-30T18:00:00-04:00",
+      "summary": "Meeting w luis for dinner"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-01T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-01T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-01T08:45:00-04:00",
+      "location": "",
+      "start": "2026-05-01T08:15:00-04:00",
+      "summary": "GYM"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-02T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-02T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-03T04:35:00-04:00",
+      "location": "TOKYO HND",
+      "start": "2026-05-03T03:30:00-04:00",
+      "summary": "Flight to OSAKA (JL 127)"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-03T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-03T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-04T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-04T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-04T08:45:00-04:00",
+      "location": "",
+      "start": "2026-05-04T08:15:00-04:00",
+      "summary": "GYM"
+    },
+    {
+      "calendar": "Holidays in United States",
+      "end": "2026-05-06",
+      "location": "",
+      "start": "2026-05-05",
+      "summary": "Cinco de Mayo"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-05T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-05T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-05T08:45:00-04:00",
+      "location": "",
+      "start": "2026-05-05T08:15:00-04:00",
+      "summary": "GYM"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-06T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-06T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-06T08:45:00-04:00",
+      "location": "",
+      "start": "2026-05-06T08:15:00-04:00",
+      "summary": "GYM"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-07T08:00:00-04:00",
+      "location": "",
+      "start": "2026-05-07T07:45:00-04:00",
+      "summary": "Meditate +Tea"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-07T08:45:00-04:00",
+      "location": "",
+      "start": "2026-05-07T08:15:00-04:00",
+      "summary": "GYM"
+    },
+    {
+      "calendar": "aaronfainshtein1@gmail.com",
+      "end": "2026-05-07T11:00:00-04:00",
+      "location": "",
+      "start": "2026-05-07T10:00:00-04:00",
+      "summary": "Nestmate/Docpro weekly Call"
+    }
+  ],
+  "timeMax": "2026-05-07T14:00:06.072241700-04:00",
+  "timeMin": "2026-04-30T14:00:06.072241700-04:00"
+}

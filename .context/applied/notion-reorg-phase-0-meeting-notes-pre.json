@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "snapshot_phase": "0.6",
+    "db_name": "Meeting Notes",
+    "database_id": "1dea3158-59b4-8036-ad33-f5ef7515666e",
+    "data_source": "collection://22ba3158-59b4-804d-9c1c-000b9fad40ae",
+    "view_url_queried": "https://www.notion.so/1dea315859b48036ad33f5ef7515666e?v=22ba315859b48060aee5000c6bbb1ea7",
+    "snapshot_taken_at": "2026-05-29",
+    "row_count": 6,
+    "workspace_breakdown": {
+      "null_no_workspace": 6
+    },
+    "category_breakdown": {
+      "null_no_category": 6
+    },
+    "notes": "Meeting Notes DB very sparse — 6 rows total, all with null Workspace AND null Category. Granola-syncs land here historically (Abba article 28, Abid Meeting 1/16, Coding with LLMs, Instrument List, blank, Biller meeting Prep). Phase 1.2 Category drop is safe — 100% null. Phase 2 Workspace migration trivial — nothing to migrate."
+  },
+  "results_summary": "Full row payload preserved in conversation context 2026-05-29. Meeting Notes page IDs intact."
+}

@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"s3I2ot0cNls\"",
+  "id": "Q2hwdUtlb3YweFVpTGxObA",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "External owner Oksana. Track-only on Aaron side. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-8142-9bd6-dabce7f2d8b7",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/Q2hwdUtlb3YweFVpTGxObA",
+  "status": "needsAction",
+  "title": "AFFA: Oksana to discuss partnership proposal with Ella (track-only)",
+  "updated": "2026-04-30T17:54:26.329Z",
+  "webViewLink": "https://tasks.google.com/task/ChpuKeov0xUiLlNl?sa=6"
+}

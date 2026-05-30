@@ -3,3 +3,4 @@ Move away from react and do SwiftUI since its smoother.
 Work on UX design specifically the homepage, app should open up with an introduction to the app maybe prompt someone to start an account with an email and password. nice and simple that will do. then it will say at the top "Hi I'm Natalie" and below that will be 3 oval icons with different options of what users can do within the app.(mimick the extension structure and build)you can change it daily or keep the same 3 options and each will have its own icon specific to the action natalie does that that specific icon is referring to. below that is a chat box of course for typing in queries. 
 
 there should also be two tabs. one for this "homepage" and a separate tab for previous queries, a history so to say how chatgpt has it. (use mobbin for chatgpt structure)
+#review #labaide-app

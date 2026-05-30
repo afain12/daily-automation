@@ -1,0 +1,67 @@
+{
+  "run_id": "ss-20260526-2310",
+  "skill": "sync-sweep",
+  "input_class": "A",
+  "trigger_source": "standalone-invocation",
+  "mode": "draft",
+  "today": "2026-05-26",
+  "status": "applied",
+  "entities": [
+    {
+      "entity_canonical": "Richard / AFC Short Hills",
+      "source_line": 273,
+      "source_text": "Touched base with ryan on multiple supply line deals(nestmate folder)- welcare pharmacy pricing by tommrow, varithena pricing by tommorw as well create a 10 am reminder in callender. disussed ricahrda vaccine and am expecting pricing back from them regarding shingles, measles and others- create one large task with three subcategoies for followup tommrow.",
+      "confidence": 0.88,
+      "update_summary": "Richard vaccine pricing inbound + Ryan supply lines (welcare/varithena)",
+      "payload": {
+        "page_id": "36ca3158-59b4-8022-8b72-e86d82264934",
+        "page_title": "AFC Short hills",
+        "append_heading": "2026-05-26 — Richard vaccine pricing inbound + Ryan supply lines (welcare/varithena)"
+      },
+      "action_id": "sync-sweep:36ca3158:2026-05-26:r1a7c9d3",
+      "result": "200",
+      "patched_at": "2026-05-26T23:10:00-04:00"
+    },
+    {
+      "entity_canonical": "Abid / MDland / Telcor",
+      "source_line": 281,
+      "source_text": "By tommorw(already in tasks) spoke with abid regarding linolcn billing. sits on my 5 min video demonstation with painpoints and flaws of current icd strucuture system in mdland, how the extenion will benefits the docttors in the longrun. - also set meeting for EOD thursday ideally 3-4pm with abid to meet with gary, close the deal on telcor licence and get the ball rolling.",
+      "confidence": 0.87,
+      "update_summary": "MDland video demo + Thursday EOD Abid×Gary Telcor close",
+      "payload": {
+        "page_id": "361a3158-59b4-815d-a9ef-c947281cbb20",
+        "page_title": "Abid 10am meeting — Lab + Telcor pathway lock (Morshed audit gate)",
+        "append_heading": "2026-05-26 — MDland video demo + Thursday EOD Abid×Gary Telcor close"
+      },
+      "action_id": "sync-sweep:361a3158:2026-05-26:b2t9c1d4",
+      "result": "200",
+      "patched_at": "2026-05-26T23:10:00-04:00"
+    },
+    {
+      "entity_canonical": "Dr Nashiwat",
+      "resolved_via": "disambig confirmation (Aaron picked option A)",
+      "source_line": 275,
+      "source_text": "Visited Ilenes' endocrinologist today Dr Nashiwat, great potential is currently experiences massive painpoints with exisitng pharmacies and expensive copays to patients, awaiting signed CDTM form, and workflow incorpetaion plus scripts to be sent to insight chicago pharmacy(needs to be changed on actual documentation)",
+      "confidence": 0.85,
+      "update_summary": "Visit today: CDTM form pending, scripts to Insight Chicago Pharmacy",
+      "payload": {
+        "page_id": "c515814b-2e05-4dad-b411-8e5861978557",
+        "page_title": "Dr. Lawrence Nasharat",
+        "append_heading": "2026-05-26 — Aaron visit (with Ilene): CDTM form pending, scripts to Insight Chicago Pharmacy"
+      },
+      "action_id": "sync-sweep:c515814b:2026-05-26:n3a5w7d8",
+      "result": "200",
+      "patched_at": "2026-05-26T23:10:00-04:00"
+    }
+  ],
+  "no_match_entities": [
+    {"entity": "Vantage Medical Associates", "context": "Dr Kehoe oncologist referral list target", "source_line": 277, "suggestion": "create Provider CRM row (Nestmate)"},
+    {"entity": "Ashley Orenshteyn", "context": "Patrick credentialing referral, Williamsburg Ray's gyn, Thursday deadline", "source_line": 279, "suggestion": "create Provider CRM row (Nestmate)"},
+    {"entity": "Insight Chicago Pharmacy", "context": "SP onboarding doc pharmacy redirect", "source_line": 275, "suggestion": "create account page or update existing SP onboarding doc"},
+    {"entity": "Dr Kehoe", "context": "visited today, gave oncologist referral list", "source_line": 277, "suggestion": "create Provider CRM row (Nestmate)"},
+    {"entity": "Dr Dosik", "context": "oncologist Rey knows", "source_line": 277, "suggestion": "create Provider CRM stub (Nestmate)"},
+    {"entity": "Patrick", "context": "referral source", "source_line": 279, "suggestion": "create CRM stub (Nestmate)"},
+    {"entity": "Ray / Williamsburg office", "context": "credentialing target office", "source_line": 279, "suggestion": "create account page (Nestmate)"},
+    {"entity": "Gary biller", "context": "Telcor close meeting Thursday", "source_line": 281, "suggestion": "context captured via Abid page append; standalone CRM row optional"}
+  ]
+}

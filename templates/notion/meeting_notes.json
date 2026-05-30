@@ -1,0 +1,72 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": { "content": "Meeting Notes" }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "🗒️"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "One row per meeting. /capture-meeting routes action items into Master Tasks and learnings into Obsidian; this DB holds the durable record."
+      }
+    }
+  ],
+  "properties": {
+    "Meeting": {
+      "title": {},
+      "description": "Meeting title. Convention: '<Topic> — <YYYY-MM-DD>'."
+    },
+    "Date": {
+      "date": {},
+      "description": "When the meeting took place."
+    },
+    "Attendees": {
+      "people": {},
+      "description": "People who attended (internal Notion users)."
+    },
+    "External Attendees": {
+      "rich_text": {},
+      "description": "Comma-separated list of outside attendees (providers, clients)."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          { "name": "Lincoln Lab", "color": "purple" },
+          { "name": "United IPA", "color": "blue" },
+          { "name": "Nestmate", "color": "green" },
+          { "name": "Dock Pro", "color": "orange" },
+          { "name": "Other", "color": "gray" }
+        ]
+      },
+      "description": "Business unit this meeting belongs to."
+    },
+    "Summary": {
+      "rich_text": {},
+      "description": "1-3 paragraph recap of what was discussed and decided."
+    },
+    "Related Tasks": {
+      "relation": {
+        "data_source_id": "{{MASTER_TASKS_DS_ID}}",
+        "single_property": {}
+      },
+      "description": "Action items spawned by this meeting. Bidirectional with Master Tasks."
+    },
+    "Source": {
+      "select": {
+        "options": [
+          { "name": "Granola", "color": "purple" },
+          { "name": "Live", "color": "green" },
+          { "name": "Phone", "color": "blue" },
+          { "name": "Async", "color": "gray" }
+        ]
+      },
+      "description": "How the meeting happened / how the notes were captured."
+    }
+  }
+}

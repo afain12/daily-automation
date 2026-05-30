@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "purpose": "Rollback artifact for Master Tasks view cleanup (2026-05-29). Views are NOT in Notion trash; recreate from these configs if needed.",
+    "db": "Master Tasks",
+    "data_source": "collection://528d24b8-e1e6-4ca0-a7ee-87f70a4f7980",
+    "captured_from": "notion-fetch views, 2026-05-29"
+  },
+  "to_delete": [
+    {
+      "name": "Top-level tasks",
+      "view_id": "0b721ff9-9380-4e5b-b68e-c0c3c36882e8",
+      "type": "table",
+      "filter": "simpleFilter: Parent Task is_empty",
+      "sort": "Due ascending"
+    },
+    {
+      "name": "United IPA",
+      "view_id": "335a3158-59b4-81f2-837a-000c811dc52d",
+      "type": "table",
+      "filter": "Workspace enum_is 'United IPA'",
+      "sort": "Updated descending",
+      "displayProperties": ["Task","Category","Status","Due","Last Activity","Updated"]
+    },
+    {
+      "name": "Nestmate",
+      "view_id": "335a3158-59b4-817d-a84a-000ca2ed6e13",
+      "type": "table",
+      "filter": "Workspace enum_is 'Nestmate'",
+      "sort": "Updated descending",
+      "displayProperties": ["Task","Category","Status","Due","Last Activity","Updated","Nestmate Account"]
+    },
+    {
+      "name": "Dock Pro",
+      "view_id": "335a3158-59b4-8140-82f7-000c760e0aea",
+      "type": "table",
+      "filter": "Workspace enum_is 'Dock Pro'",
+      "sort": "Updated descending",
+      "displayProperties": ["Task","Category","Status","Due","Last Activity","Updated"]
+    }
+  ],
+  "to_fix": [
+    {
+      "name": "Lincoln Lab",
+      "view_id": "335a3158-59b4-8116-af5a-000cc458de8c",
+      "type": "table",
+      "filter_current_BROKEN": "Workspace enum_is 'Link & Reference Laboratory' (option deleted -> shows nothing)",
+      "filter_target": "Workspace enum_is 'Lincoln Reference Laboratory'",
+      "sort": "Updated descending",
+      "displayProperties": ["Task","Category","Status","Due","Last Activity","Updated","Nestmate Account"]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": { "content": "Provider CRM" }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "🏥"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Provider / client / partner directory. One row per outside contact or organization the businesses interact with."
+      }
+    }
+  ],
+  "properties": {
+    "Name": {
+      "title": {},
+      "description": "Provider or contact name. Use 'Last, First' for individuals or the organization name."
+    },
+    "Email": {
+      "email": {},
+      "description": "Primary contact email."
+    },
+    "Phone": {
+      "phone_number": {},
+      "description": "Primary contact phone."
+    },
+    "Stage": {
+      "select": {
+        "options": [
+          { "name": "Lead", "color": "gray" },
+          { "name": "Contacted", "color": "yellow" },
+          { "name": "In Pipeline", "color": "blue" },
+          { "name": "Onboarding", "color": "orange" },
+          { "name": "Active", "color": "green" },
+          { "name": "Dormant", "color": "brown" },
+          { "name": "Lost", "color": "red" }
+        ]
+      },
+      "description": "Pipeline stage. Drives weekly CRM nudges."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          { "name": "Lincoln Lab", "color": "purple" },
+          { "name": "United IPA", "color": "blue" },
+          { "name": "Nestmate", "color": "green" },
+          { "name": "Dock Pro", "color": "orange" },
+          { "name": "Other", "color": "gray" }
+        ]
+      },
+      "description": "Which business owns this relationship."
+    },
+    "Last Contact": {
+      "date": {},
+      "description": "Date of most recent outbound or inbound touch."
+    },
+    "Next Step": {
+      "rich_text": {},
+      "description": "What's the next concrete action — what / when / who."
+    },
+    "Related Tasks": {
+      "relation": {
+        "data_source_id": "{{MASTER_TASKS_DS_ID}}",
+        "single_property": {}
+      },
+      "description": "Open tasks linked to this provider. Bidirectional with Master Tasks."
+    },
+    "Notes": {
+      "rich_text": {},
+      "description": "Background, history, decision context for this relationship."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — Labaide product design spec 2026-05-13: Natalie test-time compute + AI-as-judge eval",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Labaide / Natalie product spec — test-time compute + AI judge" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-13" } },
+      "Type": { "select": { "name": "Meeting" } },
+      "Workspace": { "select": { "name": "Link & Reference Laboratory" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Captured product-design spec for Natalie (phlebotomy assistant) in vault/Labaide/Labaide Poteitnial addons.md. Components: (1) test-time compute generating structured outputs until ruleset matches, (2) AI-as-judge evaluation (Gemini as evaluator) for coherence/visibility/clarity scoring on lab-test/tube queries, (3) prompting tuned to busy phleb voice (80-120 samples/day, zero error tolerance), (4) MCQ post-finetune metric for right-tube-for-test scenarios, (5) separate /self-improve tab for response review in MySQL, (6) later: voice for on-road rep access, (7) later: screen-read for lab-order detection from EMR." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "Promote braindump to structured Notion page (Labaide product roadmap). Identify first eval rubric to ship — recommend coherence/clarity/visibility 1-5 scoring on existing conversation logs. Investigate Gemini evaluator integration." } }
+        ]
+      }
+    }
+  }
+}

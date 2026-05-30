@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — Ilene Specialty Pharmacy briefing 2026-05-13: podcast education path, first stops Thu 5/14",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Ilene — Specialty Pharmacy program briefing + GI rollout sequencing" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-13" } },
+      "Type": { "select": { "name": "Meeting" } },
+      "Workspace": { "select": { "name": "Nestmate" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Briefed Ilene on Specialty Pharmacy program (en route to Tim ENG visit). Next education step: have her listen to the SP podcast. Rollout sequencing: first provider stops start Thu 5/14 — Dr Kiranpreet visit 09:30 already pinned (Staten Island). Ilene-direct GI half of 21d carry continues to close; Article 28 ABBA half remains outstanding." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "Confirm Ilene listened to podcast before Thu visits. Execute Kiranpreet 09:30 visit Thu 5/14. Begin 340b referral flow with Dr Inna Gordin (via Dr G). Followup w/ Dr Yili Huang dinner target Mon 5/19." } }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "pending",
+  "purpose": "Activity Log entry — Dr Tim ENG visit 2026-05-13: closed for lab, July 15 opening, June 15 followup target",
+  "endpoint": "POST https://api.notion.com/v1/pages",
+  "body": {
+    "parent": { "data_source_id": "3db174bf-c997-4a41-93ee-36f280e511db" },
+    "properties": {
+      "Activity": {
+        "title": [
+          { "text": { "content": "Dr Tim ENG visit — LocalMD Sunset Park 6219 5th Ave Brooklyn" } }
+        ]
+      },
+      "Date": { "date": { "start": "2026-05-13" } },
+      "Type": { "select": { "name": "Meeting" } },
+      "Workspace": { "select": { "name": "Nestmate" } },
+      "Outcome": {
+        "rich_text": [
+          { "text": { "content": "Practice still being built out. Credentialing through CAIPA, completion expected July. Opens July 15. Closed for lab — exchanged contacts. Aaron offered to help with office setup as needed." } }
+        ]
+      },
+      "Next Action": {
+        "rich_text": [
+          { "text": { "content": "Followup ~June 15 (1 month before opening). Offer office setup support. Track CAIPA credentialing progress. Tied to broader LocalMD Sunset Park push (Dr Alex CDTM unlock + Dr Rybstein green-light still open)." } }
+        ]
+      }
+    }
+  }
+}

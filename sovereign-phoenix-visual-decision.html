@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign Phoenix IPA — Visual Decision Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1e3a;
+    --navy-2: #1e3a5f;
+    --surface: #fafbfc;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --border-strong: #cbd5e1;
+    --text: #111827;
+    --muted: #6b7280;
+    --teal: #0891b2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --bull: #16a34a;
+    --base: #0891b2;
+    --bear: #d97706;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--surface);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Top banner */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+    padding: 48px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(20,184,166,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .hero .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 12px; color: #93c5fd; font-weight: 600;
+  }
+  .hero h1 {
+    font-size: 38px; line-height: 1.15; margin: 8px 0 4px;
+    font-weight: 800; letter-spacing: -0.02em;
+  }
+  .hero h2 {
+    font-size: 16px; font-weight: 500; color: #cbd5e1;
+    margin: 0 0 28px; max-width: 800px;
+  }
+  .verdict-pill {
+    display: inline-block;
+    background: rgba(20,184,166,0.18);
+    border: 1px solid rgba(20,184,166,0.45);
+    color: #5eead4;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+  }
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-top: 24px;
+  }
+  .stat {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .stat .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #93a3b8; font-weight: 600;
+  }
+  .stat .value {
+    font-size: 26px; font-weight: 700; margin-top: 6px; letter-spacing: -0.02em;
+  }
+  .stat .sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+  /* Sections */
+  section.block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin: 24px 0;
+    padding: 28px 32px;
+    box-shadow: 0 1px 2px rgba(15,30,58,0.04);
+  }
+  section.block h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  section.block .lede {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+    max-width: 900px;
+  }
+  .section-tag {
+    display: inline-block;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+    background: #eff6ff; color: var(--navy-2);
+    padding: 4px 10px; border-radius: 999px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  /* Mermaid wrappers */
+  .mermaid-wrap {
+    background: #fcfdfd;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    overflow-x: auto;
+  }
+  .mermaid { font-family: 'Inter', sans-serif !important; }
+
+  /* Chart wrappers */
+  .chart-box {
+    position: relative;
+    height: 380px;
+  }
+  .chart-box.short { height: 300px; }
+
+  /* Break-even heatmap */
+  table.heatmap {
+    width: 100%; border-collapse: separate; border-spacing: 4px;
+    font-size: 14px;
+  }
+  table.heatmap th, table.heatmap td {
+    padding: 10px 8px; text-align: center; border-radius: 6px;
+  }
+  table.heatmap th {
+    color: var(--muted); font-weight: 600; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  table.heatmap td.label {
+    text-align: left; padding-left: 12px; background: #f8fafc;
+    color: var(--navy-2); font-weight: 600;
+  }
+  table.heatmap td.cell {
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+    color: #fff;
+  }
+  .he-neg-strong { background: #b91c1c; }
+  .he-neg { background: #ef4444; }
+  .he-zero { background: #d97706; }
+  .he-pos { background: #22c55e; }
+  .he-pos-strong { background: #15803d; }
+  .he-pos-vstrong { background: #064e3b; }
+  .heatmap-key {
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 12px; font-size: 12px; color: var(--muted);
+  }
+  .heatmap-key .swatch {
+    display: inline-block; width: 14px; height: 14px; border-radius: 3px;
+  }
+
+  /* Walk-away & next-steps lists */
+  .checklist { display: grid; gap: 10px; margin-top: 6px; }
+  .check {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 10px; padding: 12px 14px;
+    font-size: 14px;
+  }
+  .check.go { background: #f0fdf4; border-color: #bbf7d0; }
+  .check.now { background: #eff6ff; border-color: #bfdbfe; }
+  .check .icon {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    color: var(--red);
+    flex-shrink: 0;
+  }
+  .check.go .icon { color: var(--green); }
+  .check.now .icon { color: var(--navy-2); }
+
+  /* Two-col layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .scenario-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+    background: #fcfdfd;
+  }
+  .scenario-card h4 {
+    margin: 0 0 4px; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+  }
+  .scenario-card .prob {
+    font-size: 12px; color: var(--muted); margin-bottom: 12px;
+  }
+  .scenario-card.bear h4 { color: var(--bear); }
+  .scenario-card.base h4 { color: var(--base); }
+  .scenario-card.bull h4 { color: var(--bull); }
+  .scenario-card .row {
+    display: flex; justify-content: space-between;
+    font-size: 13px; padding: 4px 0; border-bottom: 1px dashed var(--border);
+  }
+  .scenario-card .row:last-child { border-bottom: none; }
+  .scenario-card .row .mono { font-weight: 600; }
+
+  /* Decision pill row */
+  .scoreboard {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin: 20px 0 8px;
+  }
+  .sb-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 18px;
+    background: #fcfdfd;
+  }
+  .sb-card .h {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); font-weight: 700;
+  }
+  .sb-card .v {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--navy);
+  }
+  .sb-card .s { font-size: 12px; color: var(--muted); }
+
+  /* Footer */
+  footer.foot {
+    color: var(--muted); font-size: 12px; padding: 28px 0 60px;
+    text-align: center;
+  }
+
+  /* Print */
+  @media print {
+    .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; }
+    section.block { break-inside: avoid; box-shadow: none; }
+    .stats, .scoreboard, .grid-2, .grid-3 { break-inside: avoid; }
+  }
+  @media (max-width: 900px) {
+    .stats, .grid-2, .grid-3, .scoreboard { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Sovereign Phoenix IPA · Acquisition Decision Map</div>
+    <h1>Conditional GO — and the downside is finally small.</h1>
+    <h2>$250K buy-in for 51% (loan stays off the deal). Four cash partners at ~$62.5K each. Three revenue engines now in the model — Aetna Medicare Level-2 (the per-life margin play), Health First Level-1 with up to 25K incoming lives at $2 PMPM "super generous" (the volume play), and Fidelis Level-1 $3 PMPM (steady baseline). Aetna has Y1-only no-downside; HF cleanup unlocks the volume. Not pursuing ACO REACH.</h2>
+    <span class="verdict-pill">VERDICT · CONDITIONAL GO · STAGE BEHIND THE GATES</span>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Cash exposure per partner</div>
+        <div class="value">$62.5K</div>
+        <div class="sub">Capped at ~$100K with reserve</div>
+      </div>
+      <div class="stat">
+        <div class="label">Risk-weighted EV per partner</div>
+        <div class="value">~$1.0M</div>
+        <div class="sub">3-yr · multi-payer · sober Aetna tiers</div>
+      </div>
+      <div class="stat">
+        <div class="label">MiroFish 24-mo viability</div>
+        <div class="value">68%</div>
+        <div class="sub">89% confidence on that read</div>
+      </div>
+      <div class="stat">
+        <div class="label">Decisive gate</div>
+        <div class="value">HF HEDIS</div>
+        <div class="sub">Triggers NYSDOH §7a cascade</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- =============== SCENARIO TREE =============== -->
+<section class="block">
+  <div class="section-tag">SCENARIO TREE</div>
+  <h3>Two directions, six gates, three outcomes</h3>
+  <p class="lede">Every branch shows what you risk and where you stop. Green is "pass and proceed"; red is "trip the wire and walk." The terminal nodes are weighted with the probabilities used in the EV calculation.</p>
+
+  <div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    A([Start · 4 partners · $250K cash · $1.2M loan stays OFF the 51%]):::start --> G1{Gate 1<br/>HF HEDIS pre-validation}
+    G1 -- pass --> G2{Gate 2<br/>NYSDOH §7a approval}
+    G1 -- fail --> X1[Walk · $0 deployed<br/>~5% legal reserve burn]:::fail
+
+    G2 -- pass --> G3{Gate 3<br/>10% owner flip + manager removal}
+    G2 -- fail --> X2[Walk · escrow returned<br/>minus legal]:::fail
+
+    G3 -- pass --> G4{Gate 4<br/>Aetna + HF + Fidelis<br/>retain contracts on CoC}
+    G3 -- fail --> X3[Walk · restructure or exit<br/>buy-in returned]:::fail
+
+    G4 -- pass --> G5{Gate 5<br/>Lincoln Lab data pipeline live}
+    G4 -- fail --> X4[Walk · revenue engine gone]:::fail
+
+    G5 -- pass --> CLOSE([Close · Cash released<br/>SAIPA playbook live]):::stage
+    G5 -- fail --> X5[Down-shift to bear<br/>organic only]:::warn
+
+    CLOSE --> EXEC{18-mo execution checkpoint<br/>Aetna stars · HF cleanup landed?}
+    EXEC -- 4 stars · 6K Aetna · 25K+ HF · Fidelis on --> BULL[BULL · 20% prob<br/>3-yr cum +$21M IPA<br/>+$2.7M / partner]:::bull
+    EXEC -- 4 stars · 3K Aetna · 25K HF landed --> BASE[BASE · 45% prob<br/>3-yr cum +$9M IPA<br/>+$1.15M / partner]:::base
+    EXEC -- stuck at 3 stars · 1.5K Aetna · HF cleanup stalls --> BEAR[BEAR · 20% prob<br/>Y2+ downside risk<br/>smart exit at 18mo<br/>−$60 to −$90K / partner]:::bear
+
+    classDef start fill:#0f1e3a,stroke:#0f1e3a,color:#fff,font-weight:600;
+    classDef stage fill:#0891b2,stroke:#0891b2,color:#fff,font-weight:600;
+    classDef bull fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700;
+    classDef base fill:#0891b2,stroke:#0e7490,color:#fff,font-weight:700;
+    classDef bear fill:#d97706,stroke:#b45309,color:#fff,font-weight:700;
+    classDef fail fill:#dc2626,stroke:#b91c1c,color:#fff;
+    classDef warn fill:#fef3c7,stroke:#d97706,color:#92400e;
+</div>
+  </div>
+
+  <div class="grid-3" style="margin-top:18px;">
+    <div class="scenario-card bear">
+      <h4>Bear · ~20%</h4>
+      <div class="prob">Aetna stalls at 1.5K lives · stars stick at 3.0 · HF cleanup STALLS · Y2+ Aetna downside live · smart exit at 18mo</div>
+      <div class="row"><span>Y1 net (HF baseline only)</span><span class="mono" style="color:var(--bear)">−$125K</span></div>
+      <div class="row"><span>Y2 net (Aetna downside on)</span><span class="mono" style="color:var(--bear)">−$170K</span></div>
+      <div class="row"><span>18-mo SMART EXIT</span><span class="mono" style="color:var(--bear)">cap losses</span></div>
+      <div class="row"><span>3-yr cumulative IPA</span><span class="mono" style="color:var(--bear)">~ −$450K to −$700K</span></div>
+      <div class="row"><span>Per partner (51% / 4)</span><span class="mono" style="color:var(--bear)">−$60K to −$90K</span></div>
+    </div>
+    <div class="scenario-card base">
+      <h4>Base · ~45%</h4>
+      <div class="prob">Aetna 3K @ 4 stars · 25K HF cleanup LANDS (17.5K Medicaid + 7.5K Medicare) · Fidelis steady</div>
+      <div class="row"><span>Y1 net</span><span class="mono" style="color:var(--green)">+$170K</span></div>
+      <div class="row"><span>Y2 net (HF active)</span><span class="mono" style="color:var(--green)">+$3.87M</span></div>
+      <div class="row"><span>Y3 net (mature)</span><span class="mono" style="color:var(--green)">+$5.09M</span></div>
+      <div class="row"><span>3-yr cumulative IPA</span><span class="mono" style="color:var(--green)">+$9.1M</span></div>
+      <div class="row"><span>Per partner (51% / 4)</span><span class="mono" style="color:var(--green)">+$1.15M</span></div>
+    </div>
+    <div class="scenario-card bull">
+      <h4>Bull · ~20%</h4>
+      <div class="prob">Aetna 6K @ 4–4.5 stars · 25K HF + growth to 35K · all 3 payers humming · DocPro hits SAIPA-tier</div>
+      <div class="row"><span>Y1 net</span><span class="mono" style="color:var(--green)">+$1.46M</span></div>
+      <div class="row"><span>Y2 net</span><span class="mono" style="color:var(--green)">+$8.28M</span></div>
+      <div class="row"><span>Y3 net</span><span class="mono" style="color:var(--green)">+$11.7M</span></div>
+      <div class="row"><span>3-yr cumulative IPA</span><span class="mono" style="color:var(--green)">+$21.4M</span></div>
+      <div class="row"><span>Per partner (51% / 4)</span><span class="mono" style="color:var(--green)">+$2.7M</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== 24-MONTH TIMELINE =============== -->
+<section class="block">
+  <div class="section-tag">24-MONTH GATE TIMELINE</div>
+  <h3>What happens, when — from LOI to self-funded buyout</h3>
+  <p class="lede">The gates aren't sequenced loosely; they cascade. Health First's HEDIS sign-off triggers NYSDOH §7a; §7a unlocks the owner flip and manager removal; only then do Aetna's payouts actually start landing. The 18-month star-uplift checkpoint is the moment that decides bull vs. bear.</p>
+
+  <div class="mermaid-wrap">
+<div class="mermaid">
+gantt
+    title Sovereign Phoenix Acquisition — 24-Month Decision Timeline
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b '%y
+    section Pre-close · No cash committed
+    LOI · $250K / 51% / loan-off terms          :a1, 2026-06-01, 14d
+    DocPro drafts 2.5→4 HEDIS plan              :a2, 2026-06-01, 21d
+    Lincoln data targeting list (top 50 MA PCPs):a3, 2026-06-01, 30d
+    Luis · informal contract retention talks     :a4, 2026-06-08, 30d
+    Gate 1 · HF HEDIS pre-validation             :crit, g1, 2026-06-22, 45d
+    Gate 4 · Aetna written non-objection         :crit, g4, 2026-07-01, 30d
+    Gate 3 · 10% owner flip term sheet           :crit, g3, 2026-07-15, 30d
+    Gate 5 · Lincoln data-sharing agreement      :g5, 2026-07-15, 30d
+    section Escrow & Close
+    Escrow $250K (all gates pass)                :milestone, m1, 2026-08-15, 1d
+    Gate 2 · NYSDOH §7a filing & approval        :crit, g2, 2026-08-15, 60d
+    CLOSE · Cash released to sellers             :milestone, m2, 2026-10-15, 1d
+    section Year 1 · Aetna ramp
+    Star uplift program live (DocPro SAIPA playbook):p1, 2026-10-15, 365d
+    First Aetna shared-savings payout (Q1 cycle) :milestone, m3, 2027-01-15, 1d
+    Reach 3.5 stars target                       :p2, 2027-04-15, 90d
+    Begin equity buyout · Tranche 1 (+10%)       :milestone, m4, 2027-04-15, 1d
+    Show Aetna proof point to HF & Fidelis       :p3, 2027-06-01, 90d
+    section Year 2 · Scale & self-funded buyout
+    4-star achievement target                    :crit, p4, 2028-04-15, 90d
+    $12 PMPM admin fee unlocks                   :milestone, m5, 2028-04-15, 1d
+    Equity buyout · Tranche 2 (+15% from cash)   :milestone, m6, 2028-04-15, 1d
+    Bank/MSO debt for full remaining buyout      :milestone, m7, 2028-07-15, 1d
+    24-month decision checkpoint                 :milestone, m8, 2028-10-15, 1d
+</div>
+  </div>
+</section>
+
+<!-- =============== CASH FLOW CURVE =============== -->
+<section class="block">
+  <div class="section-tag">CUMULATIVE CASH FLOW</div>
+  <h3>What it looks like in dollars — month by month, 36 months</h3>
+  <p class="lede">All three scenarios start at −$250K at close. Bear dips through Y2 as the Aetna downside kicks in but is cushioned by the HF + Fidelis baseline, flattening around −$650K when the 18-mo smart exit halts the bleeding. Base climbs through Y1 (HF cleanup completing) then accelerates as the 25K HF lives go live in Y2. Bull is steeper because Aetna grows to 6K, HF 25K lands earlier and grows further, and Fidelis layers a steady baseline on top.</p>
+
+  <div class="chart-box">
+    <canvas id="cashflowChart"></canvas>
+  </div>
+</section>
+
+<!-- =============== ANNUAL INCOME =============== -->
+<section class="block">
+  <div class="section-tag">ANNUAL INCOME BREAKDOWN</div>
+  <h3>Where the dollars come from — admin fee vs. shared savings, each year</h3>
+  <p class="lede">Six revenue stacks per year, three payers each split admin fee vs shared savings, with opex below the line. Notice the shape: <strong>HF shared savings is the biggest single block in Base and Bull</strong> — the 25K incoming cleanup lives at "super generous" Level-1 SS dwarfs Aetna in absolute volume. Aetna is higher per-life margin but smaller in total dollars. Fidelis is steady baseline. In Bear Y2 you can see the small negative Aetna stack — that's the Y2+ downside materializing before the 18-mo smart exit.</p>
+
+  <div class="chart-box">
+    <canvas id="incomeChart"></canvas>
+  </div>
+</section>
+
+<!-- =============== BREAK-EVEN HEATMAP =============== -->
+<section class="block">
+  <div class="section-tag">BREAK-EVEN MATRIX</div>
+  <h3>The one chart that decides the deal</h3>
+  <p class="lede">3-year cumulative net (in $K) at every combination of star rating and attributed Aetna Medicare lives. Red = you lose money. Green = you win. The line between them — break-even — sits at roughly 4,000 lives if you hit 4 stars, or 5,500 lives if you stall at 3. The 750-provider panel can plausibly produce 5K–20K attributed lives, so the deal works at any star rating ≥3.5.</p>
+
+  <table class="heatmap">
+    <thead>
+      <tr>
+        <th style="text-align:left; padding-left:12px;">Star rating ↓ · Attributed Aetna lives →</th>
+        <th>3,000 lives</th>
+        <th>5,000 lives</th>
+        <th>8,000 lives</th>
+        <th>12,000 lives</th>
+        <th>20,000 lives</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">3.0 stars (status quo +)</td>
+        <td class="cell he-neg-strong">−$1,420</td>
+        <td class="cell he-neg">−$500</td>
+        <td class="cell he-pos">+$880</td>
+        <td class="cell he-pos-strong">+$2,720</td>
+        <td class="cell he-pos-vstrong">+$6,400</td>
+      </tr>
+      <tr>
+        <td class="label">3.5 stars (Y1 target)</td>
+        <td class="cell he-neg">−$490</td>
+        <td class="cell he-pos">+$1,050</td>
+        <td class="cell he-pos-strong">+$3,360</td>
+        <td class="cell he-pos-vstrong">+$6,440</td>
+        <td class="cell he-pos-vstrong">+$12,600</td>
+      </tr>
+      <tr>
+        <td class="label">4.0 stars (the deal target)</td>
+        <td class="cell he-pos">+$905</td>
+        <td class="cell he-pos-strong">+$3,375</td>
+        <td class="cell he-pos-vstrong">+$7,080</td>
+        <td class="cell he-pos-vstrong">+$12,020</td>
+        <td class="cell he-pos-vstrong">+$21,900</td>
+      </tr>
+      <tr>
+        <td class="label">4.5 stars (SAIPA-tier stretch)</td>
+        <td class="cell he-pos-strong">+$2,210</td>
+        <td class="cell he-pos-vstrong">+$5,550</td>
+        <td class="cell he-pos-vstrong">+$10,560</td>
+        <td class="cell he-pos-vstrong">+$17,240</td>
+        <td class="cell he-pos-vstrong">+$30,600</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="heatmap-key">
+    <span class="swatch he-neg-strong"></span> Big loss
+    <span class="swatch he-neg"></span> Loss
+    <span class="swatch he-pos"></span> Modest win
+    <span class="swatch he-pos-strong"></span> Strong win
+    <span class="swatch he-pos-vstrong"></span> Transformative
+    <span style="margin-left:auto; font-style:italic;">Figures = 3-yr cumulative net, IPA-level (×0.51÷4 ≈ per-partner share).</span>
+  </div>
+</section>
+
+<!-- =============== EV CHART =============== -->
+<section class="block">
+  <div class="section-tag">RISK-WEIGHTED EV</div>
+  <h3>What you're actually being paid to take this risk</h3>
+  <p class="lede">Four outcomes, weighted by probability, measured against your $62.5K cash exposure. With three revenue engines now in the model (Aetna + HF + Fidelis), the per-scenario outcomes are more conservative than before — sober tiers replace the aggressive 12K–40K Aetna lives I was using — but the asymmetry actually holds: bull is +$2.7M per partner, bear (with HF/Fidelis baseline cushioning the floor) is −$75K, expected value ~$1.0M, asymmetry ~36×. The big shift: HF is now the volume engine, Aetna is the margin engine, Fidelis is steady baseline. Base case carries the deal.</p>
+
+  <div class="chart-box short">
+    <canvas id="evChart"></canvas>
+  </div>
+
+  <div class="scoreboard">
+    <div class="sb-card">
+      <div class="h">Downside (bear w/ smart exit)</div>
+      <div class="v" style="color:var(--red);">~−$75K</div>
+      <div class="s">HF + Fidelis baseline cushions floor</div>
+    </div>
+    <div class="sb-card">
+      <div class="h">Expected value per partner</div>
+      <div class="v" style="color:var(--green);">~+$1.0M</div>
+      <div class="s">3-yr, multi-payer, sober tiers</div>
+    </div>
+    <div class="sb-card">
+      <div class="h">Asymmetry (bull / bear floor)</div>
+      <div class="v" style="color:var(--navy);">~36×</div>
+      <div class="s">Bull $2.7M ÷ bear floor $75K</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== WALK-AWAYS =============== -->
+<section class="block">
+  <div class="section-tag">HARD WALK-AWAY TRIPWIRES</div>
+  <h3>Agree these with the four cash partners before signing anything</h3>
+  <p class="lede">If any of these fires, the deal stops — no matter how much momentum has been built. Lock them in writing now so the decision is made before the emotion of being deep in negotiation.</p>
+
+  <div class="checklist">
+    <div class="check"><span class="icon">✕</span><div><strong>Buy-in inflates above $100K per partner.</strong> Current management drifts the $250K minimum upward → walk.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>The $1.2M loan re-attaches to the 51%.</strong> Any structure that puts the debt back on the acquirers' side → walk.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>Health First refuses pre-closing HEDIS validation.</strong> No HF sign-off = no §7a approval = no deal.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>NYSDOH §7a signals likely denial.</strong> Counsel reads the room; stop before more legal spend.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>Aetna issues termination or rate-cut on change of control.</strong> Engine gone → bear case at best, not worth $62.5K.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>Lincoln Lab data access blocked or non-actionable.</strong> No targeting weapon → organic growth too slow against NY rate compression.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>DocPro will not commit full SAIPA-tier process.</strong> Without it the star uplift is wishful — the deal collapses to bear.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>10% owner flip falls through and no alternative path to 51%.</strong> No control → no deal.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>18-month star checkpoint: if 4 stars are not on track</strong> (stuck at 3.0 or trending wrong), EXIT before Y3 Aetna downside fully materializes. The smart exit caps cumulative loss near −$75K per partner; staying in turns bear into ruin.</div></div>
+    <div class="check"><span class="icon">✕</span><div><strong>HF cleanup doesn't land by mid-Y2.</strong> If the ~25K HF lives (70/30 Medicaid/Medicare) don't transfer to SP by month ~18 because HF refuses to clear HEDIS or DocPro can't deliver, the base case collapses — HF SS is the biggest single revenue block in Base and Bull. Without the cleanup landing, you're back to bear economics regardless of Aetna stars.</div></div>
+  </div>
+</section>
+
+<!-- =============== NEXT 36 HOURS =============== -->
+<section class="block">
+  <div class="section-tag">DECIDE BY TOMORROW NIGHT</div>
+  <h3>What needs to happen between now and your answer</h3>
+  <p class="lede">You don't need to commit cash tomorrow — you need to commit to a posture. The posture this dashboard supports is: <strong>say "conditional yes, structured around the gates."</strong> Three things sharpen that answer before you say it out loud.</p>
+
+  <div class="checklist">
+    <div class="check now"><span class="icon">1</span><div><strong>Pull the actual Aetna contract language</strong> on (a) the $12 PMPM at 4 stars, (b) the Level-2 50%-upside / 50%-downside terms, (c) the Y1 no-downside carve-out IN WRITING, and (d) the Y2+ downside CAP structure (% of benchmark or absolute $). The downside cap is now the single most important diligence item — it sets the floor on the bear case. Luis can get this tonight.</div></div>
+    <div class="check now"><span class="icon">2</span><div><strong>Have DocPro give you a 2-sentence yes or no on whether he'll commit the SAIPA playbook here.</strong> Not "we should," not "we could" — yes or no. If no, the dashboard collapses to bear and the answer is don't buy.</div></div>
+    <div class="check now"><span class="icon">3</span><div><strong>Run a fast Lincoln-data count of high-value Aetna Medicare prescribers in the ~400-provider network</strong> (practice volume context: ~250 patients/mo per provider ≈ ~100K patient-touches/mo total). Even a rough Aetna-MA attribution count — 750 today, target 1.5K / 3K / 6K — replaces the bear/base/bull guess with a real number and turns "conditional GO" into a tight GO or NO-GO.</div></div>
+    <div class="check now"><span class="icon">4</span><div><strong>Verify Health First's actual cleanup timeline AND the composition of the incoming ~25K lives.</strong> HF shared savings is the single biggest revenue block in Base and Bull — if HF refuses HEDIS clearance or the 25K (70/30 Medicaid/Medicare) lives don't actually land by mid-Y2, the model collapses to bear. Ask Luis to get written confirmation from HF on (a) cleanup acceptance criteria, (b) target transfer date, (c) actual member-mix breakdown.</div></div>
+    <div class="check go"><span class="icon">✓</span><div><strong>If all four come back green, tomorrow night's answer is YES — conditional on the gates, staged with escrow, capped at $100K per partner.</strong></div></div>
+    <div class="check"><span class="icon">!</span><div><strong>If any come back red, tomorrow night's answer is NO — and you've saved $62.5K and 18 months of attention.</strong></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  Sovereign Phoenix IPA · Visual decision map · Built from <code>sovereign-phoenix-reality-seed.md</code> + <code>full_report-ff994d29.md</code> + <code>sovereign-phoenix-financial-decision.md</code>.<br>
+  All scenario figures illustrative until Aetna contract terms and Lincoln-data attribution counts are confirmed.
+</footer>
+
+</div>
+
+<!-- =============== CDN SCRIPTS =============== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+
+<script>
+  // Mermaid init
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Inter, sans-serif',
+      primaryColor: '#0891b2',
+      primaryTextColor: '#ffffff',
+      primaryBorderColor: '#0e7490',
+      lineColor: '#94a3b8',
+      tertiaryColor: '#f1f5f9',
+      ganttFontSize: '13'
+    },
+    flowchart: { curve: 'basis', padding: 16, nodeSpacing: 40, rankSpacing: 60 },
+    gantt: { fontSize: 13, barHeight: 22, barGap: 6, leftPadding: 220 }
+  });
+
+  // Helper: interpolate monthly cumulative cash across annual checkpoints
+  function buildMonthly(points) {
+    // points: [{m:0,v:-250},{m:12,v:...},...]
+    const out = [];
+    for (let i = 0; i < points.length - 1; i++) {
+      const a = points[i], b = points[i+1];
+      const span = b.m - a.m;
+      for (let m = a.m; m < b.m; m++) {
+        const t = (m - a.m) / span;
+        out.push(a.v + (b.v - a.v) * t);
+      }
+    }
+    out.push(points[points.length-1].v);
+    return out;
+  }
+  const months = Array.from({length:37}, (_,i) => i);
+  const bearData = buildMonthly([{m:0,v:-250},{m:12,v:-375},{m:18,v:-475},{m:24,v:-580},{m:36,v:-650}]);
+  const baseData = buildMonthly([{m:0,v:-250},{m:12,v:-80},{m:24,v:3790},{m:36,v:8875}]);
+  const bullData = buildMonthly([{m:0,v:-250},{m:12,v:1208},{m:24,v:9484},{m:36,v:21168}]);
+
+  // Cumulative cash flow chart
+  new Chart(document.getElementById('cashflowChart'), {
+    type: 'line',
+    data: {
+      labels: months.map(m => 'M' + m),
+      datasets: [
+        { label: 'Bull · ~20%', data: bullData, borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.08)', borderWidth: 3, tension: 0.35, fill: true, pointRadius: 0, pointHoverRadius: 5 },
+        { label: 'Base · ~45%', data: baseData, borderColor: '#0891b2', backgroundColor: 'rgba(8,145,178,0.08)', borderWidth: 3, tension: 0.35, fill: true, pointRadius: 0, pointHoverRadius: 5 },
+        { label: 'Bear · ~20%', data: bearData, borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.08)', borderWidth: 3, tension: 0.35, fill: true, pointRadius: 0, pointHoverRadius: 5 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 13, weight: '600' }, color: '#111827', usePointStyle: true } },
+        tooltip: {
+          backgroundColor: '#0f1e3a', titleFont: { family: 'Inter', weight: 'bold' }, bodyFont: { family: 'Inter' },
+          callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString('en-US',{maximumFractionDigits:0})}K` }
+        }
+      },
+      scales: {
+        y: {
+          title: { display: true, text: 'Cumulative net cash ($K, IPA-level)', font: { family: 'Inter', weight: '600' }, color: '#374151' },
+          grid: { color: 'rgba(15,30,58,0.06)' },
+          ticks: { font: { family: 'JetBrains Mono' }, callback: v => '$' + v.toLocaleString('en-US') + 'K' }
+        },
+        x: {
+          title: { display: true, text: 'Months from close', font: { family: 'Inter', weight: '600' }, color: '#374151' },
+          grid: { display: false },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, autoSkip: true, maxTicksLimit: 13 }
+        }
+      }
+    }
+  });
+
+  // Income breakdown stacked — multi-payer (Aetna / Health First / Fidelis × admin + shared savings)
+  const incomeData = {
+    labels: ['Bear Y1','Bear Y2','Bear Y3 (exit)','Base Y1','Base Y2','Base Y3','Bull Y1','Bull Y2','Bull Y3'],
+    aetnaAdmin:   [72, 101, 0, 192, 315, 432, 360, 648, 936],
+    aetnaSS:      [25, -100, 0, 250, 875, 1200, 750, 2700, 4200],
+    hfAdmin:      [120, 120, 0, 120, 720, 720, 240, 720, 840],
+    hfSS:         [250, 250, 0, 400, 2800, 3675, 1200, 5400, 7000],
+    fidelisAdmin: [108, 108, 0, 108, 108, 108, 108, 108, 108],
+    fidelisSS:    [0, 50, 0, 0, 150, 250, 0, 200, 400],
+    opex:         [700, 750, 100, 900, 1100, 1300, 1200, 1500, 1800]
+  };
+  new Chart(document.getElementById('incomeChart'), {
+    type: 'bar',
+    data: {
+      labels: incomeData.labels,
+      datasets: [
+        { label: 'Aetna admin fee',            data: incomeData.aetnaAdmin,   backgroundColor: '#0e7490', stack: 'rev', borderRadius: 3 },
+        { label: 'Aetna shared savings (L2 · 50% cap · Y1 no-downside)', data: incomeData.aetnaSS,     backgroundColor: '#16a34a', stack: 'rev', borderRadius: 3 },
+        { label: 'Health First admin fee ($2 PMPM L1)', data: incomeData.hfAdmin,    backgroundColor: '#1e3a5f', stack: 'rev', borderRadius: 3 },
+        { label: 'Health First shared savings (L1 · super-generous)', data: incomeData.hfSS,       backgroundColor: '#3b82f6', stack: 'rev', borderRadius: 3 },
+        { label: 'Fidelis admin fee ($3 PMPM L1)', data: incomeData.fidelisAdmin, backgroundColor: '#7c3aed', stack: 'rev', borderRadius: 3 },
+        { label: 'Fidelis shared savings (lagged ~2yr)', data: incomeData.fidelisSS, backgroundColor: '#a78bfa', stack: 'rev', borderRadius: 3 },
+        { label: 'Operating cost',              data: incomeData.opex.map(v => -v),   backgroundColor: '#dc2626', stack: 'op', borderRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 13, weight: '600' }, color: '#111827', usePointStyle: true } },
+        tooltip: {
+          backgroundColor: '#0f1e3a',
+          callbacks: { label: ctx => `${ctx.dataset.label}: $${Math.abs(ctx.parsed.y).toLocaleString('en-US')}K` }
+        }
+      },
+      scales: {
+        y: {
+          stacked: true,
+          title: { display: true, text: 'Annual amount ($K)', font: { family: 'Inter', weight: '600' }, color: '#374151' },
+          grid: { color: 'rgba(15,30,58,0.06)' },
+          ticks: { font: { family: 'JetBrains Mono' }, callback: v => '$' + v.toLocaleString('en-US') + 'K' }
+        },
+        x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Inter', weight: '600' } } }
+      }
+    }
+  });
+
+  // EV chart — horizontal bar
+  new Chart(document.getElementById('evChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Pre-close failure (15%)', 'Bear · 1.5K Aetna · HF stalls · exit at 18mo (20%)', 'Base · 3K Aetna · 25K HF lands (45%)', 'Bull · 6K Aetna · HF + growth (20%)'],
+      datasets: [
+        {
+          label: 'Per-partner outcome ($K)',
+          data: [-30, -75, 1150, 2700],
+          backgroundColor: ['#dc2626','#d97706','#0891b2','#16a34a'],
+          borderRadius: 6
+        },
+        {
+          label: 'Probability-weighted contribution to EV ($K)',
+          data: [-4.5, -15, 517.5, 540],
+          backgroundColor: ['rgba(220,38,38,0.35)','rgba(217,119,6,0.35)','rgba(8,145,178,0.35)','rgba(22,163,74,0.35)'],
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 13, weight: '600' }, color: '#111827', usePointStyle: true } },
+        tooltip: {
+          backgroundColor: '#0f1e3a',
+          callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.x.toLocaleString('en-US')}K` }
+        },
+        title: {
+          display: true,
+          text: 'Σ Weighted contribution ≈ +$1,038K per partner over 3 years (multi-payer · sober Aetna tiers · Y2+ downside)',
+          font: { family: 'Inter', size: 13, weight: '700' },
+          color: '#0f1e3a',
+          padding: { top: 8, bottom: 12 }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Per-partner value ($K)', font: { family: 'Inter', weight: '600' }, color: '#374151' },
+          grid: { color: 'rgba(15,30,58,0.06)' },
+          ticks: { font: { family: 'JetBrains Mono' }, callback: v => '$' + v.toLocaleString('en-US') + 'K' }
+        },
+        y: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: '600' } } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

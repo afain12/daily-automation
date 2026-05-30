@@ -1,0 +1,18 @@
+# E2 disambiguation memory for /sync-sweep entity resolution.
+# Entry shape:
+#   - mention_text: str           # exact phrase from braindump (e.g. "Alex")
+#     resolved_page_id: str       # Notion page id Aaron picked
+#     resolved_page_title: str    # human-readable title for logs
+#     workspace: str              # workspace value of the resolved page
+#     confirmed_at: str           # ISO timestamp of most recent confirmation
+#     confirmation_count: int     # increments each time Aaron re-picks the same target
+#                                 # When count reaches 3, entry graduates to
+#                                 # config/sources.yaml entity_aliases and is removed here.
+resolutions:
+  - mention_text: "Dr Nashiwat"
+    resolved_page_id: "c515814b-2e05-4dad-b411-8e5861978557"
+    resolved_page_title: "Dr. Lawrence Nasharat"
+    workspace: null
+    confirmed_at: "2026-05-26T23:10:00-04:00"
+    confirmation_count: 1
+    notes: "Typo variant confirmed by Aaron via sync-sweep disambig 5/26. Ilene's endocrinologist."

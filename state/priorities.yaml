@@ -1,0 +1,1292 @@
+# COO Twin - Carry-Forward Priorities
+# Updated by /end-day, consumed by /start-day
+# 2026-05-26 EOD: tracked 0/3, real 1.5/3 (delta +1.5). Telcor block ran but decision unverified; SP visits (ENT/allergy + Nazmul) happened with outcomes uncaptured; Sovereign Phoenix untouched. BIG real movement off Top 3: 5 new Master Tasks decomposed from Richard outcomes (Quest mismatch, MedGroup, vaccine SKUs, send-out policy, Medline-vs-McKesson); emergent Dr Meny/DocPro review meeting (17:00); Ilene's endo Dr Nashiwat visit (high SP potential, CDTM pending, scripts redirected to Insight Chicago Pharmacy); Dr Kehoe oncologist referral list (Vantage Medical Associates target via Rey/Dosik); Patrick credentialing referrals (Ashley Orenshteyn + Williamsburg Ray's gyns, deadline Thursday); Abid Lincoln billing 5-min video demo prep + EOD Thursday 3-4pm Abid+Gary Telcor close meeting. 4 gtasks closed via /end-day push (WP UC checks, Valentyna deposit, Dr Alam, Call irina dropped). 9 gtasks closed by Aaron's nightly batch at 19:10. Activity Log silence now 6 days; notion_silence_resumes_5_21 still live. calendar_action_skip_pattern_5_21 does NOT extend (all 5 work blocks ran).
+# 2026-05-21 EOD: 0.5/3 Top 3 real (Essen call only; Rookwood + SP both not closed). Notion silent again (0 Activity Log/CRM today; 5/20 break was a 1-day flash). Major off-Top-3 field work: Richard 11am ($30k/m Medline + PCR reagent biggest + vaccines, Mon order incoming), Lynn 12pm (CDTM form delivered, Ilene/Doreen catering plan via Insight Comprehensive Pharmacy). Calendar Fri 5/22: ADDED SI visit 10:30-12:00 (GI Medical Services + Dr Langan), DELETED Remzy 10:30 (conflict), DELETED Acousta 14:00 (postponed next week, busy seeing patients). 0 gtasks closed today (Aaron's nightly batch pattern). Dr Eng Adam deadline 5/21 passed, extended +2d. New flags: notion_silence_resumes_5_21, calendar_action_skip_pattern_5_21 (Rookwood + Nestmate weekly both skipped same day).
+# 2026-05-20 EOD: 2.5/3 Top 3 real movement (Big Apple no-prescribe, D'Angelo Practice Fusion go-live, Telcor call happened/decision deferred; Goyal skipped). 2 Notion Master Tasks -> Done. 3 Activity Log Decision entries created (broke 2-day Notion silence). 6 new gtasks created from braindump + 1 calendar event (WP UC Thu 5/21 eve). Goyal carries forward NEW. Telcor decision deferred per Aaron.
+
+last_updated: "2026-05-28"
+
+# 2026-05-28 EOD: tracked 0/3, real 0/3 (delta 0) -- but BIG off-Top-3 day. Telcor close slipped to Fri ~4pm (Abid+Gary). Nestmate/DocPro weekly ran w/o Activity Log capture. Patrick credentialing not addressed (Fri 5/29 HARD deadline). 5 field meetings landed major content: Jeff (AFC Haledon owner, GPO opportunity + USCIS civil surgeon need), Yan Goldberg (BeWell Article 28 CLOSED, Fulton St integration begins, needs internist from Abid PCP network), Rey/Medspan (cardiologist list for repatha referrals, blank referral guide planned, gyn/GI midlevels needed), Nina Aronov (functional medicine -- Marina Moysieva panels first, then Accu expansive + pricing agreement), evening UIPA Sovereign Phoenix acquisition (Aetna Medicare Level 2 shared savings IS the real asset, $250k buy-in not $1.2M loan, 4-way split, Lincoln data drives provider onboarding, 750-provider panel 2.5* -> 4* = $12 PMPM admin). 10 gtasks closed today by Aaron's nightly batch + 1 pushed via /end-day (For Abid 28d carry). 4 daily-note checkboxes pulled. Notion silence now 8d. /sync-sweep ran at Step 9.5. SP modeling carries (3 items) promoted ACTIVE. Rybstein dropped to back_burner per braindump. SP Notion page got Due Mon 6/2 + reorg directive (use new Claude Notion templates).
+
+# 2026-05-27 EOD: tracked 1/3, real 3/3 (delta +2). #1 IPA panel-loss call ran (AL capture owed); #2 Jacobs lunch BIG (Xtandi = 15k profit drug, top-priority flag; brochures created for Ilene rolodex); #3 Abid video done (gtask closed) + Thu 15:00 Telcor close on cal. 6 new calendar events created (Bewell Thu 14:00, Sergio-Claude Thu 12:00, Langan Fri 12:00, Parmar Fri 13:45, Huang Tue 6/2 12:00, Suleman+Ahmed Wed 6/3 12:00); 2 geo/time conflicts flagged (14:00->15:00 NJ; 12:00->12:30). CDTM ask of Guerchon annotated done+sent. Notion silence now 7d (notion_silence_resumes_5_21 still live). Late-night annotation pattern continues -- daily-note carries more state than Notion writes.
+
+carry_forward:
+  # ============================================================
+  # NEW 5/28 -- Today's captures (Jeff/Yan/Rey/Nina/UIPA-SP braindump)
+  # ============================================================
+  - title: "Find Yan Goldberg an internist (use Abid PCP network -- line up multiples)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'most importantly make sure to find him a primary care- use abids network looking for any PCPs looking to work.- make this a task on google tasks pls'. Yan ALL about relationships -- new primary goal is find him an internist at earliest convenience, line up multiple candidates. BeWell Article 28 closed today, Fulton St integration begins. He's connected with Yili Huang (Lincoln Lab tab)."
+
+  - title: "Get Lisette Escobales FNP contact from Abid (for Rey/Medspan Associates)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'For his account Medspan Associates, FNP is from abid(get contact asap) Lisette Escobales.' Asap."
+
+  - title: "Build blank referral guide for Rey's cardiologist list (repatha + specialty meds)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'Start by connecting with his list of cardiologists to get referals for repatha, and other specialty medications for his patients. Prepare a blank referal guide and walk him through the process. if he lands meetings for us we can send them to our specialiy pharmacy and genrerate revenue fast with his lists of relationships.' SP-aligned revenue generator."
+
+  - title: "Source gyn NP/midlevel for Rey/Medspan via Guerchon"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'Get a Gyn(task for guerchon)NP or Midlevel for their practice as well.' New opportunity opened by Rey relationship."
+
+  - title: "Source GI midlevel for Rey/Medspan (Pierre Hindy via Claude or Kevin Tin; Jan/Feb residency-grad window)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'Also needs Gi (ideal time to grasp is from january and feb according to claude when they just graduate from residency). Speak with maybe pierre hindys ppl thru claude if we can find a way to grasp a new midlevel or kevin tin for their practice.' Pin Jan/Feb 2027 window."
+
+  - title: "Nina Aronov functional medicine -- gather panel scope + costs, Marina Moysieva panels first, then Accu expansive + pricing agreement"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'For Nina Aronov- she is venteruing into functional medicine. Immediat eto do list is gather what exactly her team is looking to test and panel costs. Submit Marina moysieva panels to her to start followed by accu supported expansive panels with doc +excel file to get feedback. prepare prosal see what we need to do to get adjusted to thier workflow and get pricing agreements in place.' Multi-step sequence."
+
+  - title: "Jeff AFC Haledon -- USCIS civil surgeon intro (Dr Lau), GPO reagent quotes (Ryan), visit 'The Pack' classes"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: 'using these notes today we had met with Jeff owner of an AFC, extremely well connected individual with loads of opportunites to do busines. immediate paint points is missing USCIS civil surgoen- use dr lau already left notes and actionable next steps below meeting notes. Visit more The Pack (his gym) classes and touch base with time to time. After getting quotes from Ryans GPO we can save them loads of money on reagents for inhouse testing on his inhouse commercial population.' Notion: Jeff AFC Haledon owner 36ea315859b480af9fffced08daf2085."
+
+  - title: "Sovereign Phoenix acquisition workstream -- $250k buy-in modeling, Aetna Medicare provider onboarding via Lincoln data, contract retention as Aetna case proof (DISCRETION)"
+    source: manual
+    source_id: null
+    business: ipa
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/28 EOD: massive UIPA meeting tonight. '$1.2 million loan, which would not be part of our 51. Ideally we would want to buy in for as little money as possible but the way it seems the current management would like to have a minimum buy-in of $250,000.' Structure: Doc pro for billing+data, Aaron+Ahmed for provider engagement+enrollment, Luis for contract negotiation. Real value shifted from Healthfirst to Aetna Medicare shared savings contract (Level 2, 50% upside, no downside, payouts ~3mo). 750-provider panel, 2.5* rating, target 4* = $12 PMPM admin fee. Lincoln data identifies Aetna providers to rapidly onboard. 4-way split: Ahmed/Luis/Aaron/DocPro. Cash injection from shared savings buys out current owners. Contract retention required as Aetna proof case. EVERYTHING IN DISCRETION."
+
+  - title: "Reorganize Specialty Pharmacy Notion page using new Claude templates uploaded to Notion (lots of Nestmate-SP updates pending)"
+    source: notion
+    source_id: "34aa3158-59b4-81a7-8f81-f817a822ed6c"
+    business: nestmate
+    first_carried: "2026-05-28"
+    days_carried: 1
+    original_due: "2026-06-02"
+    notes: "Dead-task scan 5/28: SP Notion page 26d dormant. Aaron 5/28 directive: 'nots of upsates in especiality pharmacy left in nestmate reoagraize it all using our new claud tesmpaltes we upladed for notion'. Notion page Due set Mon 6/2 via /end-day 8f."
+
+  # ============================================================
+  # NEW 5/27 -- Today's captures (Jacobs lunch + late-night braindump)
+  # ============================================================
+  - title: "Dr Ben Jacobs / Xtandi -- TOP PRIORITY (15k profit drug, $20 copay)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/27 EOD: 'Visited Dr Ben Jacobs today, upon visiting he seemed intrigued and xtandi is a 15k profit drug to us so has on top priority and $20 copays for such medication.' Add to Provider CRM, label SP/top-priority. SP visit happened during Jacobs lunch."
+
+  - title: "Ilene CDTM signing next Tuesday + admin burden workout (sending scripts)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-06-02"
+    notes: "Aaron 5/27 EOD: 'Ilene has a followup of CDTM form signing next Tuesday, while we work out the administrative burdens and get them to start sending scripts.' Pair with Huang 12:00 lunch Tue 6/2."
+
+  - title: "Dr Langan Friday lunch -- CDTM sign + brochure workflow (wife + Maggie handle insurance calls)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-29"
+    notes: "Aaron 5/27 EOD: 'Dr Langan follow-up on friday, (bring lunch) get signed CDTM and incorporate brochure in their workflow. (wife makes the ins calls + maggie).' Calendar event created Fri 5/29 12:00-13:30. BRING LUNCH."
+
+  - title: "Dr Parmar Friday follow-up -- insurance ppl + collect biologic scripts"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-29"
+    notes: "Aaron 5/27 EOD: 'Dr Parmar friday follow-up as well speak with their key ppl who work with insurances and get the ball rolling. Need to start collecting those biologic scripts and reduce the administrative burden on their behalf.' Calendar event created Fri 5/29 13:45-14:45."
+
+  - title: "Bewell @ Lincoln Lab Thu 2pm -- ask about endocrinology borrow"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-28"
+    notes: "Aaron 5/27 EOD: 'meeting with bewell for lincoln lab tomm 2pm need to prep and ask about endocrinology for their practice (see if we can borrow theirs).' Calendar event created. WARNING: 14:00->15:00 Union NJ geo conflict; ~45min travel."
+
+  - title: "Call Claude re Dr Sergio Martinez Thu 12pm (for Guerchon)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-28"
+    notes: "Aaron 5/27 daily-note annotation: 'call claude tomm 12pm'. Calendar event created Thu 5/28 12:00-12:30. WARNING: overlaps 12:30 Meet Yan."
+
+  - title: "Submit expenses for Accu + 3/16 Outback receipt -- tomorrow AM"
+    source: tasks
+    source_id: "ZHZvQW1hdVdOR0VYczExeg"
+    business: other
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-28"
+    notes: "Aaron 5/27 annotation: 'submit it tomm am create in task'. Already in gtasks; pin AM block."
+
+  - title: "Send EMR integration request to Dr Hui Tzu Chou"
+    source: tasks
+    source_id: "bVN1S2FYeXpCVnN5SHVsWQ"
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-28"
+    notes: "Aaron 5/27 annotation: 'send emr integration request'. Concrete action on the 5/20 onboarding carry."
+
+  # [removed 5/28] Friday AM text Alex re: Rybstein -- dropped with Rybstein per 5/28 braindump 'out of picute for now'.
+
+  - title: "Dr Inna Gordin follow-up task -- tomorrow"
+    source: tasks
+    source_id: "OVJLdWtnczJVTUNnX0w5Qg"
+    business: nestmate
+    first_carried: "2026-05-27"
+    days_carried: 1
+    original_due: "2026-05-28"
+    notes: "Aaron 5/27 annotation: 'follow up tasks for tom'. 340b SP onboarding lead via Dr G referrals; Guerchon BAA gate cleared 5/19."
+
+  # ============================================================
+  # NEW 5/26 -- Today's captures (braindump + field visits)
+  # ============================================================
+  - title: "Ryan welcare pharmacy pricing -- followup tomorrow (10am calendar reminder)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: "2026-05-27"
+    notes: "Aaron 5/26 EOD braindump: 'welcare pharmacy pricing by tommrow'. Pair w/ varithena pricing followup. Set 10am reminder."
+
+  - title: "Ryan varithena pricing -- followup tomorrow (10am)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: "2026-05-27"
+    notes: "Aaron 5/26 EOD braindump: 'varithena pricing by tommorw'. Big Apple varithena thread continuation w/ Ryan."
+
+  - title: "Richard vaccines pricing parent + 3 subtasks (shingles/measles/others)"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/26 EOD: 'discussed Richard vaccine and am expecting pricing back from them regarding shingles, measles and others -- create one large task with three subcategories for followup tommrow'. Create Notion Master Task w/ 3 subtasks."
+
+  - title: "Dr Nashiwat (Ilene's endo) -- CDTM form + workflow + scripts to Insight Chicago Pharmacy"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/26 EOD: 'Visited Ilenes endocrinologist today Dr Nashiwat, great potential is currently experiences massive painpoints with exisitng pharmacies and expensive copays to patients, awaiting signed CDTM form, and workflow incorpetaion plus scripts to be sent to insight chicago pharmacy(needs to be changed on actual documentation)'. SP-aligned. Documentation needs pharmacy-name update from prior versions."
+
+  - title: "Dr Kehoe oncology -- speak to Rey re: Dr Dosik before scheduling outreach to Vantage Medical Associates"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/26 EOD: 'Visited Dr Kehoe, from todyas meeitng we recieved a lovely list of oncologists who know the docotor. notable ones from vantage medical associates, maybe we use them as ideal targets plus other docs mention. using rey speak to him about the dosiks oncology figure out how we can best understand thier busienss before scheduling to meet.' New SP-adjacent channel."
+
+  - title: "Patrick credentialing referrals -- Ashley Orenshteyn + Williamsburg Ray's gyns -- DEADLINE THURSDAY"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: "2026-05-29"
+    notes: "Aaron 5/26 EOD: 'Two referalls from patrick need till need to touch based with other docs like ashley orenshteyn for credentialing and other gyns for rays office in williamsburg. (by thursday needs to be done)'. Hard Thursday deadline."
+
+  # [removed 5/27] Abid Lincoln billing 5-min video demo -- DONE (gtask VTlrUXdqS3RGdk1DWjQzNg closed 5/27).
+  # [removed 5/27] Schedule EOD Thursday 3-4pm Abid+Gary -- DONE (calendar event created 5/27 17:11, Lincoln/docpro 15:00-16:00 at Union NJ).
+  - title: "Capture Dr Meny / DocPro review (5/26 17:00) outcomes to Activity Log"
+    source: manual
+    source_id: null
+    business: dock_pro
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Emergent calendar event 17:00-18:00, Google Meet w/ DocPro team (Abid, Anabil, Tanwir) + Dr Remzy Meny. Ties to open Move-Remzy-to-Provider-CRM thread. Activity Log entry + decompose any new actions."
+
+  # [removed 5/27] Capture Telcor decision (5/26 9am block) -- Aaron marked [x] in 5/27 daily note; decision framed as gated on Thu 5/28 Abid+Gary meeting at Union NJ.
+  - title: "Capture today's SP visit outcomes (ENT/allergy + Dr Nazmul Khan) to Activity Log"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Top 3 #2 on 5/26 -- both visits ran, outcomes uncaptured. Anchor for /sync-sweep tomorrow."
+
+  - title: "Call Raghda -- postponed from 5/26 12:00"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/26 annotation: 'move to tommrow-postpne'."
+
+  - title: "Complete Move Dr Remzy Meny + Wholesome -> Provider CRM (SP label)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-26"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/26 annotation: '-5pm scheduled' (Meny review happened 17:00). Now complete the CRM-move desk task. Replaces the older 5/19/5/21 carries."
+
+  # ============================================================
+  # NEW 5/21 -- Today's captures + new actions
+  # ============================================================
+  - title: "Visit Dr Alex Acousta -- RESCHEDULE next week (5/22 cal block deleted; he was busy seeing patients)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/21 EOD: 'reached out to but was busy seeing patients postpone until next week'. Fri 5/22 14:00 calendar event DELETED via /end-day. Pick day next week + re-add to calendar. Still TOP PRIORITY SP referral (easiest to flip per 5/20 Activity Log)."
+
+  - title: "Move Remzy Meny + Wholesome to Provider CRM (SP label) -- Fri 5/22 10:30 block DELETED, reschedule"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Conflict with new SI visit (10:30-12:00 added 5/21 EOD). Desk task -- reschedule to weekend or Mon 5/25. Carries the 5/19 'Move Remzy Meny + Wholesome to Provider CRM under Specialty Pharmacy label' item forward."
+
+  - title: "Capture AFC Short Hills / Richard 5/21 outcomes to Activity Log + decompose workstreams (PCR reagent pricing, vaccine sell-in, Medline baseline)"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Richard touch-base 5/21 11am: ~$30k/m Medline spend, biggest line PCR reagent purchasing, vaccines = key sell-in lever. Expect order volume from Richard MONDAY 5/25. Log Activity Log entry; create child tasks: (1) PCR reagent pricing analysis, (2) vaccine sell-in pricing/positioning, (3) Medline volume baseline. See vault meeting notes (Richard meeting under Nestmate per Aaron's pointer)."
+
+  - title: "GI Medical Services -- coordinate catering lunch w/ Doreen team via Ilene (biologics → Insight Comprehensive Pharmacy)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Lynn 5/21 12pm visit: CDTM form brought over. Aaron 5/21 EOD: 'Now to work with Ilene we need to work on catering lunches to encourage Doreen and her team to start sending us biologics. Key person will be Ilene to help promote and push using Insight Comprehensive Pharmacy.' Pair with 'Follow up Ilene -- SP new doctor target list' Fri 5/22 13:00 call."
+
+  - title: "Capture Essen call 5/21 outcomes (no next-step logged yet)"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Essen call 5/21 13:30 happened. No Notion entry. Fold into Fri 5/22 16:30 SP 5/18 log block (Aaron's existing pre-plan)."
+
+  - title: "Dr Langan (Staten Island) -- prep for Fri 5/22 10:30 visit (NEW LEAD)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: "2026-05-22"
+    notes: "Calendar event 4sc7b1mic9djmd45qbu5l69r7o created 5/21 EOD. SI morning route with GI Medical Services. New lead, no prior context in vault yet."
+
+  - title: "Watch Maven LIVE 5-Agent Crew recording (5/21 1pm, not yet watched)"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/21 EOD: 'need to watch behind'. Pin a concrete 30-min block."
+
+  - title: "Zito automation follow-through (5/21 18:30-21:30 session) -- iteration + cohesive questioning"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-05-21"
+    days_carried: 1
+    original_due: null
+    notes: "Aaron 5/21 EOD: 'need to focus better on iteration and cohesive speaking with directness and proper questioning'. Self-development note attached to Zito automation work in Claude/team."
+
+  # ============================================================
+  # NEW 5/20 -- Today's captures + new actions
+  # ============================================================
+  - title: "Visit Dr Nazmul Khan (Bay Ridge) -- SAIPA referral via IPA roster"
+    source: tasks
+    source_id: "ZkQyWWVJZEpyS0FXQUZ2Tw"
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "From 5/20 braindump. SAIPA referral pipeline. Use IPA roster. Pair w/ Dr Suleman for Ahmed."
+
+  - title: "Dr Suleman (Bay Ridge) -- SAIPA referral, ASSIGNED TO AHMED"
+    source: tasks
+    source_id: "am5KSVNPN1JEcDV0Z01hSw"
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "From 5/20 braindump. Leave for Ahmed to handle. Bay Ridge SAIPA pipeline."
+
+  - title: "Onboard Dr Hui Tzu Chou -- supply list, account, calendar followup before opening"
+    source: tasks
+    source_id: "bVN1S2FYeXpCVnN5SHVsWQ"
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "From 5/20 braindump. Use Granola notes from prior meeting. Set calendar followup before her practice opens."
+
+  - title: "Address United IPA patient-panel loss concern (Goldberg + Adrianova + Ali)"
+    source: tasks
+    source_id: "S0ZsNld0dW1OTUQ4MjRrdA"
+    business: ipa
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "From 5/20 braindump. Three United IPA docs concerned about losing patient panel. Tie into Sovereign Phoenix sequencing."
+
+  - title: "Visit Dr Alex Acousta -- TOP PRIORITY SP referral (easiest to flip)"
+    source: tasks
+    source_id: "aXpNeXlyMjdUYUlZWjVfcA"
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "Per 5/20 Activity Log Decision. Apply SP pitch framework. Schedule first conversion touch this week."
+
+  - title: "Visit White Plains Urgent Care -- Immediate Medical Care (Thu 5/21 eve, on way to Ossining)"
+    source: tasks
+    source_id: "d0RrVE1FVEFZY003Tno5ag"
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: "2026-05-21"
+    notes: "Calendar event created Thu 5/21 17:30-18:15. Meet w/ Immediate Medical Care on route to Ossining."
+
+  # [removed 5/28] Big Apple varithena followup -- gtask UnNMMkV3V0pWbDA5V20ydA closed 5/28; Ryan consolidated pricing carry still active under awaiting Mon 6/1.
+
+  - title: "Telcor AI vs Gary biller -- decision DEFERRED, re-surface when ready"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "5/20 Wed 14:00 call happened. Aaron deferred decision. Re-engage with concrete decision next week."
+
+  - title: "Visit Dr Goyal White Plains -- RESCHEDULE (5/20 visit skipped)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "Originally calendar'd 5/20 15:00 but didn't happen. Second SP-aligned visit, still pending. Reschedule."
+
+  - title: "Watch Maven LIVE 8-agent webinar recording (recorded today, not yet watched)"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "Aaron 5/20: 'recorded need to watch tonight'."
+
+  - title: "Followup Dr Huang's PCP referral Dr Ye -- email sent 5/20, monitor for reply"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-20"
+    days_carried: 2
+    original_due: null
+    notes: "From 5/20 braindump. Email sent to Dr Ye, monitor for reply."
+
+  # ============================================================
+  # NEW 5/19 -- carried forward
+  # ============================================================
+  - title: "Speak to ENT + allergy group (new SP outreach angle)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "From 5/19 daily-note annotation. New SP target outreach channel."
+
+  - title: "Move Dr Remzy Meny + Wholesome accounts into Provider CRM under Specialty Pharmacy label"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "Aaron 5/19: 'left notes under dr remzy meny wholesome regarding next steps -- Make sure both accounts are thrown into the provider CRM labeled under specialty pharmacy.'"
+
+  - title: "Follow up with Ilene re: SP new doctor target list (accords/referrals)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "Aaron 5/19: 'will work on following up with Ilene to get the accords sendings'. SP is main current focus."
+
+  - title: "Confirm Dr Alam live + templates -- pushed to Sunday 5/25"
+    source: tasks
+    source_id: "ZGI0NTRDazFKT0xoZVY5aA"
+    business: lab
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: "2026-05-25"
+    notes: "Aaron 5/19: 'will be live today needs to be pushed till next sunday'. Reconfirm 5/25."
+
+  - title: "Create DocPro Tim ~18:00 huddle on calendar (pre-SP nuance lock)"
+    source: manual
+    source_id: null
+    business: ipa
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "From 5/18 EOD; still not on calendar after 5/20. 3rd day flagged."
+
+  - title: "Reply to Deepti's email"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "From 5/19 morning brief / 5/18 EOD. Email reply outstanding."
+
+  - title: "Side errands weekend: Hankook tires eBay, RockAuto brakes"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "From 5/19 morning brief."
+
+  # ============================================================
+  # SOVEREIGN PHOENIX bundle
+  # ============================================================
+  - title: "Log SP 5/18 outcomes to Activity Log (closes Notion silence on IPA workstream specifically)"
+    source: manual
+    source_id: null
+    business: ipa
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: null
+    notes: "Top 3 #3 from 5/19 -- still NOT DONE. SP 5/18 meeting outcomes need dedicated Activity Log entry."
+
+  - title: "Sovereign Phoenix -- model PMPM + shared-savings on consolidated master IPA"
+    source: tasks
+    source_id: "YXl2VDA0SGloaklQSDZpQg"
+    business: ipa
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: "2026-05-17"
+    notes: "Carried 8d. 5/18 SP meeting passed; deliverable still open."
+
+  - title: "Sovereign Phoenix -- compare IPA contract lucrativeness (SPIPA/Starling/NY IPA/Phoenix)"
+    source: tasks
+    source_id: "a3BXcW04NnZXa0NDT2JmZQ"
+    business: ipa
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: "2026-05-17"
+    notes: "Carried 8d. Contract comparison still pending."
+
+  - title: "Sovereign Phoenix -- $1.2M loan diligence (terms, default risk)"
+    source: tasks
+    source_id: "bUJPaW5oU0U2c2l3X2pVeA"
+    business: ipa
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: "2026-05-17"
+    notes: "Carried 8d. From Luis 5/13: $1.2M loan from 2020 failures rolls into purchase price."
+
+  # ============================================================
+  # CONTINUED -- Lab workstream
+  # ============================================================
+  - title: "Julie touchbase -- Stevens team API docs (status + HV order tracking)"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-14"
+    days_carried: 8
+    original_due: null
+    notes: "Touch base with Julie to push API integration docs forward."
+
+  - title: "Essen clients dashboard -- postponed until ECW integration complete"
+    source: tasks
+    source_id: "aHh3YU5XN0pfSHE5a3lRRw"
+    business: lab
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Activity Log Decision 5/19. Hold until ECW done."
+
+  - title: "Finish medicaid for Lincoln (long-term)"
+    source: tasks
+    source_id: "REI4YTNHbmpJcXZkcnViNg"
+    business: lab
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Lincoln Medicaid credentialing."
+
+  - title: "Promote Labaide product spec -> structured Notion page"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Promote vault/Labaide/Labaide Poteitnial addons.md to structured Notion page."
+
+  - title: "Pickup checks (weekly standing task)"
+    source: tasks
+    source_id: "XzhWb1h3b3RndWdFbG9vSQ"
+    business: lab
+    first_carried: "2026-05-07"
+    days_carried: 15
+    original_due: null
+    notes: "Weekly standing."
+
+  - title: "Touch base with Cyrus regarding accounts"
+    source: tasks
+    source_id: "Y0dNczhIOHRIOVBEX3c2Ug"
+    business: lab
+    first_carried: "2026-04-21"
+    days_carried: 31
+    original_due: null
+    notes: "30d. Long carry."
+
+  - title: "Kidney profile for Yonkers"
+    source: tasks
+    source_id: "UTJjelhUX1NVcmVucjZ6bg"
+    business: lab
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "21d."
+
+  - title: "Bring Yitz accounts into Accu"
+    source: tasks
+    source_id: "Z1dMVWJQdW1kV2NsS0Ixaw"
+    business: lab
+    first_carried: "2026-05-02"
+    days_carried: 20
+    original_due: null
+    notes: "Accu migration pipeline."
+
+  - title: "MDland integration for Prime Health NYC + send boxes both locations"
+    source: manual
+    source_id: null
+    business: lab
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: null
+    notes: "22d."
+
+  # [removed 5/27] Followup w/ Leo (wholesome biller) + Amju -- Aaron marked [x] in 5/27 daily note (manual completion, no source ID).
+
+  - title: "NYCDOCS check collection"
+    source: tasks
+    source_id: "aWVZa09Vd0pmX1ZXejU3Zw"
+    business: lab
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: "2026-05-14"
+    notes: "Due 5/14 passed +7d."
+
+  - title: "Remaining check collections by EOW"
+    source: tasks
+    source_id: "Zm42VmhpS0MteWtnbFlzXw"
+    business: lab
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: "2026-05-15"
+    notes: "Due 5/15 passed +6d."
+
+  - title: "Confirm with Valentyna White Plains UC check deposit"
+    source: tasks
+    source_id: "MkxtdzR0di1rQUFsTFNuNw"
+    business: lab
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: null
+    notes: "Bookkeeping confirm."
+
+  # ============================================================
+  # NESTMATE -- active workstream
+  # ============================================================
+  # [removed 5/27] CDTM ask of Guerchon -- Aaron 5/27 annotation: 'done and sent.' Closes the chain that started 5/12; Guerchon BAA email 5/19 + CDTM ask 5/27 both landed. Now waiting on signed return + Dr Alex script-sending unlock (covered by new Rybstein/Alex Friday-AM carry).
+
+  - title: "Specialty Pharmacy provider audits parent (Eleni LIC, Laus, Rheum, Shapsis)"
+    source: tasks
+    source_id: "c3ZsaGdjc1Q1d1NpX3F2Yg"
+    business: nestmate
+    first_carried: "2026-05-01"
+    days_carried: 21
+    original_due: null
+    notes: "Parent task. Remaining: Endo Eleni LIC, Neuro Laus, GI Shapsis (awaiting Sorkin). Rheum audit closed 5/20 (no rheumatologics in lab)."
+
+  - title: "Design simplified one-pager for doctors (Specialty Pharmacy subtask)"
+    source: tasks
+    source_id: "UjZDWEV0dmQyR3FsbXVILQ"
+    business: nestmate
+    first_carried: "2026-05-01"
+    days_carried: 21
+    original_due: null
+    notes: "Apply SP pitch framework."
+
+  - title: "Specialty Pharmacy -- Notion page refresh"
+    source: notion
+    source_id: "34aa3158-59b4-81a7-8f81-f817a822ed6c"
+    business: nestmate
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "21d. SP main focus; Notion page itself still not refreshed."
+
+  - title: "Dr Inna Gordin -- 340b SP onboarding lead (via Dr G referrals)"
+    source: tasks
+    source_id: "OVJLdWtnczJVTUNnX0w5Qg"
+    business: nestmate
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: null
+    notes: "Brooklyn GI pipeline. Guerchon BAA gate cleared 5/19."
+
+  - title: "Document SP onboarding workflow (1-pager + EMR favorites + televisit education)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: null
+    notes: "Add office-staff angle per 5/14 pitch insight."
+
+  - title: "Coordinate homemade call w Vova + Guerchin -- hospital pts to convert"
+    source: tasks
+    source_id: "RWpaemxMTk51ZmMyenY4MA"
+    business: nestmate
+    first_carried: "2026-05-14"
+    days_carried: 8
+    original_due: null
+    notes: "Hospital patients need conversion. SP angle."
+
+  - title: "Audit for 9009 Rocksway billing visit Manny (state conflict UNRESOLVED)"
+    source: tasks
+    source_id: "QmhPd1hLRUx2b1FBOFR5Yw"
+    business: nestmate
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "State conflict from 5/18 catch-up: 'Handoff != audit completion.' Audit still actually pending."
+
+  - title: "For Dr Eng -- office setup help (Tim ENG, opens July 15)"
+    source: tasks
+    source_id: "Z1U3bTR6VzhkWkE3MkhSUQ"
+    business: nestmate
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Re-engage ~June 15."
+
+  - title: "Reschedule Dr Hussain"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "21d. Visit reschedule remains."
+
+  - title: "Onboard Dr Islam -- confirm 4/28 coffee landed + capture next step"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-28"
+    days_carried: 24
+    original_due: null
+    notes: "23d. Flushing hospital PCP referrals."
+
+  - title: "Onboard Dr Sergio Martinez (pulmonology referrals)"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "21d."
+
+  - title: "Setup PrimeHealth NYC + Guerchon meeting (Jamaica Queens) -- bundle w/ CDTM"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "Pair with CDTM ask + SP strategy."
+
+  - title: "Schedule next-month Dr Kevin Tin + Guerchon meeting"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "Tin's gtask LkMNWVdsAJcM1J4- still open."
+
+  - title: "Anju conversation re: Remzy Meny decision-maker"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-24"
+    days_carried: 28
+    original_due: null
+    notes: "27d. Gated on Anju + G."
+
+  - title: "Ilene combined nudge -- Article 28 ABBA half"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-22"
+    days_carried: 30
+    original_due: null
+    notes: "29d. Ilene channel active per 5/19."
+
+  - title: "Dr Rookwood revisit via Accu Migration angle"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-04-15"
+    days_carried: 37
+    original_due: "2026-05-21"
+    notes: "36d. Scheduled Thu 5/21 15:00."
+
+  - title: "Visit Dr Tin"
+    source: tasks
+    source_id: "LkMNWVdsAJcM1J4-"
+    business: nestmate
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: null
+    notes: "22d. Verify duplicate vs closed item."
+
+  - title: "Endo Eleni LIC visit"
+    source: notion
+    source_id: "34aa3158-59b4-815c-a262-d581d2b73896"
+    business: nestmate
+    first_carried: "2026-04-22"
+    days_carried: 30
+    original_due: null
+    notes: "29d Notion stale. SP provider audit child."
+
+  - title: "GI ride-along Claude -> Badalov / Yuri P"
+    source: notion
+    source_id: "34aa3158-59b4-81fe-8e66-c90e29c506d8"
+    business: nestmate
+    first_carried: "2026-04-22"
+    days_carried: 30
+    original_due: null
+    notes: "29d."
+
+  - title: "Endo Yonkers prescribes? (Ilene) -- visit pinned"
+    source: tasks
+    source_id: "bUtkLWFyV0JHZjhweTIyZw"
+    business: nestmate
+    first_carried: "2026-04-22"
+    days_carried: 30
+    original_due: null
+    notes: "29d. Status still unclear."
+
+  - title: "Yonkers endos visit -- confirm whether 5/13 15:00 visit happened"
+    source: manual
+    source_id: null
+    business: nestmate
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Still unresolved from 5/13 EOD."
+
+  - title: "Schedule Dr Rookwood Thu 5/21 15:00 + research thread"
+    source: tasks
+    source_id: "QWpnV0NvM1hudEhDZV9yQQ"
+    business: nestmate
+    first_carried: "2026-05-19"
+    days_carried: 3
+    original_due: "2026-05-21"
+    notes: "Calendar event exists; verify + prep."
+
+  # ============================================================
+  # UNITED IPA -- active
+  # ============================================================
+  - title: "Send Thomas email -- exit-of-next-steps with current IPA"
+    source: tasks
+    source_id: "ZWE0NXNnaEhNM001Wi1WMA"
+    business: ipa
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Aaron actively working this."
+
+  - title: "Wayne / Dr Ludy Honore re-engage (Beacon -> United wave)"
+    source: tasks
+    source_id: "ZHBFbEFUX3N4bVkzQmtmYg"
+    business: ipa
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: "2026-04-29"
+    notes: "22d."
+
+  - title: "NY IPA / Healthfirst 5/14 outcome -- still UNRESOLVED"
+    source: tasks
+    source_id: "VzI1TFRROUNlbnB5aGZDcw"
+    business: ipa
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: "2026-05-14"
+    notes: "Carried 8d. Feeds SP consolidation."
+
+  - title: "Kader follow-ups bundle -- backburned until end-of-week meeting"
+    source: notion
+    source_id: "343a3158-59b4-8119-8d9e-f356beabb9ef"
+    business: ipa
+    first_carried: "2026-04-15"
+    days_carried: 37
+    original_due: null
+    notes: "36d. Kader UNTRUSTED per 5/14 sequencing decision."
+
+  - title: "Dr Andy IPA-NY letter prep + sign (Pedalics + Health First)"
+    source: tasks
+    source_id: "d2ZLaDVENUg4N2hMNnd4Sw"
+    business: ipa
+    first_carried: "2026-04-23"
+    days_carried: 29
+    original_due: null
+    notes: "28d. Maybe roll into Sovereign Phoenix consolidation."
+
+  - title: "Visit PRIME Health Jamaica"
+    source: tasks
+    source_id: "h3rbo5n51_32ukbj"
+    business: ipa
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: "2026-04-29"
+    notes: "Fold into PrimeHealth NYC + Guerchon meeting prep."
+
+  - title: "Follow up with Kader re: SYFM (re-eval whether worth pursuing given UNTRUSTED flag)"
+    source: tasks
+    source_id: "OFpHa0ZVQnoxTnhMcUNPag"
+    business: ipa
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: null
+    notes: "22d. Reassess given Kader UNTRUSTED flag."
+
+  # ============================================================
+  # DOCK PRO -- minimal (Cardio Pro Rollout snoozed)
+  # ============================================================
+  - title: "For Abid -- clarify scope"
+    source: tasks
+    source_id: "OHR3emlKWWEwRHVOV2lYag"
+    business: dock_pro
+    first_carried: "2026-04-23"
+    days_carried: 29
+    original_due: null
+    notes: "28d. Pair with 'Call abid' gtask."
+
+  - title: "Call Abid"
+    source: tasks
+    source_id: "UnQ4cUpDdWJ4Z0VrUTJjdg"
+    business: dock_pro
+    first_carried: "2026-05-13"
+    days_carried: 9
+    original_due: null
+    notes: "Verify if 5/14 Abid 10am meeting was this call or separate."
+
+  - title: "Mikhale FL MSO followup + (954) 600-2319"
+    source: tasks
+    source_id: "b2xXcF9rRG5OaXpCY3ZPZg"
+    business: dock_pro
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: null
+    notes: "Pair with Rudy Moise."
+
+  - title: "Dr Rudy Moise MSO FL -- research"
+    source: tasks
+    source_id: "bkZ6d1U5MVZKQy1VZ2hxSw"
+    business: dock_pro
+    first_carried: "2026-04-23"
+    days_carried: 29
+    original_due: null
+    notes: "28d."
+
+  - title: "Docpro ICD suggestions buildout -- followup"
+    source: manual
+    source_id: null
+    business: dock_pro
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: "2026-05-08"
+    notes: "5/8 target passed +13d."
+
+  # ============================================================
+  # OTHER / PERSONAL
+  # ============================================================
+  - title: "Study AI textbook -- emergency this weekend (Aaron flag)"
+    source: tasks
+    source_id: "eXhRS2ZvZU5JcVRoTnN4aQ"
+    business: other
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: "2026-05-11"
+    notes: "Updated 5/20 04:00. Slipped past 5/19 daily target. Pin a concrete block."
+
+  - title: "Sarasota -- pick days (Jun 26 -- Jul 1)"
+    source: tasks
+    source_id: "OXAtSG9DT25QTVd5eW1pYg"
+    business: other
+    first_carried: "2026-04-29"
+    days_carried: 23
+    original_due: null
+    notes: "Travel planning."
+
+  - title: "Review startup playbook online"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-04-30"
+    days_carried: 22
+    original_due: null
+    notes: "21d. Self-development."
+
+  - title: "Get invoice from Richard for GPO + lunch -- pin hard deadline or DROP"
+    source: tasks
+    source_id: "N3c3VFptVWRpUjVjZ1dBYQ"
+    business: other
+    first_carried: "2026-04-08"
+    days_carried: 44
+    original_due: null
+    notes: "43d. STRONG recommend: drop or pin concrete deadline next /end-day."
+
+  - title: "Capture Maven LIVE workshop takeaways (5/12 12:00)"
+    source: manual
+    source_id: null
+    business: other
+    first_carried: "2026-05-12"
+    days_carried: 10
+    original_due: null
+    notes: "5-min braindump -> vault/notes/. 9d later, outcome unknown."
+
+# ============================================================
+# AWAITING -- deadlines reached/passed
+# ============================================================
+awaiting:
+  - title: "GI: Shapsis via Sorkin -- 45/pp proposal"
+    blocked_on: "Sorkin's manager"
+    nudged_at: "2026-04-22"
+    waiting_since: "2026-04-22"
+    awaiting_until: null
+    business: nestmate
+    source: tasks
+    source_id: "WlNKS2w4NG51aVVrdk5yTg"
+    notes: "29d waiting."
+
+  - title: "Piris Health insurances -- Raymond response"
+    blocked_on: "Raymond"
+    nudged_at: "2026-04-22"
+    waiting_since: "2026-04-22"
+    awaiting_until: "2026-04-30"
+    business: dock_pro
+    source: tasks
+    source_id: null
+    notes: "DEADLINE PASSED 4/30 (+21d). Likely parked."
+
+  - title: "Research MSOs Miami -- Ryan's additional contacts"
+    blocked_on: "Ryan"
+    nudged_at: "2026-04-22"
+    waiting_since: "2026-04-22"
+    awaiting_until: "2026-04-30"
+    business: dock_pro
+    source: tasks
+    source_id: "OHl4SW80cXdNT0Y5UU5lbw"
+    notes: "DEADLINE PASSED 4/30 (+21d)."
+
+  - title: "Nestmate EMU -- price match supply list"
+    blocked_on: "Ryan (pricing)"
+    nudged_at: "2026-04-23"
+    waiting_since: "2026-04-20"
+    awaiting_until: "2026-04-28"
+    business: nestmate
+    source: tasks
+    source_id: null
+    notes: "DEADLINE PASSED 4/28 (+23d)."
+
+  - title: "Main Street Radiology -- email response"
+    blocked_on: "Main Street Radiology"
+    nudged_at: "2026-04-23"
+    waiting_since: "2026-04-23"
+    awaiting_until: null
+    business: nestmate
+    source: notion
+    source_id: "348a3158-59b4-81f9-ad1b-e492456c5653"
+    notes: "28d In Progress Notion stale. Aaron 5/19: 'still waiting for update'."
+
+  - title: "Dr Eng Medicaid app -- Adam update tomorrow"
+    blocked_on: "Adam"
+    nudged_at: "2026-05-19"
+    waiting_since: "2026-05-19"
+    awaiting_until: "2026-05-23"
+    business: nestmate
+    source: tasks
+    source_id: "Q1A0a2dudHZlU1AyTVJGeg"
+    notes: "Aaron 5/19: 'awaiting updates from adam'. Deadline 5/21 PASSED. Aaron 5/21 EOD: 'still waiting on updates from Adam'. Extended +2d."
+
+  # [removed 5/28] Dr Rybstein green-light -- Aaron 5/28 braindump: "rybstein out of picute for now will leave note beow". Moved to back_burner.
+  # [removed 5/28] Big Apple varithena -- gtask UnNMMkV3V0pWbDA5V20ydA closed today. Carry cleared.
+
+  - title: "Ryan consolidated pricing -- DME + vaccine + Varithena GPO savings"
+    blocked_on: "Ryan"
+    nudged_at: "2026-05-27"
+    waiting_since: "2026-05-27"
+    awaiting_until: "2026-06-01"
+    business: nestmate
+    source: manual
+    source_id: null
+    notes: "Aaron 5/27 EOD braindump: 'Ryan followup give until monday for concise numbers and additional GPO contract saving for dme, vaccine, and Varithena.' Mon 6/1 deadline."
+
+# ============================================================
+# DORMANT SNOOZE
+# ============================================================
+dormant_snooze:
+  - page_id: "342a3158-59b4-8148-913d-e3357662c2e2"
+    title: "Cardio Pro Rollout"
+    until: "2026-06-30"
+    notes: "Aaron 5/19: 'back burnered until ipa stuff settled'. Snooze until end of June."
+
+# ============================================================
+# BACK BURNER
+# ============================================================
+back_burner:
+  - title: "Dr Rybstein green-light -- LocalMD Sunset Park (Rybstein himself no-go; LocalMD cardio-credentialed wins case anyway)"
+    source: tasks
+    source_id: "NC1kLWs2RERuS090SC1Xdw"
+    business: nestmate
+    moved_at: "2026-05-28"
+    notes: "Aaron 5/28 EOD braindump: 'For Alex Acosta, his dr Alex Rybstein is a no go on collecting cardio scripts but Localmd an existiign client just got credentialed with cardio in a few months will start sending out scipts directly to our pharmacy no issues so case still closed and still a win in our books.' Net result: Rybstein out, but LocalMD cardio scripts coming directly via different path. Case CLOSED as a WIN. Fri 5/29 awaiting deadline + Friday AM text-Alex carry both cleared. Surface again only on Aaron prompt."
+
+  - title: "Kader follow-ups: Dr. Bassak, Saboor Waizon, Shaikh Hassan"
+    source: notion
+    source_id: "343a3158-59b4-8119-8d9e-f356beabb9ef"
+    business: ipa
+    moved_at: "2026-05-26"
+    notes: "Dead-task scan 5/26: In Progress 33d dormant. System flag kader_untrusted_documented -- exclude from any SP-acquisition step. Notion page title prepended with [BACK-BURNER] in /end-day 8f."
+
+  - title: "AFFA bundle (6 Lincoln Lab subtasks)"
+    source: notion
+    source_id: null
+    business: lab
+    moved_at: "2026-05-26"
+    notes: "Aaron 5/26 daily-note: 'Close for now'. Track-only per cowork 5/26 note. The 6 Notion subtasks (Oksana NPI screenshots, Oksana/Ella partnership, MTHFR billing crossref, GDX pediatric, Fragile X, credentialed insurances list) remain open in Notion -- surface only if Oksana pings. Credentialed-insurances list is the one that matters."
+
+  - title: "Sheila"
+    source: tasks
+    source_id: "SWk4SEd4MmJNUUlpYTVyaw"
+    business: nestmate
+    moved_at: "2026-05-11"
+    notes: "Aaron 5/11: 'STILL BACKLOGGED WILL REVISIT AT A LATER DATE'."
+
+  - title: "Good Health Psych -- re-attempt outreach"
+    source: notion
+    source_id: null
+    business: nestmate
+    moved_at: "2026-05-11"
+    notes: "Aaron 5/11: 'BACKDATE'."
+
+  - title: "Monsey Health -- pin concrete next step or park"
+    source: tasks
+    source_id: null
+    business: nestmate
+    moved_at: "2026-05-11"
+    notes: "Aaron 5/11: 'BACKDATE AS OF NOW'."
+
+  - title: "Roman <-> CardioPro team meeting"
+    source: tasks
+    source_id: "3epOO2gm3-XUfIIj"
+    business: dock_pro
+    moved_at: "2026-04-30"
+    notes: "Aaron 4/30: 'postpone till june'. Surface again in June."
+
+# ============================================================
+# DROPPED THIS CYCLE (5/28 EOD)
+# ============================================================
+dropped_20260528:
+  - "Acousta SP gtask aXpNeXlyMjdUYUlZWjVfcA -- DONE 5/28 by Aaron's nightly batch."
+  - "Nazmul Khan SAIPA gtask ZkQyWWVJZEpyS0FXQUZ2Tw -- DONE 5/28."
+  - "UIPA panel-loss gtask S0ZsNld0dW1OTUQ4MjRrdA -- DONE 5/28 (paired with tonight's UIPA meeting)."
+  - "Big Apple varithena gtask UnNMMkV3V0pWbDA5V20ydA -- DONE 5/28."
+  - "D'Angelo samples gtask ZXNIQzRIQ2J1WktURER6cQ -- DONE 5/28."
+  - "Buy melatonin gtask OE1qblRUbkI1UWxuWFE2QQ -- DONE 5/28."
+  - "Collect checks remaining gtask Zm42VmhpS0MteWtnbFlzXw -- DONE 5/28 (5/20-era carry finally cleared)."
+  - "Suleman SAIPA gtask am5KSVNPN1JEcDV0Z01hSw -- DONE 5/28 (5/20-era; Ahmed handed off)."
+  - "Maven URL gtask UnB3bHppSGNCQWRwc2F1dg -- DONE 5/28."
+  - "Ossining housecalls (manual gtask aXFhSmgyTGVKLV9LLVIwXw) -- DONE 5/28."
+  - "For Abid -- clarify scope gtask OHR3emlKWWEwRHVOV2lYag -- PUSHED via /end-day 8e (28d carry cleared)."
+  - "Rybstein from awaiting -- moved to back_burner per Aaron 5/28 braindump: 'out of picute for now will leave note beow'."
+  - "Friday AM text-Alex Rybstein carry -- dropped with Rybstein."
+
+# ============================================================
+# DROPPED THIS CYCLE (5/27 EOD)
+# ============================================================
+dropped_20260527:
+  - "Abid 5-min video demo (gtask VTlrUXdqS3RGdk1DWjQzNg) -- DONE 5/27, gtask closed via /end-day push."
+  - "Capture Telcor decision (5/26 9am block) -- Aaron marked [x] manually in 5/27 daily note. Activity Log entry still owed (no source ID; logged in 5/27 EOD log)."
+  - "Followup w/ Leo (wholesome biller) + Amju -- Aaron marked [x] manually in 5/27 daily note (no source ID)."
+  - "CDTM ask of Guerchon (gtask Y0JoUVp0b21lNUlXWjFQTw) -- Aaron 5/27 annotation 'done and sent.' Closes 10d carry chain."
+  - "Schedule EOD Thu 3-4pm Abid+Gary -- DONE 5/27 17:11 (calendar event Lincoln/docpro 5/28 15:00 Union NJ)."
+
+# ============================================================
+# DROPPED PREV CYCLE (5/26 EOD)
+# ============================================================
+dropped_20260526:
+  - "Call irina accu (gtask eHNuSjhWZFZJMHlSZWhjWA) -- Aaron 5/26 annotation: 'uncesessary'. Closed via /end-day push."
+
+# ============================================================
+# DROPPED PREV CYCLE (5/21 EOD)
+# ============================================================
+dropped_20260521:
+  - "Acousta 5/22 14:00 calendar event -- DELETED (postponed next week, busy seeing patients). Re-added as manual carry-forward to reschedule."
+  - "Remzy CRM move 5/22 10:30 calendar event -- DELETED (direct conflict with SI visit). Re-added as manual carry-forward."
+  - "Top 3 #3 (Essen call 1:30) -- partial (call happened, no outcome logged). Capture task added to carry-forward."
+
+# ============================================================
+# DROPPED PREV CYCLE (5/20 EOD)
+# ============================================================
+dropped_20260520:
+  - "Visit Dr D'Angelo 11:30 -- DONE 5/20 (Practice Fusion live, Sandra ready). Activity Log entry created."
+  - "Wed 5/20: Telcor AI billing call + Gary biller proposal review -- call happened; decision DEFERRED. Tracker rolled forward as new carry."
+  - "Wed 5/20: Review Gary biller proposal in advance (Morshed dependency) -- read for 5/20 call."
+  - "Nephro Big Apple prescribes? -- DONE 5/20 (they don't). Notion -> Done. Activity Log entry created."
+  - "Rheum audit -- DONE 5/20 (no rheumatologists in lab annotated). Notion -> Done."
+  - "Provider Adrianova/Goldberg/Ali stale follow-ups -- subsumed into new IPA panel-loss gtask 5/20."
+
+# ============================================================
+# SYSTEM NOTES
+# ============================================================
+system_flags:
+  - flag: "main_street_radiology_weekly_cadence"
+    captured: "2026-05-26"
+    note: "Dead-task scan 5/26 disposition: keep in carry, add weekly cadence note (Aaron annotation 'consistent weekly followup needed'). Notion page 33d dormant. Surface in /start-day every Monday until status changes."
+
+  - flag: "sovereign_phoenix_3mo_countdown"
+    captured: "2026-05-14"
+    target_resolution: "2026-08-14"
+    days_remaining: 84
+    note: "85d to 2026-08-14. Surface every /start-day until takeover complete."
+
+  - flag: "kader_untrusted_documented"
+    captured: "2026-05-14"
+    note: "Any SP-acquisition step must exclude Kader."
+
+  - flag: "sp_pitch_framework_promoted"
+    captured: "2026-05-14"
+    note: "Reusable pitch IP at vault/notes/2026-05-14-sp-pitch-framework.md."
+
+  - flag: "notion_silence_broken_5_20"
+    captured: "2026-05-20"
+    note: "2-day Notion silence broken via 3 Activity Log Decision creates + 2 Master Task Done flips. Pattern: 2nd consecutive day of zero business-hours Notion writes -- /sync-sweep + braindump-extractor would fix."
+
+  - flag: "notion_silence_resumes_5_21"
+    captured: "2026-05-21"
+    note: "5/20 break was a 1-day flash. 5/21: 0 Activity Log entries, 0 Provider CRM updates, 0 Master Task status moves during business hours (the 2 'edited today' rows are 00:42/00:43 late-night 5/20 closes). All 5/21 field outcomes (Richard, Lynn, Essen, GI calls) live ONLY in daily-note braindump. /sync-sweep this run should route them."
+
+  - flag: "calendar_action_skip_pattern_5_21"
+    captured: "2026-05-21"
+    note: "5/20 watch-flag 'first calendar action skip in 2 weeks' (Goyal) escalates: 5/21 had TWO skipped calendar actions (3pm Rookwood + 10am Nestmate/Docpro weekly). Promote watch-flag to pattern. Possible root cause: heavy field day with cascading time slips."
+
+  - flag: "top3_scoring_vs_actual_output_mismatch"
+    captured: "2026-05-12"
+    extended: "2026-05-20"
+    note: "5/20: tracked 0/3 -> real 2.5/3 delta +2.5 (biggest in week). Goyal skipped. Telcor deferred. D'Angelo Practice Fusion go-live + Big Apple no-prescribe captured at EOD only."
+
+  - flag: "calendar_action_skip_first_in_2_weeks"
+    captured: "2026-05-20"
+    note: "Dr Goyal 15:00 visit skipped 5/20 -- first calendar action skip in ~2 weeks. Watch for repeat pattern on 5/21."
+
+  - flag: "daily_note_checkbox_bypass_pattern"
+    captured: "2026-05-13"
+    extended: "2026-05-20"
+    note: "5/20 had 2 [x] ticks (Big Apple Nephro + Rheum audit) -- both resolved via title match (no source-ID comments on these). Goyal '[ ] was not done' annotation handled correctly as carry-forward."
+
+  - flag: "automode_trust_gate_friction"
+    captured: "2026-05-14"
+    extended: "2026-05-20"
+    note: "5/20 EOD run: classifier blocked Notion writes after Aaron's terse 'defer it for now' (meant for Telcor only). Required plain-text reauth to proceed. Matches feedback_automode_trust_gate.md."
+
+  - flag: "specialty_pharmacy_main_focus"
+    captured: "2026-05-19"
+    extended: "2026-05-20"
+    note: "Acousta promoted to TOP PRIORITY 5/20. Pipeline now: Acousta (easiest flip), Inna Gordin, Eleni LIC, Laus, Shapsis (awaiting Sorkin). Big Apple Nephro DROPPED (no prescribe). Hui Tzu Chou onboarding new."
+
+  - flag: "essen_workstream_status"
+    captured: "2026-05-19"
+    extended: "2026-05-20"
+    note: "Dashboard ECW-gated. Stevens API docs still in flight. Faxes flowing."
+
+  - flag: "dangelo_practice_fusion_live"
+    captured: "2026-05-20"
+    note: "D'Angelo went live with Practice Fusion 5/20. Sandra ready. Expect first samples ~5/27. Touch base end of week."
+
+last_updated: "2026-05-28"

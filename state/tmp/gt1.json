@@ -1,0 +1,14 @@
+Using keyring backend: keyring
+{
+  "etag": "\"CfH3icf7Ae8\"",
+  "id": "SS1zUHdhbEdpZk41MEN2Tg",
+  "kind": "tasks#task",
+  "links": [],
+  "notes": "Lab subtask. Parent: https://www.notion.so/352a315859b481a68890cb65825bca28 — Notion task 352a3158-59b4-81fe-907a-da7359b04e5a",
+  "position": "00000000000000000000",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow/tasks/SS1zUHdhbEdpZk41MEN2Tg",
+  "status": "needsAction",
+  "title": "AFFA: Provide credentialed insurances list + which to avoid sending",
+  "updated": "2026-04-30T17:54:22.684Z",
+  "webViewLink": "https://tasks.google.com/task/I-sPwalGifN50CvN?sa=6"
+}

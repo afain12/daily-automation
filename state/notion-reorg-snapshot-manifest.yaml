@@ -1,0 +1,80 @@
+# Notion Reorg Snapshot Manifest
+#
+# Rollback index for Phases 1-4 of the Notion workspace reorganization.
+# Each file in this manifest is a baseline state captured before any mutation.
+# Hashes (SHA-256) detect tampering.
+#
+# Rollback strategy uses these files for assertion (verify post-rollback counts
+# match baseline). Actual page-level restoration relies on:
+#   - Notion's 30-day version history per page (manual UI rollback)
+#   - action_ids stamped in .context/applied/<aid>.json (the list of pages touched)
+#   - Notion Trash 30-day undo for archived DBs
+#
+# For high-risk PATCH batches (Phase 2 Workspace migration), additional
+# per-batch row snapshots will be written to .context/applied/notion-reorg-phase-N-*-pre-migrate.json
+# with FULL row data, not just metadata.
+
+generated_at: "2026-05-29"
+schema_version: 1
+
+snapshots:
+  - phase: "0.2"
+    db_name: "Orphan Provider CRM (phantom duplicate)"
+    database_id: "35542c16-f36a-4246-83af-6b71dfa6c7de"
+    data_source: "collection://062feecb-7cea-4522-9283-64ba07f0c109"
+    file: ".context/applied/notion-reorg-phase-0-orphan-crm-pre.json"
+    sha256: "dae78549d75f793337e47292751fb868fd457e8f8f5cd5162e1da7bbcca95faf"
+    row_count: 0
+    notes: "Empty. Phase 3 row migration unnecessary."
+
+  - phase: "0.3"
+    db_name: "Activity Log"
+    database_id: "ec64cb70-bf24-43cd-b9e5-eef117e53062"
+    data_source: "collection://3db174bf-c997-4a41-93ee-36f280e511db"
+    file: ".context/applied/notion-reorg-phase-0-activity-log-pre.json"
+    sha256: "f7695ad0a998c596788426c2c59c741ad2eddcbd96215da36229d9b38c485e6e"
+    row_count: 27
+    notes: "7 rows tagged Link & Reference Laboratory (Phase 2 migration target)."
+
+  - phase: "0.4"
+    db_name: "Master Tasks"
+    database_id: "ece9b123-5e67-4172-b9a0-8f558c53ccfa"
+    data_source: "collection://528d24b8-e1e6-4ca0-a7ee-87f70a4f7980"
+    file: ".context/applied/notion-reorg-phase-0-master-tasks-pre.json"
+    sha256: "26e1518a07f4d0f96769715cebf217eb79dd5bdc57116d4ab37126e537c94111"
+    row_count: 41
+    notes: "11 rows tagged Link & Reference Laboratory (Phase 2 migration target)."
+
+  - phase: "0.5"
+    db_name: "Provider CRM (real)"
+    database_id: "df3a3158-59b4-8363-937f-017bbe2ca1c0"
+    data_source: "collection://ae0a3158-59b4-8235-b7ca-0758daa2322a"
+    file: ".context/applied/notion-reorg-phase-0-provider-crm-pre.json"
+    sha256: "931cd69c65338d1c13e861daae8bcf2fd650112eb55cfdab71d611596302d855"
+    row_count: 9
+    notes: "Zero rows tagged Lincoln Lab variants. Phase 2.6 still adds Other option (additive only)."
+
+  - phase: "0.6"
+    db_name: "Meeting Notes"
+    database_id: "1dea3158-59b4-8036-ad33-f5ef7515666e"
+    data_source: "collection://22ba3158-59b4-804d-9c1c-000b9fad40ae"
+    file: ".context/applied/notion-reorg-phase-0-meeting-notes-pre.json"
+    sha256: "98c16624adb6ec23f609c2393993353dafc2d63c390d37f85f71735e4f654d87"
+    row_count: 6
+    notes: "All 6 rows have null Workspace AND null Category. Phase 1.2 Category drop trivially safe."
+
+  - phase: "0.7"
+    db_name: "Speciality Pharmacy Account Tracking"
+    database_id: "32ca3158-59b4-8055-a8f7-c3fc008baf61"
+    data_source: "collection://32ca3158-59b4-81d0-9877-000b8bcd5639"
+    file: ".context/applied/notion-reorg-phase-0-sp-tracking-pre.json"
+    sha256: "a2d020d59967b11b284e6d2f77bfa1ba7211c89f8c53df757ecb7fd31b3c2546"
+    row_count: 13
+    notes: "Active SP program DB. Parented under Nestmate teamspace. No Workspace field on this DB - schema mismatched to actual use, rebuild deferred."
+
+# Phase 0 totals
+totals:
+  databases_snapshotted: 6
+  total_rows_baseline: 96
+  expected_phase_2_workspace_patches: 18  # 7 Activity Log + 11 Master Tasks (both Link & Reference Laboratory)
+  expected_phase_3_provider_relation_patches: 0  # orphan CRM empty, Activity Log Provider column observed empty
