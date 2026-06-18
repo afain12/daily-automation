@@ -1182,11 +1182,13 @@ sources_skipped: [{list of sources that failed or were unavailable}]
 
 {full briefing content from Step 7}
 
-## Top 3 Outcomes
 {The 3 outputs rendered via `scripts/output_planning.py :: render_log_top3(outputs)`,
-pasted verbatim. This heading is REQUIRED and exact: contract #2 — /end-day reads
-`## Top 3 Outcomes` from THIS log file (not the daily note). The daily note's
-headline is "Today — Ship These 3"; the LOG keeps "Top 3 Outcomes". Never swap them.}
+pasted verbatim. render_log_top3 EMITS its own `## Top 3 Outcomes` heading — do NOT
+write that heading separately above (a literal heading here + the renderer's heading
+yields back-to-back `## Top 3 Outcomes`, so /end-day reads an empty first section and
+reports 0 outcomes). This heading is REQUIRED and exact: contract #2 — /end-day reads
+`## Top 3 Outcomes` from THIS log file (not the daily note). The daily note's headline
+is "Today — Ship These 3"; the LOG keeps "Top 3 Outcomes". Never swap them.}
 ```
 
 If the log file already exists (re-run), append a new timestamped section
