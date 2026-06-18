@@ -157,6 +157,23 @@ class EdgeCaseGuardTests(unittest.TestCase):
         self.assertTrue(op.render_output_plan_markdown([]).startswith("## Today — Ship These 3"))
 
 
+class HeaderFlattenTests(unittest.TestCase):
+    def test_newline_in_pulse_or_daytype_creates_no_phantom_checkbox(self):
+        # codex [P2]: portfolio_pulse/day_type are free-form; a newline + checkbox
+        # must not create a column-0 syncable line before the real outputs.
+        md = op.render_output_plan_markdown(
+            _sample_outputs(),
+            portfolio_pulse="IPA tight\n- [ ] phantom <!-- gtask:evilp -->",
+            day_type="field\n- [ ] phantom2 <!-- notion:evild -->",
+        )
+        import end_day_orchestrator as edo
+        actions = edo.extract_checked_source_actions(md.replace("- [ ] ", "- [x] "))
+        ids = sorted(a.get("source_id") for a in actions if a.get("source_id"))
+        self.assertNotIn("evilp", ids)
+        self.assertNotIn("evild", ids)
+        self.assertEqual(ids, ["343a3158", "abc123"])  # only the real source markers
+
+
 class DoneWhenGuardTests(unittest.TestCase):
     """Refinement #3: render REFUSES outputs without a real done-state."""
 

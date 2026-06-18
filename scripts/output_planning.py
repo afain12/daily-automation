@@ -185,6 +185,11 @@ def render_output_plan_markdown(
                 f"(e.g. 'proposal sent + decision captured'), not an activity."
             )
 
+    # Flatten the free-form header inputs too (same phantom-checkbox risk as the
+    # meta fields): a newline + `- [ ] ... <!-- gtask:.. -->` in pulse/day_type would
+    # otherwise create a column-0 syncable checkbox before the real outputs.
+    portfolio_pulse = portfolio_pulse.replace("\n", " ")
+    day_type = day_type.replace("\n", " ")
     lines: List[str] = ["## Today — Ship These 3", ""]
     if portfolio_pulse:
         lines.append(f"_Portfolio Pulse:_ {portfolio_pulse}")

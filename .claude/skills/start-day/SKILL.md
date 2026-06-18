@@ -685,14 +685,18 @@ Unchanged deterministic mechanism (no Claude judgment). `STREAM_KEYS` is the lis
 `streams[].key` values read from `config/streams.yaml` in declaration order. `N = 7`.
 
 ```
+# filtered_items = the day-type-filtered candidate pool from Stage 3 (e.g. on a
+# `field` day, deep-work items are already removed). Starvation MUST draw from this
+# pool, NOT raw all_items, or the override could reinsert exactly the kind of output
+# the day-type rule just dropped.
 1. raw_top3 = first 3 outputs after the leverage-class ranking (Stage 2, day-type-filtered)
 2. raw_top3_streams = set of stream keys in raw_top3
 3. for each stream key S in STREAM_KEYS:
-     oldest_stale[S] = max(item.days_stale for item in all_items where item.stream == S and item.days_stale >= 7)
+     oldest_stale[S] = max(item.days_stale for item in filtered_items where item.stream == S and item.days_stale >= 7)
 4. starved = streams where oldest_stale[S] is defined AND S not in raw_top3_streams
 5. if starved is non-empty:
      pick S_starved = argmax(oldest_stale[S] for S in starved)   # most-starved wins
-     candidate = highest-leverage item in all_items where stream == S_starved
+     candidate = highest-leverage item in filtered_items where stream == S_starved
      final_top3 = [raw_top3[0], raw_top3[1], candidate]          # replace slot #3 only
    else:
      final_top3 = raw_top3
