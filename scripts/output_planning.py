@@ -200,7 +200,7 @@ def render_output_plan_markdown(
         # Compact context lines are indented and marker-free (display only).
         # done_when on the INDENTED display line, never on the column-0 checkbox
         # (contract #1). The guard above guarantees done_when is non-empty here.
-        meta = f"  {output.owner} · done when: {output.done_when}"
+        meta = f"  {output.owner} · {output.status} · done when: {output.done_when}"
         lines.append(meta)
     return "\n".join(lines).rstrip() + "\n"
 
