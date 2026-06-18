@@ -134,6 +134,7 @@ def group_outputs(
                     owner=item.owner,
                     source_refs=[ref],
                     status=item.status,
+                    done_when=item.done_when,  # carry done-state so the split child still renders
                 )
             )
     return grouped

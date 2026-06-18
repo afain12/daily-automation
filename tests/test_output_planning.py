@@ -56,6 +56,21 @@ class GroupingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             op.group_outputs(_sample_outputs(), max_children=0)
 
+    def test_split_preserves_done_when_and_still_renders(self):
+        # Regression (codex [P2]): split children must carry done_when, else the
+        # render guard raises and aborts the whole morning render.
+        agg = op.DailyOutput(
+            title="Two anchors fused",
+            owner="Nestmate",
+            done_when="Both providers credentialed + confirmations logged",
+            source_refs=[op.SourceRef("gtask", "a1"), op.SourceRef("notion", "n2")],
+        )
+        grouped = op.group_outputs([agg])
+        self.assertTrue(all(g.done_when == agg.done_when for g in grouped))
+        # must NOT raise — the guard is satisfied because done_when survived the split
+        md = op.render_output_plan_markdown(grouped)
+        self.assertEqual(md.count("<!--"), 2)
+
 
 class MarkerPlacementTests(unittest.TestCase):
     def test_markers_land_on_non_indented_checkbox_lines(self):

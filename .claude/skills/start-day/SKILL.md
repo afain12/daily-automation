@@ -1046,8 +1046,14 @@ tags: [daily, briefing]
 
 # Daily Briefing — {TODAY} ({day of week})
 
-## Calendar
-{events}
+## Portfolio Pulse
+{Paste from Step 7 — one decision-driving line per business: the SPECIFIC binding
+constraint today + the capital-allocation %. This leads the working note (the daily
+note is what Aaron acts from on his phone, so the High Output model lands here too).}
+
+## Kill / Defer / Delegate
+{Paste from Step 7 — what is NOT worked today (Kill / Defer / Delegate buckets),
+decided BEFORE the 3 outputs. "Nothing to cut today." if empty.}
 
 {The 3 outputs — paste the verbatim output of
 `scripts/output_planning.py :: render_output_plan_markdown(...)`, which emits its own
@@ -1057,6 +1063,15 @@ column-0 source marker; the done-state goes on the indented marker-free display 
 The daily-note headline stays "Today — Ship These 3" — never rename it to "Top 3
 Outcomes" here; that exact heading belongs only to the LOG file (see "Save to logs"
 below, contract #2).}
+
+## Meetings That Must Convert
+{Paste from Step 7 — today's meetings and the decision / owner / next-action each must
+produce. Omit if none today.}
+
+---
+
+## Calendar
+{events}
 
 ---
 
