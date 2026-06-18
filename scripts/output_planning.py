@@ -24,7 +24,18 @@ real_vs_tracked_delta and earliest_start_hint are intentionally OUT of scope
 from __future__ import annotations
 
 import dataclasses
+import re
 from typing import List, Optional
+
+# A `done_when` is "lazy" (rejected) if it is empty or, case-insensitive and
+# anchored at the START, begins with one of these continuation verbs. These name
+# an activity ("work on Healthix"), not a shippable done-state ("Healthix proposal
+# sent + decision captured"). The render guard refuses them so the SELECTION layer
+# is forced to supply a real done-state, not a reordered task dump.
+_LAZY_DONE_WHEN = re.compile(
+    r"^\s*(work on|make progress on|follow up on|continue|keep working on)\b",
+    re.IGNORECASE,
+)
 
 # Marker systems that end_day_orchestrator.extract_checked_source_actions reads.
 # `cal` and other systems render WITHOUT a sync marker (display-only) so they are
@@ -73,6 +84,11 @@ class DailyOutput:
     owner: str
     source_refs: List[SourceRef] = dataclasses.field(default_factory=list)
     status: str = "Not started"
+    # The shippable done-state for this output. Required at render time: an empty
+    # or "lazy" (work on / follow up on / continue ...) value makes
+    # render_output_plan_markdown raise. Defaulted to "" so the dataclass stays
+    # valid for partially-built fixtures, but the renderer is the enforcement point.
+    done_when: str = ""
 
 
 @dataclasses.dataclass
@@ -158,6 +174,16 @@ def render_output_plan_markdown(
     owner, status) goes on separate display lines that carry no marker, so the
     end-day parser never sees them as syncable.
     """
+    # Guard: every rendered output MUST carry a real done-state. This forces the
+    # selection layer to commit to a shippable result, not a reordered task dump.
+    for output in outputs[:3]:
+        if not output.done_when.strip() or _LAZY_DONE_WHEN.match(output.done_when):
+            raise ValueError(
+                f"output {output.title!r} has a lazy or empty done_when "
+                f"({output.done_when!r}); supply a shippable done-state "
+                f"(e.g. 'proposal sent + decision captured'), not an activity."
+            )
+
     lines: List[str] = ["## Today — Ship These 3", ""]
     if portfolio_pulse:
         lines.append(f"_Portfolio Pulse:_ {portfolio_pulse}")
@@ -172,7 +198,9 @@ def render_output_plan_markdown(
         # One column-0 checkbox per source ref; one marker per line.
         lines.extend(_output_checkbox_lines(output))
         # Compact context lines are indented and marker-free (display only).
-        meta = f"  {output.owner} · {output.status}"
+        # done_when on the INDENTED display line, never on the column-0 checkbox
+        # (contract #1). The guard above guarantees done_when is non-empty here.
+        meta = f"  {output.owner} · done when: {output.done_when}"
         lines.append(meta)
     return "\n".join(lines).rstrip() + "\n"
 

@@ -15,18 +15,21 @@ def _sample_outputs():
             owner="Nestmate",
             source_refs=[op.SourceRef("gtask", "abc123")],
             status="Not started",
+            done_when="Healthix proposal sent + proceed/reschedule/drop decision captured",
         ),
         op.DailyOutput(
             title="MDland negotiation",
             owner="United IPA",
             source_refs=[op.SourceRef("notion", "343a3158")],
             status="In progress",
+            done_when="MDland counter-offer sent and verbal agreement on rate",
         ),
         op.DailyOutput(
             title="Buy RDDT",
             owner="Other / Personal",
             source_refs=[op.SourceRef("derived")],
             status="Not started",
+            done_when="RDDT limit order placed and confirmed filled",
         ),
     ]
 
@@ -116,6 +119,7 @@ class EdgeCaseGuardTests(unittest.TestCase):
             title="Call clinic\nabout panel",
             owner="Nestmate",
             source_refs=[op.SourceRef("gtask", "xyz789")],
+            done_when="clinic confirmed panel order placed",
         )
         md = op.render_output_plan_markdown([out])
         marker_lines = [ln for ln in md.splitlines() if "<!--" in ln]
@@ -136,6 +140,87 @@ class EdgeCaseGuardTests(unittest.TestCase):
         # Degraded morning run (no sources): heading survives, no items, no crash.
         self.assertTrue(op.render_log_top3([]).startswith("## Top 3 Outcomes\n"))
         self.assertTrue(op.render_output_plan_markdown([]).startswith("## Today — Ship These 3"))
+
+
+class DoneWhenGuardTests(unittest.TestCase):
+    """Refinement #3: render REFUSES outputs without a real done-state."""
+
+    def _output(self, done_when):
+        return op.DailyOutput(
+            title="Healthix",
+            owner="Nestmate",
+            source_refs=[op.SourceRef("gtask", "abc123")],
+            done_when=done_when,
+        )
+
+    def test_guard_raises_on_empty_done_when(self):
+        with self.assertRaises(ValueError) as ctx:
+            op.render_output_plan_markdown([self._output("")])
+        # The offending output title is named in the error.
+        self.assertIn("Healthix", str(ctx.exception))
+
+    def test_guard_raises_on_whitespace_only_done_when(self):
+        with self.assertRaises(ValueError):
+            op.render_output_plan_markdown([self._output("   ")])
+
+    def test_guard_raises_on_lazy_done_when(self):
+        with self.assertRaises(ValueError) as ctx:
+            op.render_output_plan_markdown([self._output("work on Healthix")])
+        self.assertIn("Healthix", str(ctx.exception))
+
+    def test_guard_raises_on_each_lazy_pattern(self):
+        for lazy in (
+            "work on Healthix",
+            "make progress on the IPA deal",
+            "follow up on MDland",
+            "continue the rollout",
+            "keep working on credentialing",
+            "WORK ON Healthix",  # case-insensitive, anchored at start
+        ):
+            with self.assertRaises(ValueError, msg=f"should reject: {lazy!r}"):
+                op.render_output_plan_markdown([self._output(lazy)])
+
+    def test_guard_passes_on_real_done_when(self):
+        md = op.render_output_plan_markdown(
+            [self._output("Healthix proposal sent + decision captured")]
+        )
+        self.assertIn("## Today — Ship These 3", md)
+
+    def test_lazy_pattern_mid_string_is_allowed(self):
+        # Anchored at start: "work on" only rejected as a leading verb phrase.
+        md = op.render_output_plan_markdown(
+            [self._output("Deck that we will work on together is finalized")]
+        )
+        self.assertIn("## Today — Ship These 3", md)
+
+    def test_done_state_text_appears_on_non_marker_line(self):
+        done = "Healthix proposal sent + proceed/reschedule/drop decision captured"
+        md = op.render_output_plan_markdown([self._output(done)])
+        done_lines = [ln for ln in md.splitlines() if done in ln]
+        self.assertEqual(len(done_lines), 1, "done_when should render exactly once")
+        line = done_lines[0]
+        # It renders on an indented, marker-free display line (contract #1).
+        self.assertIn("done when:", line)
+        self.assertNotIn("<!--", line)
+        self.assertNotEqual(line, line.lstrip(), "done_when line must be indented")
+        self.assertFalse(line.lstrip().startswith("- [ ]"))
+
+
+class BidirectionalHeadingTests(unittest.TestCase):
+    """Refinement #8: the two renderers must NOT cross-emit each other's heading.
+
+    Catches the rename trap: the daily-note headline ('Ship These 3') must never
+    leak into the LOG (contract #2 needs the LOG to keep '## Top 3 Outcomes'),
+    and the LOG heading must never leak into the daily-note section.
+    """
+
+    def test_log_top3_does_not_contain_ship_these_3(self):
+        log = op.render_log_top3(_sample_outputs())
+        self.assertNotIn("Ship These 3", log)
+
+    def test_output_plan_does_not_contain_top_3_outcomes(self):
+        md = op.render_output_plan_markdown(_sample_outputs())
+        self.assertNotIn("Top 3 Outcomes", md)
 
 
 if __name__ == "__main__":

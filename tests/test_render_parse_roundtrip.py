@@ -66,16 +66,19 @@ class RenderParseRoundtripTests(unittest.TestCase):
                 title="Reach out to Healthix",
                 owner="Nestmate",
                 source_refs=[op.SourceRef("gtask", "abc123")],
+                done_when="Healthix proposal sent + decision captured",
             ),
             op.DailyOutput(
                 title="MDland negotiation",
                 owner="United IPA",
                 source_refs=[op.SourceRef("notion", "343a3158")],
+                done_when="MDland rate agreed verbally",
             ),
             op.DailyOutput(
                 title="Buy RDDT",
                 owner="Other / Personal",
                 source_refs=[op.SourceRef("derived")],
+                done_when="RDDT order filled",
             ),
         ]
         section = op.render_output_plan_markdown(outputs)
@@ -101,6 +104,7 @@ class ContractEnforcementTests(unittest.TestCase):
             title="Two-system task",
             owner="Nestmate",
             source_refs=[op.SourceRef("gtask", "g111"), op.SourceRef("notion", "n222")],
+            done_when="both systems updated and reconciled",
         )
         section = op.render_output_plan_markdown([out])
         marker_lines = [ln for ln in section.splitlines() if "<!--" in ln]
