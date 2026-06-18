@@ -238,5 +238,29 @@ class BidirectionalHeadingTests(unittest.TestCase):
         self.assertNotIn("Top 3 Outcomes", md)
 
 
+class MetaFlattenTests(unittest.TestCase):
+    def test_newline_in_done_when_creates_no_phantom_checkbox(self):
+        # codex [P2]: a newline-carrying done_when must not produce a 2nd col-0 marker line.
+        out = op.DailyOutput(
+            title="Send proposal",
+            owner="Nestmate",
+            done_when="sent\n- [ ] phantom <!-- gtask:evil -->",
+            source_refs=[op.SourceRef("gtask", "real1")],
+        )
+        md = op.render_output_plan_markdown([out])
+        # Contract #1 is about COLUMN-0 checkbox lines: there must be exactly one,
+        # the real one. The flattened done_when keeps any marker text on the indented
+        # meta line, which the parser never reads.
+        col0_marker_checkboxes = [
+            ln for ln in md.splitlines() if ln.startswith("- [ ] ") and "<!--" in ln
+        ]
+        self.assertEqual(len(col0_marker_checkboxes), 1)
+        self.assertIn("real1", col0_marker_checkboxes[0])
+        # the real end-day parser sees exactly one syncable action (no phantom).
+        import end_day_orchestrator as edo
+        actions = edo.extract_checked_source_actions(md.replace("- [ ] ", "- [x] "))
+        self.assertEqual([a.get("source_id") for a in actions], ["real1"])
+
+
 if __name__ == "__main__":
     unittest.main()

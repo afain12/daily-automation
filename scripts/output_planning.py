@@ -199,9 +199,14 @@ def render_output_plan_markdown(
         # One column-0 checkbox per source ref; one marker per line.
         lines.extend(_output_checkbox_lines(output))
         # Compact context lines are indented and marker-free (display only).
-        # done_when on the INDENTED display line, never on the column-0 checkbox
-        # (contract #1). The guard above guarantees done_when is non-empty here.
-        meta = f"  {output.owner} · {output.status} · done when: {output.done_when}"
+        # ponytail: flatten newlines in EVERY interpolated field — a `\n` in any of
+        # them would start a column-0 continuation line, and if it carried a marker
+        # (e.g. done_when = "sent\n- [ ] x <!-- gtask:y -->") that phantom checkbox
+        # would be synced by end-day. The guard above guarantees done_when is non-empty.
+        owner = output.owner.replace("\n", " ")
+        status = output.status.replace("\n", " ")
+        done_when = output.done_when.replace("\n", " ")
+        meta = f"  {owner} · {status} · done when: {done_when}"
         lines.append(meta)
     return "\n".join(lines).rstrip() + "\n"
 
