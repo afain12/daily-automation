@@ -13,10 +13,11 @@ lead with where the leverage is, commit to 3 outputs, count delegation as output
 1. Header — date, day, `Mode:`.
 2. **## Portfolio Pulse** — one line per business: which is the binding constraint today + why.
    The single highest-leverage framing; it decides what the 3 outputs should be.
-3. **## Today — Ship These 3** — the 3 outputs (render via `output_planning.render_output_plan_markdown`).
+3. **## Kill / Defer / Delegate** — daily triage of stale / low-leverage items (the "what NOT to do
+   today") — comes BEFORE the outputs (decide what you're not doing before committing capacity). See synthesis #2.
+4. **## Today — Ship These 3** — the 3 outputs (render via `output_planning.render_output_plan_markdown`).
    Phone-first compact bullets, markers on column-0 checkboxes. THE headline.
-4. **## Meetings That Must Convert** — today's meetings that must produce a decision / owner / next action.
-5. **## Kill / Defer / Delegate** — daily triage of stale / low-leverage items (the "what NOT to do today").
+5. **## Meetings That Must Convert** — today's meetings that must produce a decision / owner / next action.
 6. Operational alerts (catch-up sync, memory↔calendar gaps, pending writes) — KEEP, compacted, below the fold.
 7. Demoted supporting detail: Calendar, **Actionable Items by Stream** (now a reference backlog, NOT the headline),
    Meeting Recaps, Notion Changes, Provider Follow-ups, Suppressed audit. All retained, just demoted.

@@ -291,8 +291,8 @@ this step makes them load-bearing.
   page whose `id` is in `SUPPRESSED_IDS`. Same for Provider CRM.
 - **Step 5 (Google Tasks)**: filter out any task whose `id` is in
   `SUPPRESSED_IDS`.
-- **Step 6 (Top 3 scoring)**: suppressed items are excluded from the score
-  pool entirely. They never become Top 3 candidates.
+- **Step 6 (3-output selection)**: suppressed items are excluded from the
+  leverage pool entirely. They never become candidate outputs.
 - **Step 7 (briefing)**: render a footer **"🔇 Suppressed N items
   (deprioritized/back-burner/snoozed)"** with a one-line-per-bucket
   summary so the audit trail stays visible. Format:
@@ -771,10 +771,11 @@ stale / low-leverage candidates that did NOT make the 3. Three buckets:}
 - **Delegate:** {item} → **{named delegatee from state/profile.yaml}** — {the next step they can do without Aaron}
 {If a bucket is empty, omit that bullet. If nothing to triage: "Nothing to cut today."}
 
-## Today — Ship These 3
 {The 3 outputs from Step 6 Stage 5. Render via
-`scripts/output_planning.py :: render_output_plan_markdown(outputs, portfolio_pulse, day_type)`
-and PASTE its output verbatim — phone-first compact bullets, NO wide tables. Each
+`scripts/output_planning.py :: render_output_plan_markdown(outputs, portfolio_pulse, day_type)`.
+The renderer emits its OWN `## Today — Ship These 3` heading, so PASTE its output
+verbatim in place of this block — do NOT write the heading separately above (pasting
+it under a literal heading double-prints it). Phone-first compact bullets, NO wide tables. Each
 output's checkbox is a NON-INDENTED `- [ ] ` line carrying exactly one column-0
 source marker (contract #1); the done-state and owner go on the indented marker-free
 display line. NEVER re-indent or paraphrase a checkbox line, and never fold two
@@ -932,10 +933,11 @@ wrongly filtered. Omit section entirely if SUPPRESSED_IDS is empty.}
   - Notion (Master Tasks / Provider CRM): `- [ ] Peptide purity RJ (Notion) <!-- notion:abc-123-def -->`
   - Items derived (calendar prep, manual additions, stale items without a single
     source): no comment. They sync as `manual_completions` only.
-  - One ID per checkbox. If the line aggregates multiple source items, list each
-    on its own sub-checkbox with its own ID.
-- Include sub-checkboxes for grouped items (e.g., outreach lists) — each subitem
-  carries its own ID comment if it has one.
+  - One ID per checkbox. If a line aggregates multiple source items, list each on
+    its own **top-level (column-0)** `- [ ]` checkbox with its own ID — never an
+    indented sub-checkbox (the end-day parser only reads column-0 lines, contract #1).
+- For grouped items (e.g., outreach lists), render each member as its own column-0
+  `- [ ]` checkbox carrying its ID comment; do NOT nest ID-bearing items as indented sub-bullets.
 - Items with no clear stream tag go under the `is_default: true` stream from `streams.yaml`
 - Overdue and stale items go into their stream section, not a separate section
 
@@ -1047,13 +1049,14 @@ tags: [daily, briefing]
 ## Calendar
 {events}
 
-## Today — Ship These 3
 {The 3 outputs — paste the verbatim output of
-`scripts/output_planning.py :: render_output_plan_markdown(...)`. Each output's
-checkbox is a NON-INDENTED `- [ ] ` line with one column-0 source marker; the
-done-state goes on the indented marker-free display line. Do NOT rename this
-headline to "Top 3 Outcomes" in the daily note — that exact heading belongs only
-to the LOG file (see "Save to logs" below, contract #2).}
+`scripts/output_planning.py :: render_output_plan_markdown(...)`, which emits its own
+`## Today — Ship These 3` heading (do NOT write that heading separately above, or it
+double-prints). Each output's checkbox is a NON-INDENTED `- [ ] ` line with one
+column-0 source marker; the done-state goes on the indented marker-free display line.
+The daily-note headline stays "Today — Ship These 3" — never rename it to "Top 3
+Outcomes" here; that exact heading belongs only to the LOG file (see "Save to logs"
+below, contract #2).}
 
 ---
 
@@ -1188,7 +1191,8 @@ print(json.dumps({
     'mode': '${MODE}',
     'sources_ok': ${SOURCES_OK_JSON},          # e.g. ['calendar','notion','tasks','obsidian']
     'sources_skipped': ${SOURCES_SKIPPED_JSON},
-    'top3_scores': ${TOP3_SCORES_JSON},        # e.g. [8, 7, 5]
+    'top3_scores': null,                       # frozen field retained (contract #5); leverage model emits no numeric scores
+    'top3_leverage_classes': ${TOP3_LEVERAGE_CLASSES_JSON},  # NEW; e.g. ["constraint-removal","revenue","constraint-removal"]
     'starvation_swap': ${STARVATION_SWAP_FLAG}, # true/false
     'pending_writes_count': ${PENDING_WRITES_COUNT},
     'pull_completions': ${PULL_COMPLETIONS_COUNT},
