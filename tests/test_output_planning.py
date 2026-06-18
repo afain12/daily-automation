@@ -105,5 +105,38 @@ class RenderShapeTests(unittest.TestCase):
         self.assertIn("- [ ] Reach out to Healthix", md)
 
 
+class EdgeCaseGuardTests(unittest.TestCase):
+    def test_empty_id_renders_no_marker(self):
+        # SourceRef('gtask','') must NOT emit `<!-- gtask: -->` (empty-id write).
+        self.assertEqual(op.SourceRef("gtask", "").marker(), "")
+        self.assertEqual(op.SourceRef("notion", "").marker(), "")
+
+    def test_newline_in_title_stays_on_one_checkbox_line(self):
+        out = op.DailyOutput(
+            title="Call clinic\nabout panel",
+            owner="Nestmate",
+            source_refs=[op.SourceRef("gtask", "xyz789")],
+        )
+        md = op.render_output_plan_markdown([out])
+        marker_lines = [ln for ln in md.splitlines() if "<!--" in ln]
+        # marker is on exactly one non-indented checkbox line (contract #1).
+        self.assertEqual(len(marker_lines), 1)
+        self.assertEqual(marker_lines[0], marker_lines[0].lstrip())
+        self.assertRegex(marker_lines[0], r"^- \[ \]\s+")
+
+    def test_render_caps_at_three_outputs(self):
+        four = _sample_outputs() + [
+            op.DailyOutput(title="Fourth", owner="Other", source_refs=[op.SourceRef("derived")])
+        ]
+        md = op.render_output_plan_markdown(four)
+        self.assertNotIn("Fourth", md)
+        self.assertEqual(len([ln for ln in md.splitlines() if ln.startswith("- [ ] ")]), 3)
+
+    def test_empty_outputs_renders_heading_without_crash(self):
+        # Degraded morning run (no sources): heading survives, no items, no crash.
+        self.assertTrue(op.render_log_top3([]).startswith("## Top 3 Outcomes\n"))
+        self.assertTrue(op.render_output_plan_markdown([]).startswith("## Today — Ship These 3"))
+
+
 if __name__ == "__main__":
     unittest.main()

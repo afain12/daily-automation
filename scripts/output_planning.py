@@ -51,6 +51,11 @@ class SourceRef:
             return ""
         if self.system == "derived":
             return "<!-- derived -->"
+        if not self.id:
+            # ponytail: no target id -> emit no marker (degrades to a
+            # manual_completion) rather than `<!-- gtask: -->`, which the end-day
+            # parser would route to a sync write with an empty source_id.
+            return ""
         return f"<!-- {self.system}:{self.id} -->"
 
 
@@ -126,7 +131,10 @@ def _output_checkbox_line(output: DailyOutput) -> str:
     through they all land on this same non-indented line, never on a sub-bullet.
     """
     markers = " ".join(m for m in (r.marker() for r in output.source_refs) if m)
-    line = f"- [ ] {output.title}"
+    # ponytail: a newline in the title would push the marker onto a continuation
+    # line that is not a `- [ ]` checkbox -> contract #1 break. Flatten it.
+    title = output.title.replace("\n", " ")
+    line = f"- [ ] {title}"
     if markers:
         line = f"{line} {markers}"
     return line
@@ -152,7 +160,9 @@ def render_output_plan_markdown(
     if portfolio_pulse or day_type:
         lines.append("")
 
-    for output in outputs:
+    # Cap at 3 so the "Ship These 3" heading is always true and the two
+    # renderers stay in sync (render_log_top3 also slices [:3]).
+    for output in outputs[:3]:
         # The marker-bearing checkbox is ALWAYS column 0.
         lines.append(_output_checkbox_line(output))
         # Compact context lines are indented and marker-free (display only).
