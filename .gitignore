@@ -24,3 +24,6 @@ vault/.obsidian/
 # Business vault folders (OneDrive mirrors) are INCLUDED in this repo so the
 # Hermes replica has the full Obsidian vault. Source of truth remains OneDrive.
 .gstack/
+
+# Local Hermes runtime backups (deploy_hermes_skills.sh backup) — not source
+.context/hermes-backups/
