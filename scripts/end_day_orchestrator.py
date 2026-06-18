@@ -139,7 +139,10 @@ def extract_checked_source_actions(note_text: str) -> list[dict[str, Any]]:
     """Return source-sync actions implied by checked daily-note lines."""
     out: list[dict[str, Any]] = []
     for lineno, line in enumerate(note_text.splitlines(), start=1):
-        if not re.match(r"^- \[[xX]\]\s+", line.strip()):
+        # Match the RAW line (not line.strip()) so only column-0 checkboxes are
+        # syncable — an indented `  - [x] ... <!-- gtask:id -->` sub-bullet must
+        # NOT trigger a sync write (contract #1 made self-enforcing, not assumed).
+        if not re.match(r"^- \[[xX]\]\s+", line):
             continue
         marker = re.search(r"<!--\s*(gtask|notion|derived):([^>]+?)\s*-->", line)
         title = _clean_title(line)

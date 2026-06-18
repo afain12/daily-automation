@@ -91,5 +91,42 @@ class RenderParseRoundtripTests(unittest.TestCase):
         self.assertIn(("manual_completion", None, "Buy RDDT"), sig)
 
 
+class ContractEnforcementTests(unittest.TestCase):
+    """The two Codex [P1] findings, regression-guarded."""
+
+    def test_multi_ref_output_renders_one_marker_per_line_no_drop(self):
+        # [P1] #2: an aggregated output (2 refs) must NOT put both markers on one
+        # line, or the parser's single re.search drops the second sync action.
+        out = op.DailyOutput(
+            title="Two-system task",
+            owner="Nestmate",
+            source_refs=[op.SourceRef("gtask", "g111"), op.SourceRef("notion", "n222")],
+        )
+        section = op.render_output_plan_markdown([out])
+        marker_lines = [ln for ln in section.splitlines() if "<!--" in ln]
+        # exactly one marker per line, each a column-0 checkbox.
+        self.assertEqual(len(marker_lines), 2)
+        for ln in marker_lines:
+            self.assertEqual(ln, ln.lstrip())
+            self.assertEqual(ln.count("<!--"), 1)
+        # both survive the real parser when checked.
+        actions = edo.extract_checked_source_actions(section.replace("- [ ] ", "- [x] "))
+        ids = sorted(a.get("source_id") for a in actions)
+        self.assertEqual(ids, ["g111", "n222"])
+
+    def test_indented_checked_marker_is_not_synced(self):
+        # [P1] #1: an indented sub-bullet with a marker must NOT be treated as a
+        # sync completion (contract #1 is now enforced by the parser itself).
+        note = (
+            "## Today — Ship These 3\n\n"
+            "- [x] Top level task <!-- gtask:real -->\n"
+            "  - [x] Indented child <!-- gtask:shouldskip -->\n"
+        )
+        actions = edo.extract_checked_source_actions(note)
+        ids = [a.get("source_id") for a in actions]
+        self.assertIn("real", ids)
+        self.assertNotIn("shouldskip", ids)
+
+
 if __name__ == "__main__":
     unittest.main()

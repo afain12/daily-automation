@@ -123,21 +123,27 @@ def group_outputs(
     return grouped
 
 
-def _output_checkbox_line(output: DailyOutput) -> str:
-    """Render ONE top-level `- [ ] ` line carrying this output's marker(s).
+def _output_checkbox_lines(output: DailyOutput) -> List[str]:
+    """Render the top-level `- [ ] ` checkbox line(s) for one output.
 
-    Markers are appended inline on the same column-0 checkbox line (contract #1).
-    With 1:1 grouping there is exactly one sync marker; if multiple refs slipped
-    through they all land on this same non-indented line, never on a sub-bullet.
+    ONE marker per line (contract #1 + the end-day parser only `re.search`es a
+    single marker per line, so two markers on one line would silently drop all
+    but the first). With 1:1 grouping that is one line; a multi-ref output that
+    bypassed `group_outputs` still renders one column-0 checkbox PER ref here,
+    never two markers sharing a line and never an indented sub-bullet.
     """
-    markers = " ".join(m for m in (r.marker() for r in output.source_refs) if m)
     # ponytail: a newline in the title would push the marker onto a continuation
     # line that is not a `- [ ]` checkbox -> contract #1 break. Flatten it.
     title = output.title.replace("\n", " ")
-    line = f"- [ ] {title}"
-    if markers:
-        line = f"{line} {markers}"
-    return line
+    refs = output.source_refs or [None]
+    lines: List[str] = []
+    for ref in refs:
+        marker = ref.marker() if ref is not None else ""
+        line = f"- [ ] {title}"
+        if marker:
+            line = f"{line} {marker}"
+        lines.append(line)
+    return lines
 
 
 def render_output_plan_markdown(
@@ -163,8 +169,8 @@ def render_output_plan_markdown(
     # Cap at 3 so the "Ship These 3" heading is always true and the two
     # renderers stay in sync (render_log_top3 also slices [:3]).
     for output in outputs[:3]:
-        # The marker-bearing checkbox is ALWAYS column 0.
-        lines.append(_output_checkbox_line(output))
+        # One column-0 checkbox per source ref; one marker per line.
+        lines.extend(_output_checkbox_lines(output))
         # Compact context lines are indented and marker-free (display only).
         meta = f"  {output.owner} · {output.status}"
         lines.append(meta)
