@@ -607,55 +607,123 @@ The known default tasklist ID is: `MDE5NTgyMDkwMjMxNjkwNzQyMTk6MDow`
 
 **If gws CLI fails or is not found:** Skip this section. Add "Google Tasks" to skipped sources. Display: "Google Tasks: not connected. Install gws CLI or paste tasks manually."
 
-## Step 6: Score and Rank Top 3 Outcomes
+## Step 6: Select the 3 Outputs (High Output leverage model)
 
-Collect all actionable items from Steps 2-5 and score each:
+`/start-day` is a **leverage allocator**, not a department to-do aggregator. This
+step replaces the old point rubric with the Grove leverage model: figure out which
+business is today's binding constraint (Portfolio Pulse), rank candidates by
+**leverage class** not by due-date points, classify the day, keep the deterministic
+starvation guard, and output exactly **3 outputs** — each a shippable result with a
+`done_when` done-state, never "work on X".
 
-| Signal | Points |
-|--------|--------|
-| Has due date today or is overdue | +3 |
-| Marked high-priority (if priority_field exists in config) | +2 |
-| Has a related calendar event today (title keyword match) | +2 |
-| Stale: not updated in 7+ days | +1 |
-| Blocks someone else (has a non-Aaron assignee) | +2 |
+Collect every actionable item from Steps 2-5 as a candidate (Notion Master Tasks,
+Google Tasks, Provider CRM follow-ups, calendar meetings, vault inbox /
+`priorities.yaml carry_forward`). Suppressed items (Step 1d) are excluded from the
+pool entirely. Owner = the item's own Workspace/stream — never inherit from a parent
+task name (check each item individually).
 
-**Ranking rules:**
-- Sort by score descending
-- Pick top 3
-- Break ties by rotating through `streams[].key` (in declaration order from
-  `config/streams.yaml`) to prevent one stream from dominating
-- Include the score breakdown for each item so Aaron can see the reasoning
+### Stage 1 — Portfolio Pulse (which business is the binding constraint today)
 
-**Stream starvation guard (added 2026-04-27, formalized 2026-05-18 per AAC):**
+Score each business (Nestmate, Dock Pro / Cardio Pro, United IPA, Lincoln Lab,
+Other) for **leverage density today** — where one action unblocks the most
+downstream value right now. Signals, highest first:
+1. A **constraint** that, if removed today, unblocks a chain (a credentialing gate,
+   one approval blocking a launch, a provider waiting on one reply).
+2. A **revenue/relationship event** with a today-shaped window (a deal that closes
+   if touched today; a relationship that decays if not).
+3. **Density** of overdue/at-risk items concentrated in one business.
 
-Deterministic formula (no Claude judgment). `STREAM_KEYS` is the list of
-`streams[].key` values read from `config/streams.yaml` in declaration order:
+Emit the Portfolio Pulse as **one decision-driving line per business** naming the
+SPECIFIC constraint (not a category) AND a **capital-allocation %** that sums to
+~100% across businesses (e.g. "60% IPA · 25% Nestmate · 15% Lincoln Lab"). The
+highest-allocation business is the Pulse winner.
+
+**The Pulse must bite the selection:** absent a strong override (a hard
+constraint-removal or a today-windowed revenue event in another business), **≥2 of
+the 3 outputs come from the highest-allocation business.** This is EOD-verifiable.
+
+### Stage 2 — Rank candidates by leverage class (descending)
+
+Rank by leverage class, NOT by due-date points. Ties broken by Portfolio-Pulse
+business first, then by Notion `Due` / overdue age.
+
+| Rank | Leverage class | Why it wins |
+|------|----------------|-------------|
+| 1 | **Constraint-removal** | Unblocks other work / other people. Highest multiplier. |
+| 2 | **Revenue / relationship** | Direct business value or a decaying relationship window. |
+| 3 | **Delegation-as-shipped** | A clean handoff *counts as shipped* — see rule below. |
+| 4 | **Meeting-conversion** | A today meeting that must end in a decision / owner / next action (feeds `## Meetings That Must Convert`). |
+| 5 | **Admin** | Necessary but low-leverage; only reaches the 3 if nothing higher exists. |
+
+**Constraint-removal detection heuristic** (deterministic — apply per candidate):
+a candidate is constraint-removal if EITHER
+- it has **0 assignees AND Status = "Waiting"**, OR
+- its title contains **"credentialing" / "approval" / "sign-off"** (case-insensitive).
+
+**Delegation-as-shipped rule:** a candidate counts as delegation-as-shipped ONLY
+when it has (a) a **named delegatee read from `state/profile.yaml`** (team/person
+list — do NOT invent a name), AND (b) a concrete **next step the delegatee can take
+without Aaron**. Handing off the right thing to a real person is an output. A vague
+"someone should handle X" does NOT qualify and stays an ordinary candidate.
+
+### Stage 3 — Day-type classification (drives aggressiveness, not candidates)
+
+Classify today from calendar density (Step 2): `field` (back-to-back meetings /
+travel) · `deep-work` (open uninterrupted blocks) · `firefight` (overdue/at-risk
+density spikes) · `admin` (light, routine). This **only filters/re-ranks** — it
+never invents candidates:
+- **field day:** drop deep-work outputs needing an uninterrupted block; prefer
+  meeting-conversion + delegation + quick constraint-removals. **No deep-work
+  calendar blocks proposed on a field day.**
+- **deep-work day:** deep-work constraint-removal outputs are viable.
+
+Surface the classification in Step 7's Portfolio Pulse / Today sections.
+
+### Stage 4 — Starvation guard (deterministic — KEEP, do not weaken)
+
+Unchanged deterministic mechanism (no Claude judgment). `STREAM_KEYS` is the list of
+`streams[].key` values read from `config/streams.yaml` in declaration order. `N = 7`.
 
 ```
-1. raw_top3 = first 3 items after sort-by-score-desc
+1. raw_top3 = first 3 outputs after the leverage-class ranking (Stage 2, day-type-filtered)
 2. raw_top3_streams = set of stream keys in raw_top3
 3. for each stream key S in STREAM_KEYS:
      oldest_stale[S] = max(item.days_stale for item in all_items where item.stream == S and item.days_stale >= 7)
 4. starved = streams where oldest_stale[S] is defined AND S not in raw_top3_streams
 5. if starved is non-empty:
      pick S_starved = argmax(oldest_stale[S] for S in starved)   # most-starved wins
-     candidate = highest-score item in all_items where stream == S_starved
+     candidate = highest-leverage item in all_items where stream == S_starved
      final_top3 = [raw_top3[0], raw_top3[1], candidate]          # replace slot #3 only
    else:
      final_top3 = raw_top3
 6. include reason in Step 7 display: "Slot #3 promoted from {S_starved} (stale {N}d)"
 ```
 
-This is AAC-D (deterministic code) work, not AAC-C (LLM judgment). Reading the
-formula above, generate the swap mechanically. Do NOT improvise.
+At most one starvation override per morning. This is AAC-D (deterministic code), not
+AAC-C (LLM judgment) — generate the swap mechanically, do NOT improvise. It exists
+because logs 2026-04-14 → 2026-04-27 showed Lab consistently starved (Accu panels
+stale 8+ days, Cytology→IHC 262 days) while Nestmate/IPA dominated; constraint-removal
+and revenue ranking still let no-due-date Lab work fall to slot 4, so age force-promotes it.
 
-This exists because logs 2026-04-14 → 2026-04-27 showed Lab consistently starved (Accu panels stale 8+ days, Cytology→IHC 262 days) while Nestmate/IPA dominated. Score-only ranking was the cause: Lab tasks have no due dates, so they never won on the +3 due-date signal. The starvation guard injects them on age alone.
+### Stage 5 — Output exactly 3 (each with a `done_when` done-state)
 
-**Items that can be scored:**
-- Notion Master Tasks items (have due dates, statuses, assignees)
-- Google Tasks items (have due dates)
-- Provider CRM follow-ups (stale contact = overdue signal)
-- Calendar prep items (upcoming meeting = urgency signal)
+Take the top 3 after Stages 2-4. Each output is a **shippable business result with a
+done-state**, never an activity. For each output, write a `done_when` string naming
+the done-state (e.g. "Healthix proposal sent + decision captured", "credentialing
+packet submitted to payer"). **Never** "work on X / make progress on X / follow up
+on X" — `scripts/output_planning.py :: render_output_plan_markdown` REFUSES to render
+a lazy/empty `done_when`, so supply a real one.
+
+Enforce **1:1 grouping** (`group_outputs(..., max_children=1)`): each output carries
+exactly one `SourceRef` so its sync marker renders on its own non-indented `- [ ]`
+line (contract #1). If fewer than 3 real candidates exist, render fewer — never pad
+with admin filler.
+
+`scripts/output_planning.py` is the canonical renderer for the 3 outputs: build
+`DailyOutput(title, owner, source_refs=[SourceRef(...)], done_when=...)` objects and
+let `render_output_plan_markdown(outputs, portfolio_pulse, day_type)` produce the
+checkbox lines. Paste its output verbatim into Step 7 — never re-indent or paraphrase
+a checkbox line.
 
 ## Step 6b: Notion 24-Hour Change Audit
 
@@ -675,12 +743,76 @@ due dates, completed work that triggers follow-up actions.
 
 ## Step 7: Compose and Display Briefing
 
-Output the briefing to the terminal in this format:
+Output the briefing to the terminal in this format. **The order is deliberate
+(leverage at the top, plumbing below):** Portfolio Pulse → Kill / Defer / Delegate
+(what NOT to do, decided BEFORE committing capacity) → Today: Ship These 3 (the
+outputs) → Meetings That Must Convert → then the existing operational sections and
+the DEMOTED `## Actionable Items by Stream` reference backlog below the fold.
 
 ```markdown
 # Daily Briefing — {TODAY} ({day of week})
 
 _Run: {RUN_ID} · Mode: {MODE}_
+
+## Portfolio Pulse
+{One decision-driving line per business naming the SPECIFIC constraint (not a
+category) + the capital-allocation % from Step 6 Stage 1. The %s sum to ~100%.
+The highest-allocation business is today's binding constraint and biases the 3
+outputs (≥2 of 3 from it absent a strong override).}
+- **{business}** ({alloc%}) — {specific constraint, e.g. "Healthix contract stalls until the credentialing packet ships today"}
+- ...
+_Day type: {field | deep-work | firefight | admin} — {one-line implication, e.g. "back-to-back; no deep-work blocks, convert meetings"}_
+
+## Kill / Defer / Delegate
+{Daily triage — what NOT to work today, decided BEFORE the 3 outputs. Pull from
+stale / low-leverage candidates that did NOT make the 3. Three buckets:}
+- **Kill:** {item} — {why it's dead, e.g. "no downstream value; close it"}
+- **Defer:** {item} — {until when / what it's waiting on}
+- **Delegate:** {item} → **{named delegatee from state/profile.yaml}** — {the next step they can do without Aaron}
+{If a bucket is empty, omit that bullet. If nothing to triage: "Nothing to cut today."}
+
+## Today — Ship These 3
+{The 3 outputs from Step 6 Stage 5. Render via
+`scripts/output_planning.py :: render_output_plan_markdown(outputs, portfolio_pulse, day_type)`
+and PASTE its output verbatim — phone-first compact bullets, NO wide tables. Each
+output's checkbox is a NON-INDENTED `- [ ] ` line carrying exactly one column-0
+source marker (contract #1); the done-state and owner go on the indented marker-free
+display line. NEVER re-indent or paraphrase a checkbox line, and never fold two
+markers onto one line. Every output has a real `done_when` (the renderer refuses
+"work on X / follow up on X / make progress on X").}
+
+{If slot #3 was promoted by the starvation guard, append a one-line reason:}
+_Slot #3 promoted from {starved_dept} (stale {N}d) — see Step 6 Stage 4._
+
+{Past-context citations are computed by running `scripts/vault_search.py` against
+each output's text BEFORE rendering the briefing. The skill should:
+
+  1. For each output, extract 3-5 keyword terms (entity names, business
+     terms, action verbs). Strip stopwords and check items.
+  2. Run `python scripts/vault_search.py "<terms joined by space>" --top-n 1
+     --min-score 1.5 --json`
+  3. If a result comes back, render a marker-free indented `↳ past: ...` line
+     beneath the output with the relative path and first 80 chars of the snippet.
+  4. If no result meets the threshold, omit the line entirely (don't render
+     "no context found" — it's noise).
+
+Skip vault_search for outputs whose source marker is [cal] (calendar prep rarely
+has past context worth surfacing). Always run for [notion:…] and [gtask:…] outputs.
+The whole pass should add < 2 seconds to total wall time.}
+
+{source_marker format (AAC GROUNDED — every fact must trace to a source):
+  - Notion item: `<!-- notion:abc-123-def -->` HTML comment on the column-0 `- [ ]` line
+  - Google Task: `<!-- gtask:XYZW... -->`
+  - Calendar prep: display-only, no sync marker ([cal])
+  - Derived/manual: `<!-- derived -->`
+  These markers are what /end-day Step 4b parses back to the source system.}
+
+## Meetings That Must Convert
+{Today's meetings (from Step 2) that must produce a decision / owner / next action.
+For each, name the specific outcome it must yield — a meeting that ends without one
+is wasted leverage. These are the meeting-conversion candidates from Step 6 Stage 2.}
+- {time} {meeting} → must produce: {decision / owner / next-action}
+{If no meetings today: "No meetings to convert today."}
 
 {If catchup_sync is non-empty:}
 ## ⚠️ Catch-up sync from yesterday
@@ -713,42 +845,11 @@ _Run: {RUN_ID} · Mode: {MODE}_
 {List today's events with times, business tags, and conflict flags}
 {If no events: "No events scheduled today."}
 
-## Top 3 Outcomes
-1. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
-   {↳ past: {path} — "{snippet excerpt, 80 chars}"}     ← optional, only if a vault_search hit ≥ 1.5 exists
-2. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
-   {↳ past: {path} — "{snippet excerpt, 80 chars}"}
-3. {item} — score: {N} ({breakdown}) [{business}] {source_marker}
-   {↳ past: {path} — "{snippet excerpt, 80 chars}"}
-
-{If slot #3 was promoted by the starvation guard, append a one-line reason:}
-   _Slot #3 promoted from {starved_dept} (stale {N}d) — see config/starvation rule._
-
-{Past-context citations are computed by running `scripts/vault_search.py` against
-each Top 3 item's text BEFORE rendering the briefing. The skill should:
-
-  1. For each Top 3 item, extract 3-5 keyword terms (entity names, business
-     terms, action verbs). Strip stopwords and check items.
-  2. Run `python scripts/vault_search.py "<terms joined by space>" --top-n 1
-     --min-score 1.5 --json`
-  3. If a result comes back, render the `↳ past: ...` line beneath the item
-     with the relative path and the first 80 chars of the snippet.
-  4. If no result meets the threshold, omit the line entirely (don't render
-     "no context found" — it's noise).
-
-Skip vault_search for items whose source_marker is [cal] (calendar prep items
-rarely have past context worth surfacing). Always run for [notion:…] and
-[gtask:…] items. The whole pass should add < 2 seconds to total wall time.}
-
-{source_marker format (AAC GROUNDED — every fact must trace to a source):
-  - Notion item: render as `[notion:ABCD…]` where ABCD is the first 4 chars of the page_id
-  - Google Task: render as `[gtask:XYZW…]`
-  - Calendar prep: `[cal]`
-  - Derived/manual: `[derived]`
-  The full ID is also embedded as an HTML comment for /end-day Step 4b parsing:
-  `<!-- notion:abc-123-def -->` etc.}
-
 ## Actionable Items by Stream
+{DEMOTED reference backlog (position-only demotion — full content + IDs retained).
+This is no longer the headline; the 3 outputs above are. But every checkbox keeps
+its full `- [ ]` + column-0 `<!-- system:id -->` marker and stream grouping so
+catch-up sync (Step 1c) still works against it.}
 
 {Iterate `streams[]` from `config/streams.yaml` in declaration order. For each
 stream, render a `### {stream.display_name}` header followed by the items
@@ -946,8 +1047,13 @@ tags: [daily, briefing]
 ## Calendar
 {events}
 
-## Top 3 Outcomes
-{scored items}
+## Today — Ship These 3
+{The 3 outputs — paste the verbatim output of
+`scripts/output_planning.py :: render_output_plan_markdown(...)`. Each output's
+checkbox is a NON-INDENTED `- [ ] ` line with one column-0 source marker; the
+done-state goes on the indented marker-free display line. Do NOT rename this
+headline to "Top 3 Outcomes" in the daily note — that exact heading belongs only
+to the LOG file (see "Save to logs" below, contract #2).}
 
 ---
 
@@ -1057,6 +1163,12 @@ sources_skipped: [{list of sources that failed or were unavailable}]
 ## Morning Briefing ({current time})
 
 {full briefing content from Step 7}
+
+## Top 3 Outcomes
+{The 3 outputs rendered via `scripts/output_planning.py :: render_log_top3(outputs)`,
+pasted verbatim. This heading is REQUIRED and exact: contract #2 — /end-day reads
+`## Top 3 Outcomes` from THIS log file (not the daily note). The daily note's
+headline is "Today — Ship These 3"; the LOG keeps "Top 3 Outcomes". Never swap them.}
 ```
 
 If the log file already exists (re-run), append a new timestamped section
