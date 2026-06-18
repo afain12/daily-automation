@@ -66,6 +66,19 @@ AND a deterministic scorer is actually needed (e.g. for end-day scorecard sync).
 
 ---
 
+## Phase-2 carry-forward (Codex review 2026-06-17, pre-existing in end_day_orchestrator.py)
+These were flagged reviewing the vendored orchestrator; NOT exercised by the Phase-1
+gate (which only imports `extract_checked_source_actions`). Address in E9.
+- **[P1] FIXED in this branch** — `REPO_DIR` hard-coded to `/Users/afain/daily-automation`;
+  now derived from `__file__` (+ `COO_REPO_DIR` override). Propagate to main + ~/.hermes copies.
+- **[P1] note_harvest worker** — `preview_note_harvest` shells out to `scripts/note_harvest.py`,
+  untracked here, so a worktree `main()` run degrades that worker to "failed" and the unified
+  gate silently omits note-harvest actions. Vendor the note_harvest chain or make the omission loud. (E9)
+- **[P2] sync-sweep line numbers** — `idx` is Braindump-relative while the gate uses daily-note
+  `source_line`; `merge_previews` line-ownership check can miss conflicts. (E9)
+- **[P2] dedupe key** — collapse external completions by `(type, source_id)` before the
+  line-sensitive key, so the same marker checked in both Today and Actionable sections doesn't double-stage. (E9)
+
 ## Guardrails for the dispatch loop
 - `~/.hermes/` may be absent on a given machine. If so, the Hermes-copy edits (T2, E7) **skip with a
   logged WARNING and a staged patch under `.context/preview/`**, they do not fail the task. The

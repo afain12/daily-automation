@@ -23,7 +23,12 @@ import sys
 import time
 from typing import Any
 
-REPO_DIR = pathlib.Path("/Users/afain/daily-automation")
+# Derive the repo root from this file's location (scripts/<this>.py) so a run from
+# a worktree or any clone operates on ITS OWN checkout — not a hard-coded production
+# path. Env override stays available for unusual layouts (e.g. Hermes deploy).
+REPO_DIR = pathlib.Path(
+    os.environ.get("COO_REPO_DIR") or pathlib.Path(__file__).resolve().parent.parent
+)
 CONTEXT = REPO_DIR / ".context"
 LOGS = REPO_DIR / "logs"
 
