@@ -1,0 +1,49 @@
+# config/calendar.yaml — calendar refinement (Slice 0).
+#
+# Single source for working-day bounds, the COO-managed block namespace, per-type
+# durations, and placement thresholds. Read by the /refine-calendar skill (and the
+# /start-day Execution Plan shadow step), which injects this as a dict into the
+# PURE helper scripts/calendar_planning.py. The helper itself never reads disk.
+#
+# All times are wall-clock in `working_bounds.tz`; the helper converts to
+# DST-correct offset-bearing RFC3339 via stdlib zoneinfo. No live calendar writes
+# are performed in the current slice — these values only drive PROPOSALS.
+
+working_bounds:
+  start: "09:00"            # after the gym/meditate routine anchors
+  end:   "17:30"
+  tz:    "America/New_York"
+
+# Field days often include evening relationship work. The helper uses these
+# bounds only when day_type == "field" so normal deep-work/admin days stay tight.
+field_day_bounds:
+  end: "19:00"
+
+# Real Google Calendar often represents business threads as all-day reminders
+# (e.g. Telecor x Lincoln). Treat those as informational by default so they do
+# not consume the whole working day. A later live adapter can mark an individual
+# all-day anchor busy by setting {busy: true}; setting this default to true
+# restores the conservative Slice-1 behavior.
+all_day_busy_default: false
+
+important_meeting_keywords: ["lunch", "dinner", "breakfast", "important", "pitch"]
+field_focus_min_window_min: 120 # on field days, only fill truly massive gaps with Top-3 FOCUS blocks
+
+block_namespace: "▹"        # COO-managed blocks are prefixed with this sigil so they
+                            # are dedupable, EOD-detectable, and never collide with a
+                            # real meeting. Execution-Plan lines are NOT checkboxes.
+
+min_gap_min: 20             # ignore open windows shorter than this for FOCUS placement
+travel_buffer_min: 15       # reserved for a later slice (BUFFER blocks); not placed in v1
+
+# Anchors whose summary contains any of these (case-insensitive) are treated as
+# routine, NOT must-convert meetings — so no PREP/CAPTURE blocks are generated
+# around them.
+routine_keywords: ["meditate", "tea", "gym", "lunch", "errand", "drive"]
+
+# v1 block taxonomy (4 types — see plan T1). Durations in minutes.
+durations:
+  FOCUS:   {min: 45, max: 60}
+  PREP:    {min: 15, max: 30}
+  CAPTURE: {min: 15, max: 20}
+  EOD:     {min: 15, max: 20}
