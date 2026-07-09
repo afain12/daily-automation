@@ -1,0 +1,83 @@
+# COO Twin - Meeting Note Routing Rules
+# Used by /capture-meeting to split notes between Notion and Obsidian
+
+# Routing is LLM-inferred based on these indicator patterns.
+# When an item is ambiguous (matches multiple categories),
+# present all matches at the trust gate and let user choose.
+
+routing:
+  action_items:
+    destination: notion
+    target_database: "Master Tasks"
+    indicators:
+      - "action"
+      - "TODO"
+      - "deadline"
+      - "by [date]"
+      - "assigned to"
+      - "follow up with"
+      - "need to"
+      - "should"
+      - "will do"
+      - "next step"
+    # Auto-set these fields on new Notion task:
+    auto_fields:
+      Status: "Not started"
+      # Workspace: inferred from meeting context or asked at trust gate
+
+  insights:
+    destination: obsidian
+    folder: "notes"
+    indicators:
+      - "idea"
+      - "insight"
+      - "pain point"
+      - "remember"
+      - "key takeaway"
+      - "interesting"
+      - "observation"
+      - "learned"
+      - "realization"
+    # Tags applied to new Obsidian note:
+    auto_tags: ["#meeting"]
+    # Business tag (#lab, #sales, etc.) inferred from meeting context
+
+  follow_ups:
+    destination: google_calendar
+    indicators:
+      - "schedule"
+      - "meet again"
+      - "follow-up meeting"
+      - "next steps meeting"
+      - "reconvene"
+      - "circle back"
+
+  decisions:
+    destination: notion
+    target_database: "Activity Log"
+    indicators:
+      - "decided"
+      - "agreed"
+      - "approved"
+      - "we will"
+      - "going with"
+      - "confirmed"
+      - "finalized"
+    auto_fields:
+      Type: "Decision"
+    # Obsidian gets a wikilink reference, not a duplicate
+    also_link_from: obsidian
+
+  contact_updates:
+    destination: notion
+    target_database: "Contact CRM"
+    indicators:
+      - "spoke with Dr"
+      - "contact said"
+      - "practice update"
+      - "credentialing"
+      - "panel size"
+      - "identifier"
+    auto_fields:
+      # Updates Last Contact and Next Step on existing contact record
+      update_existing: true

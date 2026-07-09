@@ -1,0 +1,90 @@
+# Daily Automation - sanitized data source configuration
+# Copy this file and replace placeholders with your own Notion/Google/Obsidian values.
+
+obsidian_vault_path: "./vault"
+obsidian_inbox_folder: "inbox"
+obsidian_daily_folder: "daily"
+obsidian_meetings_folder: "meetings"
+obsidian_notes_folder: "notes"
+
+obsidian_tags:
+  ops: "#ops"
+  sales: "#sales"
+  product: "#product"
+  personal: "#personal"
+
+notion_databases:
+  - name: "Master Tasks"
+    database_id: "00000000-0000-0000-0000-000000000000"
+    data_source: "collection://00000000-0000-0000-0000-000000000000"
+    business: all
+    status_field: "Status"
+    status_done_values: ["Done"]
+    status_in_progress_values: ["In progress"]
+    status_waiting_values: ["Waiting"]
+    status_not_started_values: ["Not started"]
+    assignee_field: "Assignee"
+    date_field: "Due"
+    workspace_field: "Workspace"
+    title_field: "Task"
+    workspace_values:
+      operations: "Operations"
+      sales: "Sales"
+      product: "Product"
+      personal: "Personal"
+      other: "Other"
+    views: {}
+
+  - name: "Contact CRM"
+    database_id: "00000000-0000-0000-0000-000000000000"
+    data_source: "collection://00000000-0000-0000-0000-000000000000"
+    business: all
+    stage_field: "Stage"
+    stage_active_values: ["Active"]
+    stage_inactive_values: ["Inactive"]
+    stage_pipeline_values: ["New Lead", "Outreach", "Discovery", "Proposal", "Onboarding"]
+    last_contact_field: "Last Contact"
+    next_step_field: "Next Step"
+    workspace_field: "Workspace"
+    views: {}
+
+  - name: "Activity Log"
+    database_id: "00000000-0000-0000-0000-000000000000"
+    data_source: "collection://00000000-0000-0000-0000-000000000000"
+    business: all
+    type_field: "Type"
+    type_values: ["Call", "Meeting", "Email", "Internal", "Follow-Up", "Decision"]
+    workspace_field: "Workspace"
+    date_field: "Date"
+    outcome_field: "Outcome"
+    next_action_field: "Next Action"
+
+  - name: "Meeting Notes"
+    database_id: "00000000-0000-0000-0000-000000000000"
+    data_source: "collection://00000000-0000-0000-0000-000000000000"
+    business: all
+    title_field: "Meeting name"
+    date_field: "Date"
+    summary_field: "Summary"
+    attendees_field: "Attendees"
+    workspace_field: "Workspace"
+    related_tasks_field: "Related Tasks"
+
+mobile_briefing_page_id: "00000000-0000-0000-0000-000000000000"
+mobile_briefing_page_url: "https://www.notion.so/example"
+
+google_tasks:
+  enabled: true
+
+calendar_business_keywords:
+  operations: ["ops", "operations", "admin", "finance"]
+  sales: ["sales", "lead", "pipeline", "customer", "account"]
+  product: ["product", "engineering", "launch", "roadmap"]
+  personal: ["personal", "gym", "lunch", "errand"]
+
+team_members: []
+delegation_tags: ["delegate", "handoff", "assign"]
+staleness_days: 7
+contact_followup_days: 14
+entity_aliases: {}
+single_dept_persons: {}

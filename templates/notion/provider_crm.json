@@ -1,0 +1,117 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Contact CRM"
+      }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "\ud83c\udfe5"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Contact / client / partner directory. One row per outside contact or organization the businesses interact with."
+      }
+    }
+  ],
+  "properties": {
+    "Name": {
+      "title": {},
+      "description": "Contact or contact name. Use 'Last, First' for individuals or the organization name."
+    },
+    "Email": {
+      "email": {},
+      "description": "Primary contact email."
+    },
+    "Phone": {
+      "phone_number": {},
+      "description": "Primary contact phone."
+    },
+    "Stage": {
+      "select": {
+        "options": [
+          {
+            "name": "Lead",
+            "color": "gray"
+          },
+          {
+            "name": "Contacted",
+            "color": "yellow"
+          },
+          {
+            "name": "In Pipeline",
+            "color": "blue"
+          },
+          {
+            "name": "Onboarding",
+            "color": "orange"
+          },
+          {
+            "name": "Active",
+            "color": "green"
+          },
+          {
+            "name": "Dormant",
+            "color": "brown"
+          },
+          {
+            "name": "Lost",
+            "color": "red"
+          }
+        ]
+      },
+      "description": "Pipeline stage. Drives weekly CRM nudges."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          {
+            "name": "Operations",
+            "color": "purple"
+          },
+          {
+            "name": "Sales",
+            "color": "blue"
+          },
+          {
+            "name": "Product",
+            "color": "green"
+          },
+          {
+            "name": "Product",
+            "color": "orange"
+          },
+          {
+            "name": "Other",
+            "color": "gray"
+          }
+        ]
+      },
+      "description": "Which business owns this relationship."
+    },
+    "Last Contact": {
+      "date": {},
+      "description": "Date of most recent outbound or inbound touch."
+    },
+    "Next Step": {
+      "rich_text": {},
+      "description": "What's the next concrete action \u2014 what / when / who."
+    },
+    "Related Tasks": {
+      "relation": {
+        "data_source_id": "{{MASTER_TASKS_DS_ID}}",
+        "single_property": {}
+      },
+      "description": "Open tasks linked to this contact. Bidirectional with Master Tasks."
+    },
+    "Notes": {
+      "rich_text": {},
+      "description": "Background, history, decision context for this relationship."
+    }
+  }
+}

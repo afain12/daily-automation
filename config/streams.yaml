@@ -1,0 +1,33 @@
+# Streams are generic business units / focus areas.
+# Replace these examples with your own workspace names and routing keywords.
+
+streams:
+  - key: operations
+    display_name: "Operations"
+    is_default: false
+    workspace_values: ["Operations"]
+    keywords: ["ops", "operations", "admin", "finance"]
+
+  - key: sales
+    display_name: "Sales"
+    is_default: false
+    workspace_values: ["Sales"]
+    keywords: ["sales", "lead", "pipeline", "customer", "account"]
+
+  - key: product
+    display_name: "Product"
+    is_default: false
+    workspace_values: ["Product"]
+    keywords: ["product", "engineering", "launch", "roadmap"]
+
+  - key: personal
+    display_name: "Personal"
+    is_default: false
+    workspace_values: ["Personal"]
+    keywords: ["personal", "gym", "lunch", "errand"]
+
+  - key: other
+    display_name: "Other"
+    is_default: true
+    workspace_values: ["Other"]
+    keywords: []

@@ -1,0 +1,57 @@
+# Secrets and local credentials
+.env
+*.env
+!.env.example
+.secrets/
+client_secret_*.json
+*token*.json
+*credentials*.json
+.claude/settings.local.json
+.codex/
+
+# Browser/session profiles
+scripts/notion-ui-ops/profile/
+
+# Runtime state and generated payloads
+.context/**
+!.context/
+!.context/.gitkeep
+!.context/preview/
+!.context/preview/.gitkeep
+!.context/applied/
+!.context/applied/.gitkeep
+logs/**
+!logs/
+!logs/.gitkeep
+state/tmp/**
+state/preview/**
+state/contact-leads/**
+state/operations_customer_service_drafts/**
+state/google_auth_health.yaml
+state/.google_auth_alert_state
+state/streams-drift-*.json
+
+# Local vault content / synced notes
+vault/**
+!vault/
+!vault/.gitkeep
+!vault/daily/
+!vault/daily/.gitkeep
+!vault/inbox/
+!vault/inbox/.gitkeep
+
+# Generated outputs and exports
+exports/
+outputs/
+*.numbers
+*.xlsx
+*.csv
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# External dependency skills fetched locally
+.agents/skills/
+.gstack/

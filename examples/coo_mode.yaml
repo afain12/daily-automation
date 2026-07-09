@@ -1,0 +1,4 @@
+# Runtime write mode. Copy to state/coo_mode.yaml for local use.
+mode: draft
+approved_action_prefixes: []
+auto_skills: []

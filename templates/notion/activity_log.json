@@ -1,0 +1,129 @@
+{
+  "title": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Activity Log"
+      }
+    }
+  ],
+  "icon": {
+    "type": "emoji",
+    "emoji": "\ud83d\udcd3"
+  },
+  "description": [
+    {
+      "type": "text",
+      "text": {
+        "content": "Decisions, touchpoints, and material outcomes. The single source of truth for 'what happened' across all businesses."
+      }
+    }
+  ],
+  "properties": {
+    "Entry": {
+      "title": {},
+      "description": "One-line summary of what happened. Title property."
+    },
+    "Date": {
+      "date": {},
+      "description": "When this happened (not when it was logged)."
+    },
+    "Type": {
+      "select": {
+        "options": [
+          {
+            "name": "Decision",
+            "color": "purple"
+          },
+          {
+            "name": "Meeting",
+            "color": "blue"
+          },
+          {
+            "name": "Call",
+            "color": "green"
+          },
+          {
+            "name": "Email",
+            "color": "yellow"
+          },
+          {
+            "name": "Outcome",
+            "color": "orange"
+          },
+          {
+            "name": "Milestone",
+            "color": "red"
+          },
+          {
+            "name": "Note",
+            "color": "gray"
+          }
+        ]
+      },
+      "description": "Category of activity. Drives filters in weekly review."
+    },
+    "Workspace": {
+      "select": {
+        "options": [
+          {
+            "name": "Operations",
+            "color": "purple"
+          },
+          {
+            "name": "Sales",
+            "color": "blue"
+          },
+          {
+            "name": "Product",
+            "color": "green"
+          },
+          {
+            "name": "Product",
+            "color": "orange"
+          },
+          {
+            "name": "Other",
+            "color": "gray"
+          }
+        ]
+      },
+      "description": "Business unit this entry relates to."
+    },
+    "Outcome": {
+      "rich_text": {},
+      "description": "What was decided, learned, or shipped. The substantive content of the entry."
+    },
+    "Next Action": {
+      "rich_text": {},
+      "description": "Concrete follow-up \u2014 what / when / who. If actionable, also create a Master Tasks row."
+    },
+    "Particsalesnts": {
+      "people": {},
+      "description": "People involved in this activity (internal only)."
+    },
+    "Tags": {
+      "multi_select": {
+        "options": [
+          {
+            "name": "review",
+            "color": "blue"
+          },
+          {
+            "name": "blocker",
+            "color": "red"
+          },
+          {
+            "name": "learning",
+            "color": "green"
+          },
+          {
+            "name": "compliance",
+            "color": "orange"
+          }
+        ]
+      },
+      "description": "Free-form tagging for cross-cutting themes."
+    }
+  }
+}

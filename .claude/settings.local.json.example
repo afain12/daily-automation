@@ -1,0 +1,25 @@
+{
+  "env": {
+    "NOTION_API_TOKEN": "__NOTION_API_TOKEN__"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(bash scripts/*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.secrets/**)",
+      "Read(client_secret_*.json)",
+      "Read(*token*.json)"
+    ]
+  },
+  "systemPrompt": [
+    "Daily Automation public demo configuration. Keep secrets outside git.",
+    "Use config/*.yaml for sanitized source definitions and local ignored files for real runtime state.",
+    "External writes require an explicit approval trust gate."
+  ]
+}
